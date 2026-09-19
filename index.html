@@ -1,0 +1,1472 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>GrammarStation: UNITS 17 & 18 - Past Perfect Tense (過去完了形)</title>
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <!-- Lucide Icons CDN -->
+  <script src="https://unpkg.com/lucide@latest"></script>
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Noto+Sans+JP:wght@400;500;700;900&display=swap" rel="stylesheet">
+  
+  <style>
+    body {
+      font-family: 'Plus Jakarta Sans', 'Noto Sans JP', sans-serif;
+    }
+    .gradient-header {
+      background: linear-gradient(135deg, #0f172a 0%, #1e1b4b 40%, #311042 100%);
+    }
+    .gradient-accent {
+      background: linear-gradient(135deg, #4f46e5 0%, #7c3aed 50%, #d946ef 100%);
+    }
+    .word-chip {
+      transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+      cursor: pointer;
+      user-select: none;
+    }
+    .word-chip:hover {
+      transform: translateY(-2px);
+    }
+    .chip-container::-webkit-scrollbar {
+      height: 6px;
+    }
+    .chip-container::-webkit-scrollbar-thumb {
+      background: #cbd5e1;
+      border-radius: 9999px;
+    }
+
+    @media print {
+      body {
+        background: white !important;
+        color: black !important;
+        font-size: 11pt;
+      }
+      header, footer, nav, .no-print, button, .tab-btn, #global-progress-bar-container {
+        display: none !important;
+      }
+      .tab-content {
+        display: block !important;
+      }
+      .print-only {
+        display: block !important;
+      }
+      .print-page-break {
+        page-break-before: always;
+      }
+      .card-print {
+        border: 1px solid #cbd5e1 !important;
+        box-shadow: none !important;
+        break-inside: avoid;
+        margin-bottom: 1rem !important;
+        background: white !important;
+      }
+      input[type="text"], textarea {
+        border-bottom: 1.5px solid #000 !important;
+        border-top: none !important;
+        border-left: none !important;
+        border-right: none !important;
+        border-radius: 0 !important;
+        background: transparent !important;
+      }
+    }
+
+    .print-only {
+      display: none;
+    }
+  </style>
+</head>
+<body class="bg-slate-50 text-slate-800 min-h-screen flex flex-col selection:bg-indigo-500 selection:text-white">
+
+  <!-- TOP HEADER & NAV -->
+  <header class="gradient-header text-white sticky top-0 z-50 shadow-xl border-b border-indigo-900/50 no-print">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-3 flex flex-wrap items-center justify-between gap-3">
+      <!-- Logo & Title -->
+      <div class="flex items-center gap-3">
+        <div class="p-2.5 bg-indigo-600/80 rounded-xl border border-indigo-400/30 backdrop-blur-md shadow-inner flex items-center justify-center">
+          <i data-lucide="history" class="w-6 h-6 text-indigo-200"></i>
+        </div>
+        <div>
+          <div class="flex items-center gap-2">
+            <span class="px-2 py-0.5 text-[10px] font-extrabold tracking-wider bg-indigo-500/30 text-indigo-200 border border-indigo-400/30 rounded-full uppercase">ESL Grammar Master</span>
+            <span class="text-xs text-indigo-300 font-mono">Units 17 & 18</span>
+          </div>
+          <h1 class="text-lg sm:text-xl font-black tracking-tight flex items-center gap-2">
+            <span>過去完了形</span>
+            <span class="text-xs font-semibold text-slate-300 font-sans hidden sm:inline">(Past Perfect Tense)</span>
+          </h1>
+        </div>
+      </div>
+
+      <!-- Student Badge & Controls -->
+      <div class="flex items-center gap-2 sm:gap-3 ml-auto flex-wrap">
+        <!-- Student Info Chip -->
+        <button onclick="switchTab('student-profile')" class="flex items-center gap-2 px-3 py-1.5 bg-slate-800/80 hover:bg-slate-700/80 rounded-xl border border-indigo-500/30 text-xs transition">
+          <i data-lucide="user-check" class="w-4 h-4 text-emerald-400"></i>
+          <span id="header-student-name" class="font-bold text-slate-200">生徒名: 未設定</span>
+        </button>
+
+        <!-- XP Counter -->
+        <div class="flex items-center gap-1.5 px-3 py-1.5 bg-slate-900/80 rounded-xl border border-amber-500/30 text-xs font-semibold">
+          <i data-lucide="zap" class="w-4 h-4 text-amber-400 fill-amber-400"></i>
+          <span><span id="global-xp" class="text-amber-400 font-bold text-sm">0</span> XP</span>
+        </div>
+
+        <!-- Print / PDF Button -->
+        <button onclick="switchTab('pdf-export')" class="px-3 py-1.5 bg-emerald-600 hover:bg-emerald-500 text-white rounded-xl text-xs font-bold transition flex items-center gap-1.5 shadow-md">
+          <i data-lucide="printer" class="w-4 h-4"></i>
+          <span>PDF保存・印刷</span>
+        </button>
+
+        <!-- Bilingual Toggle -->
+        <button id="btn-lang-toggle" onclick="toggleLanguage()" class="px-3 py-1.5 bg-indigo-900/80 hover:bg-indigo-800 text-indigo-100 rounded-xl border border-indigo-500/30 text-xs font-bold transition flex items-center gap-1.5">
+          <i data-lucide="languages" class="w-4 h-4 text-indigo-300"></i>
+          <span id="lang-label">日本語</span>
+        </button>
+      </div>
+    </div>
+
+    <!-- MAIN NAVIGATION TABS -->
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 bg-slate-950/50 border-t border-slate-800/80 overflow-x-auto">
+      <nav class="flex space-x-1 sm:space-x-2 py-2 text-xs sm:text-sm font-semibold whitespace-nowrap items-center" id="main-nav-tabs">
+        <button onclick="switchTab('student-profile')" id="tab-student-profile" class="tab-btn px-3 py-1.5 rounded-lg transition flex items-center gap-1.5 text-slate-300 hover:text-white hover:bg-slate-800/60">
+          <i data-lucide="user" class="w-4 h-4 text-indigo-300"></i>
+          <span>生徒情報・学習ログ</span>
+        </button>
+        <button onclick="switchTab('u17-completion')" id="tab-u17-completion" class="tab-btn px-3.5 py-1.5 rounded-lg transition flex items-center gap-1.5 bg-indigo-600 text-white shadow-md">
+          <i data-lucide="check-circle-2" class="w-4 h-4"></i>
+          <span>Unit 17-1: 完了・結果</span>
+        </button>
+        <button onclick="switchTab('u17-questions')" id="tab-u17-questions" class="tab-btn px-3.5 py-1.5 rounded-lg transition flex items-center gap-1.5 text-slate-300 hover:text-white hover:bg-slate-800/60">
+          <i data-lucide="help-circle" class="w-4 h-4"></i>
+          <span>Unit 17-2: 疑問文・否定文</span>
+        </button>
+        <button onclick="switchTab('u17-experience')" id="tab-u17-experience" class="tab-btn px-3.5 py-1.5 rounded-lg transition flex items-center gap-1.5 text-slate-300 hover:text-white hover:bg-slate-800/60">
+          <i data-lucide="award" class="w-4 h-4"></i>
+          <span>Unit 17-3: 経験</span>
+        </button>
+        <button onclick="switchTab('u18-continuation')" id="tab-u18-continuation" class="tab-btn px-3.5 py-1.5 rounded-lg transition flex items-center gap-1.5 text-slate-300 hover:text-white hover:bg-slate-800/60">
+          <i data-lucide="clock" class="w-4 h-4"></i>
+          <span>Unit 18-1: 継続 (状態/動作)</span>
+        </button>
+        <button onclick="switchTab('u18-pluperfect')" id="tab-u18-pluperfect" class="tab-btn px-3.5 py-1.5 rounded-lg transition flex items-center gap-1.5 text-slate-300 hover:text-white hover:bg-slate-800/60">
+          <i data-lucide="rewind" class="w-4 h-4"></i>
+          <span>Unit 18-2: 大過去</span>
+        </button>
+        <button onclick="switchTab('master-quiz')" id="tab-master-quiz" class="tab-btn px-3.5 py-1.5 rounded-lg transition flex items-center gap-1.5 bg-gradient-to-r from-amber-500 to-rose-500 text-white font-bold hover:brightness-110">
+          <i data-lucide="trophy" class="w-4 h-4"></i>
+          <span>総合チャレンジ</span>
+        </button>
+        <button onclick="switchTab('mock-exam')" id="tab-mock-exam" class="tab-btn px-3.5 py-1.5 rounded-lg transition flex items-center gap-1.5 bg-gradient-to-r from-purple-600 to-indigo-600 text-white font-bold hover:brightness-110">
+          <i data-lucide="file-text" class="w-4 h-4"></i>
+          <span>模擬試験</span>
+        </button>
+        <button onclick="switchTab('pdf-export')" id="tab-pdf-export" class="tab-btn px-3 py-1.5 rounded-lg transition flex items-center gap-1.5 bg-emerald-700 text-white font-bold hover:bg-emerald-600">
+          <i data-lucide="printer" class="w-4 h-4"></i>
+          <span>PDF印刷ワークシート</span>
+        </button>
+        <button onclick="switchTab('master-bank')" id="tab-master-bank" class="tab-btn px-2 py-1 rounded transition flex items-center gap-1 bg-slate-900 text-teal-400 hover:bg-slate-800 text-[11px] font-normal border border-teal-500/30 ml-auto">
+          <i data-lucide="book-open-check" class="w-3.5 h-3.5 text-teal-400"></i>
+          <span>Master Bank</span>
+        </button>
+      </nav>
+    </div>
+  </header>
+
+  <!-- MAIN CONTAINER -->
+  <main class="flex-grow max-w-7xl w-full mx-auto px-4 sm:px-6 lg:px-8 py-6 space-y-6">
+
+    <!-- GLOBAL PROGRESS BAR (Hidden in print) -->
+    <div id="global-progress-bar-container" class="bg-white rounded-xl p-3 border border-slate-200 shadow-sm flex items-center gap-4 no-print">
+      <div class="text-xs font-bold text-slate-600 shrink-0 flex items-center gap-1.5">
+        <i data-lucide="target" class="w-4 h-4 text-indigo-600"></i>
+        <span id="txt-overall-progress">学習達成度</span>
+      </div>
+      <div class="w-full bg-slate-100 rounded-full h-3 overflow-hidden border border-slate-200/80 flex">
+        <div id="overall-progress-bar" class="bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 h-3 rounded-full transition-all duration-500" style="width: 0%"></div>
+      </div>
+      <span id="overall-pct" class="text-xs font-extrabold text-indigo-700 shrink-0 font-mono">0%</span>
+    </div>
+
+    <!-- TAB 0: STUDENT PROFILE & LOCAL STORAGE HANDLER -->
+    <div id="content-student-profile" class="tab-content hidden space-y-6">
+      <div class="bg-white rounded-2xl border border-slate-200 shadow-sm p-6 space-y-6">
+        <div class="border-b border-slate-200 pb-4 flex flex-wrap items-center justify-between gap-4">
+          <div>
+            <span class="px-2.5 py-0.5 bg-indigo-100 text-indigo-800 text-xs font-bold rounded-full">Local Device Storage</span>
+            <h2 class="text-2xl font-black text-slate-900 mt-1">生徒プロフィール ＆ 学習記録</h2>
+            <p class="text-xs text-slate-600 mt-1">
+              入力された情報や解答データはお使いの端末 (ブラウザ) に自動保存されます。PDF印刷時にもこの情報が記載されます。
+            </p>
+          </div>
+          <button onclick="saveStudentProfile()" class="px-5 py-2.5 bg-indigo-600 hover:bg-indigo-700 text-white font-bold text-xs rounded-xl shadow transition flex items-center gap-2">
+            <i data-lucide="save" class="w-4 h-4"></i>
+            <span>情報を保存 (Save Profile)</span>
+          </button>
+        </div>
+
+        <!-- Student Form Inputs -->
+        <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-4">
+          <div>
+            <label class="block text-xs font-bold text-slate-700 mb-1">氏名 (Student Name)</label>
+            <input type="text" id="input-student-name" oninput="saveStudentProfile()" placeholder="山田 太郎" class="w-full px-3 py-2 bg-slate-50 border border-slate-300 rounded-lg text-sm font-semibold focus:bg-white focus:border-indigo-500 outline-none">
+          </div>
+          <div>
+            <label class="block text-xs font-bold text-slate-700 mb-1">学年・クラス (Class / Grade)</label>
+            <input type="text" id="input-student-class" oninput="saveStudentProfile()" placeholder="中学3年1組 / JHS 3-1" class="w-full px-3 py-2 bg-slate-50 border border-slate-300 rounded-lg text-sm font-semibold focus:bg-white focus:border-indigo-500 outline-none">
+          </div>
+          <div>
+            <label class="block text-xs font-bold text-slate-700 mb-1">出席番号 / 学籍番号 (ID)</label>
+            <input type="text" id="input-student-id" oninput="saveStudentProfile()" placeholder="15" class="w-full px-3 py-2 bg-slate-50 border border-slate-300 rounded-lg text-sm font-semibold focus:bg-white focus:border-indigo-500 outline-none">
+          </div>
+          <div>
+            <label class="block text-xs font-bold text-slate-700 mb-1">担当教師 / 学校名 (Teacher/School)</label>
+            <input type="text" id="input-student-teacher" oninput="saveStudentProfile()" placeholder="英語科 / 〇〇中学校" class="w-full px-3 py-2 bg-slate-50 border border-slate-300 rounded-lg text-sm font-semibold focus:bg-white focus:border-indigo-500 outline-none">
+          </div>
+        </div>
+
+        <!-- Self Reflection / Notes -->
+        <div>
+          <label class="block text-xs font-bold text-slate-700 mb-1">学習メモ・振り返り (Student Notes / Reflection)</label>
+          <textarea id="input-student-notes" oninput="saveStudentProfile()" rows="4" placeholder="過去完了形 (had + 過去分詞) の復習メモや、間違えやすい動詞の活用形などを記録しましょう..." class="w-full p-3 bg-slate-50 border border-slate-300 rounded-xl text-sm font-sans focus:bg-white focus:border-indigo-500 outline-none"></textarea>
+        </div>
+
+        <!-- Storage Status Summary -->
+        <div class="bg-indigo-50 border border-indigo-100 rounded-xl p-4 flex flex-wrap items-center justify-between gap-3 text-xs">
+          <div class="flex items-center gap-2 text-indigo-900">
+            <i data-lucide="database" class="w-4 h-4 text-indigo-600"></i>
+            <span>ローカル保存状態: <strong id="storage-status-text" class="text-emerald-600">正常に自動保存中</strong></span>
+          </div>
+          <button onclick="resetAllData()" class="px-3 py-1.5 bg-rose-100 hover:bg-rose-200 text-rose-700 font-bold rounded-lg transition text-xs flex items-center gap-1">
+            <i data-lucide="trash-2" class="w-3.5 h-3.5"></i>
+            <span>すべての学習データを削除リセット</span>
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- TAB 1: UNIT 17 - SECTION 1 (COMPLETION & RESULT) -->
+    <div id="content-u17-completion" class="tab-content space-y-6">
+      <div class="bg-white rounded-2xl border border-slate-200 shadow-sm overflow-hidden">
+        <div class="bg-gradient-to-r from-indigo-900 to-slate-900 p-5 text-white flex flex-col md:flex-row md:items-center justify-between gap-4">
+          <div>
+            <div class="flex items-center gap-2 mb-1">
+              <span class="px-2.5 py-0.5 bg-indigo-500/40 text-indigo-200 text-xs font-bold rounded-full border border-indigo-400/30">UNIT 17 • Section 1</span>
+              <span class="text-xs text-slate-300">Completion & Result</span>
+            </div>
+            <h2 class="text-xl font-bold">1. 過去完了形 〈had ＋ 過去分詞〉: 完了・結果</h2>
+            <p class="text-xs text-slate-300 mt-1" id="desc-u17-1">
+              過去のある時点における状況を、それ以前に起こったことと関連づけて「…してしまっていた」「…したところだった」を表します。
+            </p>
+          </div>
+          <div class="p-3 bg-white/10 rounded-xl backdrop-blur border border-white/10 text-center shrink-0">
+            <span class="block text-[10px] text-indigo-200 uppercase tracking-widest font-bold">Grammar Formula</span>
+            <span class="text-lg font-black text-amber-300">Subject + had + 過去分詞</span>
+          </div>
+        </div>
+
+        <div class="p-5 bg-indigo-50/50 border-b border-indigo-100">
+          <h3 class="text-xs font-bold text-indigo-950 uppercase tracking-wider mb-3 flex items-center gap-2">
+            <i data-lucide="clock" class="w-4 h-4 text-indigo-600"></i>
+            <span>Timeline Visualization (タイムライン解説)</span>
+          </h3>
+          <div class="relative bg-white rounded-xl p-4 border border-indigo-100 shadow-sm flex flex-col md:flex-row items-center justify-between gap-4 text-xs">
+            <div class="flex-1 text-center md:text-left">
+              <span class="px-2 py-0.5 bg-slate-200 text-slate-700 font-bold rounded text-[10px]">① 大過去 (Earlier Past)</span>
+              <p class="font-bold text-indigo-900 mt-1">Her father cooked dinner</p>
+              <p class="text-slate-500 text-[11px]">お父さんが夕食を作った</p>
+            </div>
+            <div class="flex items-center justify-center w-full md:w-auto my-2 md:my-0">
+              <div class="h-0.5 bg-indigo-300 w-full md:w-32 relative flex items-center justify-center">
+                <i data-lucide="arrow-right" class="w-5 h-5 text-indigo-600 absolute"></i>
+              </div>
+            </div>
+            <div class="flex-1 text-center md:text-right">
+              <span class="px-2 py-0.5 bg-indigo-600 text-white font-bold rounded text-[10px]">② 過去の基準点 (Past Reference)</span>
+              <p class="font-bold text-slate-900 mt-1">When Laura got home</p>
+              <p class="text-slate-500 text-[11px]">ローラが帰宅した時</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="bg-white rounded-2xl border border-slate-200 shadow-sm p-5 sm:p-6 space-y-4">
+        <div class="flex items-center justify-between border-b border-slate-100 pb-3">
+          <h3 class="font-bold text-slate-900 text-base flex items-center gap-2">
+            <span class="w-6 h-6 bg-indigo-600 text-white text-xs font-bold rounded-full flex items-center justify-center">1A</span>
+            <span id="title-1a">適語補充問題 (Fill in the blanks)</span>
+          </h3>
+          <span class="text-xs text-slate-500">4 Questions</span>
+        </div>
+        <p class="text-xs text-slate-600" id="sub-1a">次の日本文に合うように、空欄に適語を書きなさい。</p>
+        <div class="space-y-4" id="container-u17-1a"></div>
+      </div>
+
+      <div class="bg-white rounded-2xl border border-slate-200 shadow-sm p-5 sm:p-6 space-y-4">
+        <div class="flex items-center justify-between border-b border-slate-100 pb-3">
+          <h3 class="font-bold text-slate-900 text-base flex items-center gap-2">
+            <span class="w-6 h-6 bg-indigo-600 text-white text-xs font-bold rounded-full flex items-center justify-center">1B</span>
+            <span id="title-1b">文の書きかえ問題 (Sentence Rewrite)</span>
+          </h3>
+          <span class="text-xs text-slate-500">4 Questions</span>
+        </div>
+        <p class="text-xs text-slate-600" id="sub-1b">
+          次の文の文末に <code class="bg-slate-100 px-1.5 py-0.5 rounded border border-slate-300 font-bold text-indigo-700">when I came home</code> を加えて、過去完了形の文に書きかえなさい。
+        </p>
+        <div class="space-y-4" id="container-u17-1b"></div>
+      </div>
+    </div>
+
+    <!-- TAB 2: UNIT 17 - SECTION 2 (QUESTIONS & NEGATIVES) -->
+    <div id="content-u17-questions" class="tab-content hidden space-y-6">
+      <div class="bg-white rounded-2xl border border-slate-200 shadow-sm overflow-hidden">
+        <div class="bg-gradient-to-r from-slate-900 to-indigo-950 p-5 text-white flex flex-col md:flex-row md:items-center justify-between gap-4">
+          <div>
+            <div class="flex items-center gap-2 mb-1">
+              <span class="px-2.5 py-0.5 bg-purple-500/40 text-purple-200 text-xs font-bold rounded-full border border-purple-400/30">UNIT 17 • Section 2</span>
+              <span class="text-xs text-slate-300">Questions & Negatives</span>
+            </div>
+            <h2 class="text-xl font-bold">2. 過去完了形の疑問文と否定文</h2>
+          </div>
+        </div>
+      </div>
+      <div class="bg-white rounded-2xl border border-slate-200 shadow-sm p-5 sm:p-6 space-y-4">
+        <div class="flex items-center justify-between border-b border-slate-100 pb-3">
+          <h3 class="font-bold text-slate-900 text-base flex items-center gap-2">
+            <span class="w-6 h-6 bg-purple-600 text-white text-xs font-bold rounded-full flex items-center justify-center">2</span>
+            <span>疑問文・否定文への書換・問題 (Questions & Negatives)</span>
+          </h3>
+        </div>
+        <div class="space-y-4" id="container-u17-2"></div>
+      </div>
+    </div>
+
+    <!-- TAB 3: UNIT 17 - SECTION 3 (EXPERIENCE) -->
+    <div id="content-u17-experience" class="tab-content hidden space-y-6">
+      <div class="bg-white rounded-2xl border border-slate-200 shadow-sm overflow-hidden">
+        <div class="bg-gradient-to-r from-emerald-950 to-teal-900 p-5 text-white flex flex-col md:flex-row md:items-center justify-between gap-4">
+          <div>
+            <div class="flex items-center gap-2 mb-1">
+              <span class="px-2.5 py-0.5 bg-emerald-500/40 text-emerald-200 text-xs font-bold rounded-full border border-emerald-400/30">UNIT 17 • Section 3</span>
+              <span class="text-xs text-slate-300">Experience</span>
+            </div>
+            <h2 class="text-xl font-bold">3. 過去完了形: 経験 「（過去のある時点までに）…したことがあった」</h2>
+          </div>
+        </div>
+      </div>
+
+      <div class="bg-white rounded-2xl border border-slate-200 shadow-sm p-5 sm:p-6 space-y-4">
+        <div class="flex items-center justify-between border-b border-slate-100 pb-3">
+          <h3 class="font-bold text-slate-900 text-base flex items-center gap-2">
+            <span class="w-6 h-6 bg-emerald-600 text-white text-xs font-bold rounded-full flex items-center justify-center">3A</span>
+            <span>動詞の過去完了形への変化問題 (Experience Fill-in)</span>
+          </h3>
+        </div>
+        <div class="space-y-4" id="container-u17-3a"></div>
+      </div>
+
+      <div class="bg-white rounded-2xl border border-slate-200 shadow-sm p-5 sm:p-6 space-y-4">
+        <div class="flex items-center justify-between border-b border-slate-100 pb-3">
+          <h3 class="font-bold text-slate-900 text-base flex items-center gap-2">
+            <span class="w-6 h-6 bg-emerald-600 text-white text-xs font-bold rounded-full flex items-center justify-center">3B</span>
+            <span>語句並べ替え問題 (Word Unscramble)</span>
+          </h3>
+        </div>
+        <div class="space-y-6" id="container-u17-3b"></div>
+      </div>
+    </div>
+
+    <!-- TAB 4: UNIT 18 - SECTION 1 (CONTINUATION) -->
+    <div id="content-u18-continuation" class="tab-content hidden space-y-6">
+      <div class="bg-white rounded-2xl border border-slate-200 shadow-sm overflow-hidden">
+        <div class="bg-gradient-to-r from-blue-950 via-indigo-900 to-slate-900 p-5 text-white flex flex-col md:flex-row md:items-center justify-between gap-4">
+          <div>
+            <div class="flex items-center gap-2 mb-1">
+              <span class="px-2.5 py-0.5 bg-blue-500/40 text-blue-200 text-xs font-bold rounded-full border border-blue-400/30">UNIT 18 • Section 1</span>
+              <span class="text-xs text-slate-300">Continuation (継続)</span>
+            </div>
+            <h2 class="text-xl font-bold">1. 状態の継続 vs 動作の継続</h2>
+          </div>
+        </div>
+      </div>
+
+      <div class="bg-white rounded-2xl border border-slate-200 shadow-sm p-5 sm:p-6 space-y-4">
+        <div class="flex items-center justify-between border-b border-slate-100 pb-3">
+          <h3 class="font-bold text-slate-900 text-base flex items-center gap-2">
+            <span class="w-6 h-6 bg-blue-600 text-white text-xs font-bold rounded-full flex items-center justify-center">1A</span>
+            <span>適語補充 ＆ 種別選択問題 (Fill-in & Category Selection)</span>
+          </h3>
+        </div>
+        <div class="space-y-4" id="container-u18-1a"></div>
+      </div>
+
+      <div class="bg-white rounded-2xl border border-slate-200 shadow-sm p-5 sm:p-6 space-y-4">
+        <div class="flex items-center justify-between border-b border-slate-100 pb-3">
+          <h3 class="font-bold text-slate-900 text-base flex items-center gap-2">
+            <span class="w-6 h-6 bg-blue-600 text-white text-xs font-bold rounded-full flex items-center justify-center">1B</span>
+            <span>語句並べ替え問題 (Word Unscramble)</span>
+          </h3>
+        </div>
+        <div class="space-y-6" id="container-u18-1b"></div>
+      </div>
+    </div>
+
+    <!-- TAB 5: UNIT 18 - SECTION 2 (PLUPERFECT / 大過去) -->
+    <div id="content-u18-pluperfect" class="tab-content hidden space-y-6">
+      <div class="bg-white rounded-2xl border border-slate-200 shadow-sm overflow-hidden">
+        <div class="bg-gradient-to-r from-amber-950 via-rose-950 to-slate-900 p-5 text-white flex flex-col md:flex-row md:items-center justify-between gap-4">
+          <div>
+            <div class="flex items-center gap-2 mb-1">
+              <span class="px-2.5 py-0.5 bg-amber-500/40 text-amber-200 text-xs font-bold rounded-full border border-amber-400/30">UNIT 18 • Section 2</span>
+              <span class="text-xs text-slate-300">Pluperfect / Earlier Past</span>
+            </div>
+            <h2 class="text-xl font-bold">2. 大過去 (Pluperfect / Relative Past)</h2>
+          </div>
+        </div>
+      </div>
+
+      <div class="bg-white rounded-2xl border border-slate-200 shadow-sm p-5 sm:p-6 space-y-4">
+        <div class="flex items-center justify-between border-b border-slate-100 pb-3">
+          <h3 class="font-bold text-slate-900 text-base flex items-center gap-2">
+            <span class="w-6 h-6 bg-amber-600 text-white text-xs font-bold rounded-full flex items-center justify-center">2A</span>
+            <span>2文結合問題 (Sentence Combination)</span>
+          </h3>
+        </div>
+        <div class="space-y-4" id="container-u18-2a"></div>
+      </div>
+
+      <div class="bg-white rounded-2xl border border-slate-200 shadow-sm p-5 sm:p-6 space-y-4">
+        <div class="flex items-center justify-between border-b border-slate-100 pb-3">
+          <h3 class="font-bold text-slate-900 text-base flex items-center gap-2">
+            <span class="w-6 h-6 bg-amber-600 text-white text-xs font-bold rounded-full flex items-center justify-center">2B</span>
+            <span>語句並べ替え問題 (Word Unscramble)</span>
+          </h3>
+        </div>
+        <div class="space-y-6" id="container-u18-2b"></div>
+      </div>
+    </div>
+
+    <!-- TAB 6: MASTER CHALLENGE QUIZ -->
+    <div id="content-master-quiz" class="tab-content hidden space-y-6">
+      <div class="bg-white rounded-2xl border border-slate-200 shadow-xl overflow-hidden">
+        <div class="gradient-accent p-6 sm:p-8 text-white text-center space-y-3">
+          <div class="inline-flex items-center gap-2 px-3 py-1 bg-white/20 rounded-full text-xs font-bold backdrop-blur">
+            <i data-lucide="award" class="w-4 h-4 text-amber-300"></i>
+            <span>Comprehensive Exam • Units 17 & 18</span>
+          </div>
+          <h2 class="text-2xl sm:text-3xl font-black">過去完了形 総合判定チャレンジ</h2>
+          <p class="text-xs sm:text-sm text-indigo-100 max-w-xl mx-auto">
+            Unit 17 と Unit 18 のすべての要素からランダムに10問が出題されます。制限時間内に全問正解を目指しましょう！
+          </p>
+        </div>
+
+        <div class="p-6 sm:p-8 text-center space-y-6" id="quiz-start-screen">
+          <button onclick="startMasterQuiz()" class="px-8 py-4 bg-gradient-to-r from-indigo-600 to-purple-600 hover:from-indigo-500 hover:to-purple-500 text-white font-extrabold text-base rounded-2xl shadow-lg transition flex items-center justify-center gap-2 mx-auto">
+            <i data-lucide="play-circle" class="w-6 h-6"></i>
+            <span>テストを開始する (Start Challenge)</span>
+          </button>
+        </div>
+
+        <div class="p-6 sm:p-8 hidden space-y-6" id="quiz-active-screen">
+          <div class="flex items-center justify-between bg-slate-50 p-4 rounded-xl border border-slate-200 text-xs sm:text-sm font-bold">
+            <div class="flex items-center gap-2 text-indigo-700">
+              <i data-lucide="help-circle" class="w-5 h-5"></i>
+              <span>Question <span id="quiz-q-num">1</span> / 10</span>
+            </div>
+            <div class="flex items-center gap-2 text-rose-600 font-mono text-base">
+              <i data-lucide="clock" class="w-5 h-5"></i>
+              <span id="quiz-timer">03:00</span>
+            </div>
+          </div>
+          <div class="space-y-3">
+            <span id="quiz-q-category" class="px-2.5 py-1 bg-indigo-100 text-indigo-800 rounded font-bold text-xs inline-block">Category</span>
+            <h3 id="quiz-q-jp" class="text-base sm:text-lg font-bold text-slate-800">日本語プロンプト</h3>
+            <p id="quiz-q-en" class="text-sm font-mono text-slate-600 bg-slate-50 p-3 rounded-lg border border-slate-200">English prompt</p>
+          </div>
+          <div class="grid grid-cols-1 gap-3" id="quiz-options-container"></div>
+        </div>
+
+        <div class="p-6 sm:p-8 hidden space-y-6 text-center" id="quiz-result-screen">
+          <div class="w-20 h-20 bg-amber-100 border-4 border-amber-300 rounded-full flex items-center justify-center mx-auto text-amber-600">
+            <i data-lucide="trophy" class="w-10 h-10"></i>
+          </div>
+          <div>
+            <h3 class="text-2xl font-black text-slate-900">チャレンジ終了！</h3>
+            <p class="text-sm font-bold text-indigo-600 mt-2">スコア: <span id="quiz-final-score" class="text-2xl font-black">0</span> / 100 点</p>
+          </div>
+          <button onclick="resetQuiz()" class="px-6 py-3 bg-slate-900 hover:bg-slate-800 text-white font-bold text-xs rounded-xl transition flex items-center justify-center gap-2 mx-auto">
+            <i data-lucide="rotate-ccw" class="w-4 h-4"></i>
+            <span>もう一度挑戦する (Try Again)</span>
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- TAB 7: MOCK EXAM SECTION -->
+    <div id="content-mock-exam" class="tab-content hidden space-y-6">
+      <div class="bg-white rounded-2xl border border-slate-200 shadow-xl overflow-hidden p-6 sm:p-8 space-y-6">
+        <div class="border-b border-slate-200 pb-4 flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+          <div>
+            <span class="px-3 py-1 bg-purple-100 text-purple-800 font-bold rounded-full text-xs">Unit 17 & 18 完全収録</span>
+            <h2 class="text-2xl font-black text-slate-900 mt-1">模擬試験 (Mock Exam)</h2>
+            <p class="text-xs text-slate-600 mt-1">
+              すべての問題・設問を網羅した全問テストです。解答を入力して「自己採点」を押すと採点結果が表示されます。
+            </p>
+          </div>
+          <div class="flex items-center gap-3 shrink-0">
+            <button onclick="gradeMockExam()" class="px-5 py-2.5 bg-gradient-to-r from-purple-600 to-indigo-600 text-white font-bold text-xs rounded-xl shadow-md hover:brightness-110 flex items-center gap-2">
+              <i data-lucide="check-circle" class="w-4 h-4"></i> 自己採点
+            </button>
+            <button onclick="resetMockExam()" class="px-5 py-2.5 bg-slate-200 hover:bg-slate-300 text-slate-800 font-bold text-xs rounded-xl transition flex items-center gap-2">
+              <i data-lucide="rotate-ccw" class="w-4 h-4"></i> 解答リセット
+            </button>
+          </div>
+        </div>
+
+        <div id="mock-exam-score-banner" class="hidden p-4 rounded-xl bg-purple-50 border border-purple-200 text-center text-sm font-bold text-purple-900">
+          <!-- Score summary injected here -->
+        </div>
+
+        <div class="space-y-6" id="mock-exam-questions-container"></div>
+      </div>
+    </div>
+
+    <!-- TAB 8: PRINTABLE WORKSHEET & PDF EXPORT HUB -->
+    <div id="content-pdf-export" class="tab-content hidden space-y-6">
+      <div class="bg-white rounded-2xl border border-slate-200 shadow-xl p-6 sm:p-8 space-y-6">
+        <!-- Controls Header (Hidden in Print) -->
+        <div class="border-b border-slate-200 pb-6 flex flex-col md:flex-row md:items-center justify-between gap-4 no-print">
+          <div>
+            <span class="px-2.5 py-0.5 bg-emerald-100 text-emerald-800 text-xs font-bold rounded-full">PDF & Printable Generator</span>
+            <h2 class="text-2xl font-black text-slate-900 mt-1">PDF保存 ＆ 印刷用ワークシート</h2>
+            <p class="text-xs text-slate-600 mt-1">
+              入力された生徒情報・解答結果が記載された学習レポート、または提出用の白紙ワークシートを生成します。
+            </p>
+          </div>
+          <div class="flex items-center gap-3 flex-wrap">
+            <button onclick="window.print()" class="px-6 py-3 bg-emerald-600 hover:bg-emerald-500 text-white font-extrabold text-sm rounded-xl shadow-lg transition flex items-center gap-2">
+              <i data-lucide="printer" class="w-5 h-5"></i>
+              <span>PDFとして保存 / 印刷を実行</span>
+            </button>
+          </div>
+        </div>
+
+        <!-- Printable Document Container (Styled for both Screen & Print Output) -->
+        <div class="border border-slate-300 p-8 rounded-xl bg-white space-y-6 card-print" id="printable-worksheet-area">
+          
+          <!-- PRINT HEADER WITH STUDENT METADATA -->
+          <div class="border-b-2 border-slate-800 pb-4 flex justify-between items-end">
+            <div>
+              <div class="text-[10px] font-bold text-slate-500 uppercase tracking-widest">GrammarStation Official Worksheet</div>
+              <h1 class="text-2xl font-black text-slate-900">過去完了形 (Past Perfect) 学習成果レポート</h1>
+              <p class="text-xs text-slate-600 mt-0.5">Units 17 & 18: Completion, Experience, Continuation & Pluperfect</p>
+            </div>
+            <!-- Student Metadata Box -->
+            <div class="border border-slate-800 p-3 rounded text-xs space-y-1 font-mono min-w-[220px]">
+              <div><strong>氏名:</strong> <span id="print-student-name" class="font-bold underline">未設定</span></div>
+              <div><strong>クラス/学年:</strong> <span id="print-student-class">未設定</span></div>
+              <div><strong>出席番号:</strong> <span id="print-student-id">未設定</span></div>
+              <div><strong>印刷日:</strong> <span id="print-date">2026/09/19</span></div>
+              <div><strong>達成度/XP:</strong> <span id="print-xp-score">0 XP</span></div>
+            </div>
+          </div>
+
+          <!-- Student Reflection / Notes Section -->
+          <div class="p-4 bg-slate-50 border border-slate-200 rounded-lg">
+            <h3 class="text-xs font-bold text-slate-800 uppercase tracking-wider mb-1">■ 生徒振り返り・メモ (Student Notes)</h3>
+            <p id="print-student-notes" class="text-xs text-slate-700 italic font-sans whitespace-pre-wrap">（メモなし）</p>
+          </div>
+
+          <!-- Summary Score Card -->
+          <div class="grid grid-cols-2 sm:grid-cols-4 gap-3 text-center text-xs font-bold">
+            <div class="p-3 bg-indigo-50 border border-indigo-200 rounded-lg">
+              <span class="block text-indigo-600 text-[10px]">Unit 17 完了・経験</span>
+              <span id="print-stat-u17" class="text-base font-black text-indigo-900">0 / 21</span>
+            </div>
+            <div class="p-3 bg-blue-50 border border-blue-200 rounded-lg">
+              <span class="block text-blue-600 text-[10px]">Unit 18 継続・大過去</span>
+              <span id="print-stat-u18" class="text-base font-black text-blue-900">0 / 21</span>
+            </div>
+            <div class="p-3 bg-amber-50 border border-amber-200 rounded-lg">
+              <span class="block text-amber-600 text-[10px]">総合チャレンジ</span>
+              <span id="print-stat-quiz" class="text-base font-black text-amber-900">未受験</span>
+            </div>
+            <div class="p-3 bg-emerald-50 border border-emerald-200 rounded-lg">
+              <span class="block text-emerald-600 text-[10px]">担当印 / 評価</span>
+              <div class="w-10 h-10 border-2 border-dashed border-emerald-400 rounded-full mx-auto mt-1 flex items-center justify-center text-[9px] text-emerald-600 font-bold">確認</div>
+            </div>
+          </div>
+
+          <!-- ALL ANSWERS & INPUTS TABLE -->
+          <div class="space-y-4">
+            <h3 class="text-sm font-black text-slate-900 border-b border-slate-300 pb-1">■ 解答記録一覧 (Student Answers Summary)</h3>
+            <div class="space-y-3" id="print-answers-list">
+              <!-- Dynamically populated -->
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+
+    <!-- TAB 9: MASTER PROBLEM BANK & ANSWER KEY -->
+    <div id="content-master-bank" class="tab-content hidden space-y-6">
+      <div class="bg-slate-900 rounded-2xl border border-slate-800 shadow-xl overflow-hidden text-white p-6 sm:p-8">
+        <div class="flex flex-col md:flex-row md:items-center justify-between gap-4 border-b border-slate-800 pb-6">
+          <div>
+            <div class="inline-flex items-center gap-2 px-3 py-1 bg-teal-500/20 text-teal-300 border border-teal-500/30 rounded-full text-xs font-bold mb-2">
+              <i data-lucide="book-open-check" class="w-4 h-4"></i>
+              <span>All 42 Problems Complete Review & Solutions</span>
+            </div>
+            <h2 class="text-xl font-black tracking-tight text-white">全問題・模範解答・解説マスターバンク</h2>
+          </div>
+        </div>
+        <div class="mt-4 flex flex-wrap gap-2 text-xs font-semibold">
+          <button onclick="filterBank('all')" class="bank-filter-btn px-3 py-1.5 bg-teal-600 text-white rounded-lg transition" id="bank-filter-all">すべて (All 42)</button>
+          <button onclick="filterBank('u17-1')" class="bank-filter-btn px-3 py-1.5 bg-slate-800 hover:bg-slate-700 text-slate-300 rounded-lg transition" id="bank-filter-u17-1">Unit 17-1</button>
+          <button onclick="filterBank('u17-2')" class="bank-filter-btn px-3 py-1.5 bg-slate-800 hover:bg-slate-700 text-slate-300 rounded-lg transition" id="bank-filter-u17-2">Unit 17-2</button>
+          <button onclick="filterBank('u17-3')" class="bank-filter-btn px-3 py-1.5 bg-slate-800 hover:bg-slate-700 text-slate-300 rounded-lg transition" id="bank-filter-u17-3">Unit 17-3</button>
+          <button onclick="filterBank('u18-1')" class="bank-filter-btn px-3 py-1.5 bg-slate-800 hover:bg-slate-700 text-slate-300 rounded-lg transition" id="bank-filter-u18-1">Unit 18-1</button>
+          <button onclick="filterBank('u18-2')" class="bank-filter-btn px-3 py-1.5 bg-slate-800 hover:bg-slate-700 text-slate-300 rounded-lg transition" id="bank-filter-u18-2">Unit 18-2</button>
+        </div>
+        <div class="mt-6 space-y-4" id="master-bank-list-container"></div>
+      </div>
+    </div>
+
+  </main>
+
+  <!-- FOOTER -->
+  <footer class="bg-slate-900 border-t border-slate-800 text-slate-400 py-6 text-xs text-center mt-12 no-print">
+    <div class="max-w-7xl mx-auto px-4 flex flex-col sm:flex-row items-center justify-between gap-3">
+      <div class="flex items-center gap-2">
+        <i data-lucide="book-open" class="w-4 h-4 text-indigo-400"></i>
+        <span class="font-bold text-slate-200">GrammarStation: Units 17 & 18</span>
+      </div>
+      <p id="footer-text">ESL & EFL Interactive English Grammar Platform with PDF Export</p>
+      <button onclick="resetAllData()" class="text-slate-500 hover:text-rose-400 underline transition">
+        進捗状況をリセット (Reset Data)
+      </button>
+    </div>
+  </footer>
+
+  <script>
+    /* STATE MANAGEMENT */
+    let currentLang = 'ja';
+    let userXP = 0;
+    let completedQuestions = new Set();
+    let userAnswersState = {};
+    let chipPickState = {};
+
+    let studentProfile = {
+      name: '',
+      class: '',
+      id: '',
+      teacher: '',
+      notes: ''
+    };
+
+    let quizQuestions = [];
+    let currentQuizIndex = 0;
+    let quizScore = 0;
+    let quizTimer = null;
+    let quizTimeRemaining = 180;
+
+    /* DATA DEFINITIONS FOR ALL EXERCISES */
+    const dataUnit17_1A = [
+      { id: 'u17_1a_1', sec: 'u17-1', jp: '私は5時までには、会社を出てしまっていた。', template: 'I [gap1] [gap2] the office by five.', ans1: 'had', ans2: 'left', verb: 'leave', full: 'I had left the office by five.', exp: 'by fiveまでに会社を出た完了' },
+      { id: 'u17_1a_2', sec: 'u17-1', jp: 'ローラが家に帰ったとき、彼女のお父さんが夕食を料理してしまっていた。', template: 'When Laura got home, her father [gap1] [gap2] dinner.', ans1: 'had', ans2: 'cooked', verb: 'cook', full: 'When Laura got home, her father had cooked dinner.', exp: 'ローラ帰宅前に料理完了' },
+      { id: 'u17_1a_3', sec: 'u17-1', jp: '彼女が目覚めたときには、目覚まし時計は止まってしまっていた。', template: 'The alarm clock [gap1] [gap2] when she woke up.', ans1: 'had', ans2: 'stopped', verb: 'stop', full: 'The alarm clock had stopped when she woke up.', exp: '起床前に時計停止' },
+      { id: 'u17_1a_4', sec: 'u17-1', jp: 'パーティーが始まる前に、彼らはケーキを作ってしまっていた。', template: 'They [gap1] [gap2] a cake before the party started.', ans1: 'had', ans2: 'made', verb: 'make', full: 'They had made a cake before the party started.', exp: 'パーティー開始前のケーキ作成完了' }
+    ];
+
+    const dataUnit17_1B = [
+      { id: 'u17_1b_1', sec: 'u17-1', orig: 'Meg ate dinner.', jp: '私が帰宅した時、メグは夕食を食べてしまっていた。', correct: 'Meg had eaten dinner when I came home.', full: 'Meg had eaten dinner when I came home.', exp: 'ate -> had eaten' },
+      { id: 'u17_1b_2', sec: 'u17-1', orig: 'My parents went out.', jp: '私が帰宅した時、両親は出かけてしまっていた。', correct: 'My parents had gone out when I came home.', full: 'My parents had gone out when I came home.', exp: 'went -> had gone out' },
+      { id: 'u17_1b_3', sec: 'u17-1', orig: 'John took a bath.', jp: '私が帰宅した時、ジョンはお風呂に入ってしまっていた。', correct: 'John had taken a bath when I came home.', full: 'John had taken a bath when I came home.', exp: 'took -> had taken a bath' },
+      { id: 'u17_1b_4', sec: 'u17-1', orig: 'Liz did her homework.', jp: '私が帰宅した時、リズは宿題をやり終えてしまっていた。', correct: 'Liz had done her homework when I came home.', full: 'Liz had done her homework when I came home.', exp: 'did -> had done her homework' }
+    ];
+
+    const dataUnit17_2 = [
+      { id: 'u17_2_1', sec: 'u17-2', type: 'Q', jp: '彼らはコンサートに行く前にチケットを手に入れていましたか。', prompt: 'They got the tickets before they went to the concert.', correct: 'Had they gotten the tickets before they went to the concert?', full: 'Had they gotten the tickets before they went to the concert?', exp: '疑問文: Had + 主語 + 過去分詞' },
+      { id: 'u17_2_2', sec: 'u17-2', type: 'Q', jp: '彼女が駅に着いたとき、電車の発車後でしたか。', prompt: 'The train left when she arrived at the station.', correct: 'Had the train left when she arrived at the station?', full: 'Had the train left when she arrived at the station?', exp: '疑問文: Had the train left...' },
+      { id: 'u17_2_3', sec: 'u17-2', type: 'N', jp: '私たちは街を訪れる前にホテルを予約していなかった。', prompt: 'We reserved a hotel before we visited the city.', correct: "We hadn't reserved a hotel before we visited the city.", full: "We hadn't reserved a hotel before we visited the city.", exp: '否定文: hadn\'t + 過去分詞' },
+      { id: 'u17_2_4', sec: 'u17-2', type: 'N', jp: 'アンディは会議が始まる前に仕事が終わっていなかった。', prompt: 'Andy finished the work before the meeting started.', correct: "Andy hadn't finished the work before the meeting started.", full: "Andy hadn't finished the work before the meeting started.", exp: '否定文: hadn\'t + 過去分詞' }
+    ];
+
+    const dataUnit17_3A = [
+      { id: 'u17_3a_1', sec: 'u17-3', jp: '私はパーティーの前に彼女に会ったことがあった。', template: 'I ___________________________ her before the party. ( meet )', correct: 'had met', full: 'I had met her before the party.', exp: '経験の過去完了' },
+      { id: 'u17_3a_2', sec: 'u17-3', jp: '彼は日本に来る前に日本語を学んだことがあった。', template: 'He ___________________________ Japanese before he came to Japan. ( learn )', correct: 'had learned', full: 'He had learned Japanese before he came to Japan.', exp: '経験の過去完了' },
+      { id: 'u17_3a_3', sec: 'u17-3', jp: '私は静岡に住む前に富士山に登ったことがあった。', template: 'We ___________________________ Mt. Fuji before we lived in Shizuoka. ( climb )', correct: 'had climbed', full: 'We had climbed Mt. Fuji before we lived in Shizuoka.', exp: '経験の過去完了' },
+      { id: 'u17_3a_4', sec: 'u17-3', jp: 'ケンはオーストラリアを訪れる前にコアラに触ったことがあった。', template: 'Ken ___________________________ a koala before he visited Australia. ( touch )', correct: 'had touched', full: 'Ken had touched a koala before he visited Australia.', exp: '経験の過去完了' },
+      { id: 'u17_3a_5', sec: 'u17-3', jp: '姉と私はその旅行の前に２度沖縄に行ったことがあった。', template: 'My sister and I ___________________________ to Okinawa twice before the trip. ( be )', correct: 'had been', full: 'My sister and I had been to Okinawa twice before the trip.', exp: 'had been to 経験' }
+    ];
+
+    const dataUnit17_3B = [
+      { id: 'u17_3b_1', sec: 'u17-3', jp: '私は初めて彼女に会う前に，1度彼女に電話をしたことがあった。', words: ['I', 'had', 'called', 'her', 'once'], suffix: 'before I met her for the first time.', full: 'I had called her once before I met her for the first time.', exp: '経験 once' },
+      { id: 'u17_3b_2', sec: 'u17-3', jp: 'ジャックは留学する前に，その会社で仕事をしたことがあった。', words: ['Jack', 'had', 'worked', 'for', 'the company'], suffix: 'before he studied abroad.', full: 'Jack had worked for the company before he studied abroad.', exp: 'work for ~' },
+      { id: 'u17_3b_3', sec: 'u17-3', jp: 'その歌がラジオで流れる前に，私たちはそれを聴いたことがあった。', words: ['We', 'had', 'heard', 'the song', 'before'], suffix: 'it was played on the radio.', full: 'We had heard the song before it was played on the radio.', exp: 'hear -> heard' },
+      { id: 'u17_3b_4', sec: 'u17-3', jp: '彼がその仕事を得る前に，彼女は彼に何度もお金を貸したことがあった。', words: ['She', 'had', 'lent', 'him', 'money'], suffix: 'many times before he got the job.', full: 'She had lent him money many times before he got the job.', exp: 'lend -> lent' },
+      { id: 'u17_3b_5', sec: 'u17-3', jp: '赤ちゃんが生まれる前に，彼らはその島で休暇を過ごしたことがあった。', words: ['had', 'they', 'on', 'their holidays', 'spent'], suffix: 'the island before their baby was born.', full: 'They had spent their holidays on the island before their baby was born.', exp: 'spend -> spent' },
+      { id: 'u17_3b_6', sec: 'u17-3', jp: 'テッドはスズキさんを訪ねる前に，彼女から手紙をもらったことがあった。', words: ['from', 'had', 'a letter', 'Ms. Suzuki', 'received', 'Ted'], suffix: 'before he visited her.', full: 'Ted had received a letter from Ms. Suzuki before he visited her.', exp: 'receive a letter from' }
+    ];
+
+    const dataUnit18_1A = [
+      { id: 'u18_1a_1', sec: 'u18-1', jp: 'そのときまでに，私たちは知り合って５年になっていた。', template: 'We [gap1] [gap2] each other for five years by that time.', ans1: 'had', ans2: 'known', category: '状態の継続', catVal: 'state', full: 'We had known each other for five years by that time.', exp: '状態の継続 (know)' },
+      { id: 'u18_1a_2', sec: 'u18-1', jp: '私は新しいコンピュータを買うまで２年間そのコンピュータを使っていた。', template: 'I [gap1] [gap2] [gap3] the computer for two years when I bought a new one.', ans1: 'had', ans2: 'been', ans3: 'using', category: '動作の継続', catVal: 'action', full: 'I had been using the computer for two years when I bought a new one.', exp: '動作の継続 (use)' },
+      { id: 'u18_1a_3', sec: 'u18-1', jp: 'グレッグは高校に入るまで10年間サッカーチームに所属していた。', template: 'Greg [gap1] [gap2] to a soccer team for ten years when he entered high school.', ans1: 'had', ans2: 'belonged', category: '状態の継続', catVal: 'state', full: 'Greg had belonged to a soccer team for ten years when he entered high school.', exp: '状態の継続 (belong)' },
+      { id: 'u18_1a_4', sec: 'u18-1', jp: '父は，雪が降り始めるまで2時間，自分の車を洗っていた。', template: 'My father [gap1] [gap2] [gap3] his car for two hours when it started to snow.', ans1: 'had', ans2: 'been', ans3: 'washing', category: '動作の継続', catVal: 'action', full: 'My father had been washing his car for two hours when it started to snow.', exp: '動作の継続 (wash)' }
+    ];
+
+    const dataUnit18_1B = [
+      { id: 'u18_1b_1', sec: 'u18-1', jp: '彼女はロンドンに引っ越す前はパリに20年間住んでいた。', words: ['twenty years', 'had', 'she', 'in', 'lived', 'for', 'Paris'], suffix: 'before she moved to London.', full: 'She had lived in Paris for twenty years before she moved to London.', exp: '状態の継続 live' },
+      { id: 'u18_1b_2', sec: 'u18-1', jp: '私たちが空港に着いたとき，マイクは2時間，私たちを待っていた。', words: ['been', 'Mike', 'for', 'for', 'waiting', 'two hours', 'had', 'us'], suffix: 'when we got to the airport.', full: 'Mike had been waiting for us for two hours when we got to the airport.', exp: '動作の継続 wait' },
+      { id: 'u18_1b_3', sec: 'u18-1', jp: 'ナンシーは中国を訪れる前，中国語を５年間勉強していた。', words: ['had', 'Nancy', 'Chinese', 'five years', 'for', 'studied'], suffix: 'before she visited China.', full: 'Nancy had studied Chinese for five years before she visited China.', exp: 'study継続' },
+      { id: 'u18_1b_4', sec: 'u18-1', jp: '姉が私のかぎを見つけたとき，私はそれを１時間探していた。', words: ['an hour', 'I', 'looking for', 'been', 'my key', 'had', 'for'], suffix: 'when my sister found it.', full: 'I had been looking for my key for an hour when my sister found it.', exp: 'look for継続' }
+    ];
+
+    const dataUnit18_2A = [
+      { id: 'u18_2a_1', sec: 'u18-2', sent1: 'I made a mistake on the English test.', sent2: 'I found that.', jp: '私は英語のテストで間違えたことに気づいた。', correct: 'I found that I had made a mistake on the English test.', full: 'I found that I had made a mistake on the English test.', exp: '大過去' },
+      { id: 'u18_2a_2', sec: 'u18-2', sent1: 'He left his umbrella on the bus.', sent2: 'He realized that.', jp: '彼はバスの中に傘を忘れてきたことに気づいた。', correct: 'He realized that he had left his umbrella on the bus.', full: 'He realized that he had left his umbrella on the bus.', exp: '大過去' },
+      { id: 'u18_2a_3', sec: 'u18-2', sent1: 'She got a letter from Frank.', sent2: 'She told me that.', jp: '彼女はフランクから手紙を受け取ったと私に言った。', correct: 'She told me that she had gotten a letter from Frank.', full: 'She told me that she had gotten a letter from Frank.', exp: '大過去' },
+      { id: 'u18_2a_4', sec: 'u18-2', sent1: 'He died in an accident.', sent2: 'I heard that.', jp: '私は彼が事故で亡くなったと聞いた。', correct: 'I heard that he had died in an accident.', full: 'I heard that he had died in an accident.', exp: '大過去' },
+      { id: 'u18_2a_5', sec: 'u18-2', sent1: 'Lisa broke her arm.', sent2: 'We realized that.', jp: '私たちはリサが腕を骨折していたことに気づいた。', correct: 'We realized that Lisa had broken her arm.', full: 'We realized that Lisa had broken her arm.', exp: '大過去' }
+    ];
+
+    const dataUnit18_2B = [
+      { id: 'u18_2b_1', sec: 'u18-2', jp: '彼女はその手紙を読んでしまったと私に言った。', prefix: 'She told me that', words: ['the', 'she', 'read', 'letter', 'had'], full: 'She told me that she had read the letter.', exp: '大過去' },
+      { id: 'u18_2b_2', sec: 'u18-2', jp: '私は，3年前にその男性に会っていたことに気がついた。', prefix: 'I realized that', words: ['the man', 'had', 'three years before', 'I', 'met'], full: 'I realized that I had met the man three years before.', exp: '3 years before' },
+      { id: 'u18_2b_3', sec: 'u18-2', jp: '私たちは，ルークが真実を語っていたということがわかった。', prefix: '', words: ['told', 'found', 'Luke', 'the truth', 'that', 'had', 'We'], full: 'We found that Luke had told the truth.', exp: 'told the truth' },
+      { id: 'u18_2b_4', sec: 'u18-2', jp: '彼は，その事故が自分の家の前で起こったと言った。', prefix: 'He said that', words: ['in', 'of', 'had', 'front', 'his house', 'happened', 'the accident'], full: 'He said that the accident had happened in front of his house.', exp: 'in front of' },
+      { id: 'u18_2b_5', sec: 'u18-2', jp: '私は，彼らが6か月前に新しい家を買ったと聞いた。', prefix: 'I heard that', words: ['had', 'a new house', 'they', 'six months before', 'bought'], full: 'I heard that they had bought a new house six months before.', exp: 'six months before' },
+      { id: 'u18_2b_6', sec: 'u18-2', jp: 'すべての乗客がバスに乗り込んだあとで，運転手はエンジンを始動した。', prefix: 'After', words: ['on', 'had', 'every passenger', 'the bus', 'gotten'], suffix: ', the driver started the engine.', full: 'After every passenger had gotten on the bus, the driver started the engine.', exp: 'After 節' }
+    ];
+
+    window.onload = function() {
+      loadLocalStorageData();
+      renderU17_1A();
+      renderU17_1B();
+      renderU17_2();
+      renderU17_3A();
+      renderU17_3B();
+      renderU18_1A();
+      renderU18_1B();
+      renderU18_2A();
+      renderU18_2B();
+      renderMockExam();
+      renderMasterBankList();
+      updateGlobalStats();
+      updatePrintView();
+      lucide.createIcons();
+    };
+
+    /* LOCAL STORAGE SYSTEM */
+    function loadLocalStorageData() {
+      try {
+        const savedProfile = localStorage.getItem('gs_student_profile');
+        if (savedProfile) {
+          studentProfile = JSON.parse(savedProfile);
+          document.getElementById('input-student-name').value = studentProfile.name || '';
+          document.getElementById('input-student-class').value = studentProfile.class || '';
+          document.getElementById('input-student-id').value = studentProfile.id || '';
+          document.getElementById('input-student-teacher').value = studentProfile.teacher || '';
+          document.getElementById('input-student-notes').value = studentProfile.notes || '';
+          updateStudentHeaderDisplay();
+        }
+
+        const savedAnswers = localStorage.getItem('gs_user_answers');
+        if (savedAnswers) {
+          userAnswersState = JSON.parse(savedAnswers);
+        }
+
+        const savedXP = localStorage.getItem('gs_user_xp');
+        if (savedXP) {
+          userXP = parseInt(savedXP, 10) || 0;
+        }
+
+        const savedCompleted = localStorage.getItem('gs_completed_questions');
+        if (savedCompleted) {
+          completedQuestions = new Set(JSON.parse(savedCompleted));
+        }
+      } catch (e) {
+        console.error('LocalStorage load error', e);
+      }
+    }
+
+    function saveStudentProfile() {
+      studentProfile.name = document.getElementById('input-student-name').value;
+      studentProfile.class = document.getElementById('input-student-class').value;
+      studentProfile.id = document.getElementById('input-student-id').value;
+      studentProfile.teacher = document.getElementById('input-student-teacher').value;
+      studentProfile.notes = document.getElementById('input-student-notes').value;
+
+      localStorage.setItem('gs_student_profile', JSON.stringify(studentProfile));
+      updateStudentHeaderDisplay();
+      updatePrintView();
+    }
+
+    function updateStudentHeaderDisplay() {
+      const name = studentProfile.name.trim() || '未設定';
+      document.getElementById('header-student-name').innerText = `生徒名: ${name}`;
+    }
+
+    function persistAppState() {
+      try {
+        localStorage.setItem('gs_user_answers', JSON.stringify(userAnswersState));
+        localStorage.setItem('gs_user_xp', userXP.toString());
+        localStorage.setItem('gs_completed_questions', JSON.stringify([...completedQuestions]));
+      } catch (e) {
+        console.error('Error saving state', e);
+      }
+    }
+
+    function resetAllData() {
+      if (confirm('すべての進捗データ、回答記録、生徒情報をリセットしますか？')) {
+        localStorage.clear();
+        location.reload();
+      }
+    }
+
+    /* TTS AUDIO ENGINE */
+    function speakText(text) {
+      if ('speechSynthesis' in window) {
+        window.speechSynthesis.cancel();
+        const msg = new SpeechSynthesisUtterance(text);
+        msg.lang = 'en-US';
+        msg.rate = 0.9;
+        window.speechSynthesis.speak(msg);
+      }
+    }
+
+    /* NAVIGATION & TAB SWITCHING */
+    function switchTab(tabId) {
+      document.querySelectorAll('.tab-content').forEach(el => el.classList.add('hidden'));
+      document.querySelectorAll('.tab-btn').forEach(btn => {
+        btn.classList.remove('bg-indigo-600', 'text-white', 'shadow-md');
+        btn.classList.add('text-slate-300');
+      });
+
+      const activeContent = document.getElementById(`content-${tabId}`);
+      if (activeContent) activeContent.classList.remove('hidden');
+
+      const activeBtn = document.getElementById(`tab-${tabId}`);
+      if (activeBtn) {
+        activeBtn.classList.add('bg-indigo-600', 'text-white', 'shadow-md');
+        activeBtn.classList.remove('text-slate-300');
+      }
+
+      if (tabId === 'pdf-export') {
+        updatePrintView();
+      }
+    }
+
+    function toggleLanguage() {
+      currentLang = (currentLang === 'ja') ? 'en' : 'ja';
+      document.getElementById('lang-label').innerText = currentLang === 'ja' ? '日本語' : 'English Mode';
+    }
+
+    function updateGlobalStats() {
+      const totalProblems = 42;
+      const count = completedQuestions.size;
+      const pct = Math.round((count / totalProblems) * 100);
+
+      document.getElementById('global-xp').innerText = userXP;
+      document.getElementById('overall-progress-bar').style.width = `${pct}%`;
+      document.getElementById('overall-pct').innerText = `${pct}%`;
+    }
+
+    /* UNIT 17-1 RENDERERS */
+    function renderU17_1A() {
+      const container = document.getElementById('container-u17-1a');
+      container.innerHTML = dataUnit17_1A.map((item, idx) => {
+        const val1 = userAnswersState[`${item.id}_ans1`] || '';
+        const val2 = userAnswersState[`${item.id}_ans2`] || '';
+        return `
+        <div class="p-4 bg-slate-50 border border-slate-200 rounded-xl space-y-3">
+          <div class="flex items-start justify-between gap-2">
+            <span class="font-bold text-slate-800 text-sm">${idx + 1}. ${item.jp}</span>
+            <button onclick="speakText('${item.full}')" class="p-1.5 text-slate-400 hover:text-indigo-600 rounded-lg transition" title="Listen">
+              <i data-lucide="volume-2" class="w-4 h-4"></i>
+            </button>
+          </div>
+          <div class="flex flex-wrap items-center gap-2 text-sm font-mono bg-white p-3 rounded-lg border border-slate-200">
+            ${item.template.includes('[gap1]') ? item.template.split('[gap1]')[0] : ''}
+            <input type="text" id="${item.id}_ans1" value="${val1}" oninput="handleFillInput('${item.id}_ans1')" class="w-20 px-2.5 py-1 bg-slate-50 border border-slate-300 rounded font-bold text-center text-indigo-700" placeholder="had">
+            <input type="text" id="${item.id}_ans2" value="${val2}" oninput="handleFillInput('${item.id}_ans2')" class="w-24 px-2.5 py-1 bg-slate-50 border border-slate-300 rounded font-bold text-center text-indigo-700" placeholder="${item.verb}">
+            ${item.template.split('[gap2]')[1] || ''}
+          </div>
+          <div class="flex items-center justify-between">
+            <button onclick="checkU17_1A('${item.id}')" class="px-3 py-1.5 bg-indigo-600 hover:bg-indigo-700 text-white text-xs font-bold rounded-lg transition">判定</button>
+            <div id="${item.id}_feedback" class="text-xs font-bold hidden"></div>
+          </div>
+        </div>`;
+      }).join('');
+    }
+
+    function checkU17_1A(id) {
+      const item = dataUnit17_1A.find(q => q.id === id);
+      const v1 = (document.getElementById(`${id}_ans1`).value || '').trim().toLowerCase();
+      const v2 = (document.getElementById(`${id}_ans2`).value || '').trim().toLowerCase();
+      const fb = document.getElementById(`${id}_feedback`);
+
+      if (v1 === item.ans1.toLowerCase() && v2 === item.ans2.toLowerCase()) {
+        fb.className = "text-xs font-bold text-emerald-600 block";
+        fb.innerText = "正解！ Excellent!";
+        addXP(10, id);
+      } else {
+        fb.className = "text-xs font-bold text-rose-600 block";
+        fb.innerText = `不正解 (正解: ${item.ans1} ${item.ans2})`;
+      }
+    }
+
+    function renderU17_1B() {
+      const container = document.getElementById('container-u17-1b');
+      container.innerHTML = dataUnit17_1B.map((item, idx) => {
+        const val = userAnswersState[`${item.id}_text`] || '';
+        return `
+        <div class="p-4 bg-slate-50 border border-slate-200 rounded-xl space-y-3">
+          <div class="flex items-start justify-between gap-2">
+            <div>
+              <span class="font-bold text-slate-800 text-sm">${idx + 1}. ${item.jp}</span>
+              <p class="text-xs text-indigo-700 font-mono mt-0.5">元文: ${item.orig}</p>
+            </div>
+            <button onclick="speakText('${item.full}')" class="p-1.5 text-slate-400 hover:text-indigo-600 rounded-lg transition">
+              <i data-lucide="volume-2" class="w-4 h-4"></i>
+            </button>
+          </div>
+          <input type="text" id="${item.id}_text" value="${val}" oninput="handleFillInput('${item.id}_text')" placeholder="書きかえ文を入力..." class="w-full px-3 py-2 bg-white border border-slate-300 rounded-lg text-sm font-mono focus:border-indigo-500 outline-none">
+          <div class="flex items-center justify-between">
+            <button onclick="checkSentenceExact('${item.id}', '${item.correct}')" class="px-3 py-1.5 bg-indigo-600 hover:bg-indigo-700 text-white text-xs font-bold rounded-lg transition">判定</button>
+            <div id="${item.id}_feedback" class="text-xs font-bold hidden"></div>
+          </div>
+        </div>`;
+      }).join('');
+    }
+
+    function checkSentenceExact(id, correctStr) {
+      const inputVal = (document.getElementById(`${id}_text`).value || '').trim();
+      const fb = document.getElementById(`${id}_feedback`);
+      
+      const cleanInput = inputVal.replace(/\s+/g, ' ').replace(/[.?!]$/, '').toLowerCase();
+      const cleanTarget = correctStr.replace(/\s+/g, ' ').replace(/[.?!]$/, '').toLowerCase();
+
+      if (cleanInput === cleanTarget) {
+        fb.className = "text-xs font-bold text-emerald-600 block";
+        fb.innerText = "正解！ Perfect!";
+        addXP(10, id);
+      } else {
+        fb.className = "text-xs font-bold text-rose-600 block";
+        fb.innerText = `模範解答: ${correctStr}`;
+      }
+    }
+
+    function renderU17_2() {
+      const container = document.getElementById('container-u17-2');
+      container.innerHTML = dataUnit17_2.map((item, idx) => {
+        const val = userAnswersState[`${item.id}_text`] || '';
+        const badge = item.type === 'Q' ? '疑問文' : '否定文';
+        return `
+        <div class="p-4 bg-purple-50/50 border border-purple-100 rounded-xl space-y-3">
+          <div class="flex items-start justify-between gap-2">
+            <div>
+              <span class="px-2 py-0.5 bg-purple-200 text-purple-900 rounded font-bold text-[10px] mr-1.5">${badge}</span>
+              <span class="font-bold text-slate-800 text-sm">${idx + 1}. ${item.jp}</span>
+              <p class="text-xs text-purple-800 font-mono mt-0.5">Prompt: ${item.prompt}</p>
+            </div>
+            <button onclick="speakText('${item.full}')" class="p-1.5 text-slate-400 hover:text-purple-600 rounded-lg transition">
+              <i data-lucide="volume-2" class="w-4 h-4"></i>
+            </button>
+          </div>
+          <input type="text" id="${item.id}_text" value="${val}" oninput="handleFillInput('${item.id}_text')" placeholder="英文を入力..." class="w-full px-3 py-2 bg-white border border-purple-200 rounded-lg text-sm font-mono focus:border-purple-500 outline-none">
+          <div class="flex items-center justify-between">
+            <button onclick="checkSentenceExact('${item.id}', '${item.correct}')" class="px-3 py-1.5 bg-purple-600 hover:bg-purple-700 text-white text-xs font-bold rounded-lg transition">判定</button>
+            <div id="${item.id}_feedback" class="text-xs font-bold hidden"></div>
+          </div>
+        </div>`;
+      }).join('');
+    }
+
+    function renderU17_3A() {
+      const container = document.getElementById('container-u17-3a');
+      container.innerHTML = dataUnit17_3A.map((item, idx) => {
+        const val = userAnswersState[`${item.id}_text`] || '';
+        return `
+        <div class="p-4 bg-emerald-50/50 border border-emerald-100 rounded-xl space-y-3">
+          <div class="flex items-start justify-between gap-2">
+            <span class="font-bold text-slate-800 text-sm">${idx + 1}. ${item.jp}</span>
+            <button onclick="speakText('${item.full}')" class="p-1.5 text-slate-400 hover:text-emerald-600 rounded-lg transition">
+              <i data-lucide="volume-2" class="w-4 h-4"></i>
+            </button>
+          </div>
+          <div class="text-xs font-mono bg-white p-3 rounded-lg border border-emerald-200">
+            ${item.template}
+          </div>
+          <input type="text" id="${item.id}_text" value="${val}" oninput="handleFillInput('${item.id}_text')" placeholder="had + 過去分詞" class="w-full px-3 py-2 bg-white border border-slate-300 rounded-lg text-sm font-mono focus:border-emerald-500 outline-none">
+          <div class="flex items-center justify-between">
+            <button onclick="checkSentenceExact('${item.id}', '${item.correct}')" class="px-3 py-1.5 bg-emerald-600 hover:bg-emerald-700 text-white text-xs font-bold rounded-lg transition">判定</button>
+            <div id="${item.id}_feedback" class="text-xs font-bold hidden"></div>
+          </div>
+        </div>`;
+      }).join('');
+    }
+
+    /* WORD CHIP UNSCRAMBLE RENDERERS */
+    function renderU17_3B() {
+      renderUnscrambleSection('container-u17-3b', dataUnit17_3B);
+    }
+    function renderU18_1B() {
+      renderUnscrambleSection('container-u18-1b', dataUnit18_1B);
+    }
+    function renderU18_2B() {
+      renderUnscrambleSection('container-u18-2b', dataUnit18_2B);
+    }
+
+    function renderUnscrambleSection(containerId, dataList) {
+      const container = document.getElementById(containerId);
+      container.innerHTML = dataList.map((item, idx) => {
+        if (!chipPickState[item.id]) {
+          chipPickState[item.id] = [];
+        }
+        const picked = chipPickState[item.id];
+        return `
+        <div class="p-4 bg-slate-50 border border-slate-200 rounded-xl space-y-3">
+          <div class="flex items-start justify-between gap-2">
+            <span class="font-bold text-slate-800 text-sm">${idx + 1}. ${item.jp}</span>
+            <button onclick="speakText('${item.full}')" class="p-1.5 text-slate-400 hover:text-indigo-600 rounded-lg transition">
+              <i data-lucide="volume-2" class="w-4 h-4"></i>
+            </button>
+          </div>
+
+          <!-- Answer Drop Zone / Picked chips -->
+          <div id="${item.id}_target" class="min-h-[48px] p-2 bg-white border-2 border-dashed border-indigo-200 rounded-xl flex flex-wrap gap-2 items-center text-sm font-mono">
+            ${item.prefix ? `<span class="text-slate-500 font-bold">${item.prefix}</span>` : ''}
+            ${picked.map((w, pIdx) => `
+              <span onclick="removeChip('${item.id}', ${pIdx})" class="px-3 py-1 bg-indigo-600 text-white font-bold rounded-lg word-chip flex items-center gap-1 shadow">
+                ${w} <i data-lucide="x" class="w-3 h-3"></i>
+              </span>
+            `).join('')}
+            ${item.suffix ? `<span class="text-slate-500 font-bold">${item.suffix}</span>` : ''}
+          </div>
+
+          <!-- Available Chips -->
+          <div class="flex flex-wrap gap-2 pt-1">
+            ${item.words.map((w, wIdx) => {
+              const isUsed = picked.includes(w) && picked.filter(x => x === w).length >= item.words.filter(x => x === w).length;
+              return `
+                <button onclick="pickChip('${item.id}', '${w}')" ${isUsed ? 'disabled' : ''} class="px-3 py-1 bg-slate-200 hover:bg-indigo-100 disabled:opacity-40 text-slate-800 font-bold rounded-lg text-xs word-chip transition">
+                  ${w}
+                </button>
+              `;
+            }).join('')}
+            <button onclick="clearChips('${item.id}')" class="px-2 py-1 bg-rose-100 text-rose-700 hover:bg-rose-200 rounded-lg text-xs font-bold ml-auto transition">
+              リセット
+            </button>
+          </div>
+
+          <div class="flex items-center justify-between">
+            <button onclick="checkUnscramble('${item.id}', '${item.full}')" class="px-3 py-1.5 bg-indigo-600 hover:bg-indigo-700 text-white text-xs font-bold rounded-lg transition">判定</button>
+            <div id="${item.id}_feedback" class="text-xs font-bold hidden"></div>
+          </div>
+        </div>`;
+      }).join('');
+      lucide.createIcons();
+    }
+
+    function pickChip(id, word) {
+      if (!chipPickState[id]) chipPickState[id] = [];
+      chipPickState[id].push(word);
+      userAnswersState[`${id}_text`] = chipPickState[id].join(' ');
+      persistAppState();
+
+      if (id.startsWith('u17_3b')) renderU17_3B();
+      else if (id.startsWith('u18_1b')) renderU18_1B();
+      else if (id.startsWith('u18_2b')) renderU18_2B();
+    }
+
+    function removeChip(id, index) {
+      if (chipPickState[id]) {
+        chipPickState[id].splice(index, 1);
+        userAnswersState[`${id}_text`] = chipPickState[id].join(' ');
+        persistAppState();
+      }
+      if (id.startsWith('u17_3b')) renderU17_3B();
+      else if (id.startsWith('u18_1b')) renderU18_1B();
+      else if (id.startsWith('u18_2b')) renderU18_2B();
+    }
+
+    function clearChips(id) {
+      chipPickState[id] = [];
+      delete userAnswersState[`${id}_text`];
+      persistAppState();
+      if (id.startsWith('u17_3b')) renderU17_3B();
+      else if (id.startsWith('u18_1b')) renderU18_1B();
+      else if (id.startsWith('u18_2b')) renderU18_2B();
+    }
+
+    function checkUnscramble(id, fullStr) {
+      const picked = (chipPickState[id] || []).join(' ').trim().toLowerCase();
+      const fb = document.getElementById(`${id}_feedback`);
+      
+      const cleanFull = fullStr.replace(/[.?!,]/g, '').toLowerCase();
+
+      if (cleanFull.includes(picked) && picked.length > 5) {
+        fb.className = "text-xs font-bold text-emerald-600 block";
+        fb.innerText = "正解！ Perfect!";
+        addXP(10, id);
+      } else {
+        fb.className = "text-xs font-bold text-rose-600 block";
+        fb.innerText = `模範: ${fullStr}`;
+      }
+    }
+
+    /* UNIT 18-1 RENDERER */
+    function renderU18_1A() {
+      const container = document.getElementById('container-u18-1a');
+      container.innerHTML = dataUnit18_1A.map((item, idx) => {
+        const v1 = userAnswersState[`${item.id}_ans1`] || '';
+        const v2 = userAnswersState[`${item.id}_ans2`] || '';
+        const v3 = userAnswersState[`${item.id}_ans3`] || '';
+        const cat = userAnswersState[`${item.id}_cat`] || '';
+
+        return `
+        <div class="p-4 bg-blue-50/50 border border-blue-100 rounded-xl space-y-3">
+          <div class="flex items-start justify-between gap-2">
+            <span class="font-bold text-slate-800 text-sm">${idx + 1}. ${item.jp}</span>
+            <button onclick="speakText('${item.full}')" class="p-1.5 text-slate-400 hover:text-blue-600 rounded-lg transition">
+              <i data-lucide="volume-2" class="w-4 h-4"></i>
+            </button>
+          </div>
+          <div class="flex flex-wrap items-center gap-2 text-sm font-mono bg-white p-3 rounded-lg border border-blue-200">
+            ${item.template.includes('[gap1]') ? item.template.split('[gap1]')[0] : ''}
+            <input type="text" id="${item.id}_ans1" value="${v1}" oninput="handleFillInput('${item.id}_ans1')" class="w-16 px-2 py-1 bg-slate-50 border rounded text-center font-bold text-indigo-700" placeholder="had">
+            <input type="text" id="${item.id}_ans2" value="${v2}" oninput="handleFillInput('${item.id}_ans2')" class="w-20 px-2 py-1 bg-slate-50 border rounded text-center font-bold text-indigo-700" placeholder="been/verb">
+            ${item.ans3 ? `<input type="text" id="${item.id}_ans3" value="${v3}" oninput="handleFillInput('${item.id}_ans3')" class="w-24 px-2 py-1 bg-slate-50 border rounded text-center font-bold text-indigo-700" placeholder="using">` : ''}
+            ${item.template.split('[gap2]')[1] || ''}
+          </div>
+
+          <div class="flex items-center gap-4 text-xs font-bold">
+            <span>種別:</span>
+            <label class="flex items-center gap-1 cursor-pointer">
+              <input type="radio" name="${item.id}_cat" value="state" ${cat === 'state' ? 'checked' : ''} onchange="handleFillInput('${item.id}_cat', 'state')">
+              <span>状態の継続</span>
+            </label>
+            <label class="flex items-center gap-1 cursor-pointer">
+              <input type="radio" name="${item.id}_cat" value="action" ${cat === 'action' ? 'checked' : ''} onchange="handleFillInput('${item.id}_cat', 'action')">
+              <span>動作の継続</span>
+            </label>
+          </div>
+
+          <div class="flex items-center justify-between">
+            <button onclick="checkU18_1A('${item.id}')" class="px-3 py-1.5 bg-blue-600 hover:bg-blue-700 text-white text-xs font-bold rounded-lg transition">判定</button>
+            <div id="${item.id}_feedback" class="text-xs font-bold hidden"></div>
+          </div>
+        </div>`;
+      }).join('');
+    }
+
+    function checkU18_1A(id) {
+      const item = dataUnit18_1A.find(q => q.id === id);
+      const v1 = (document.getElementById(`${id}_ans1`).value || '').trim().toLowerCase();
+      const v2 = (document.getElementById(`${id}_ans2`).value || '').trim().toLowerCase();
+      const v3 = item.ans3 ? (document.getElementById(`${id}_ans3`).value || '').trim().toLowerCase() : '';
+      const cat = userAnswersState[`${item.id}_cat`];
+
+      const fb = document.getElementById(`${id}_feedback`);
+
+      const ansMatch = v1 === item.ans1.toLowerCase() && v2 === item.ans2.toLowerCase() && (!item.ans3 || v3 === item.ans3.toLowerCase());
+      const catMatch = cat === item.catVal;
+
+      if (ansMatch && catMatch) {
+        fb.className = "text-xs font-bold text-emerald-600 block";
+        fb.innerText = "正解！ Perfect!";
+        addXP(10, id);
+      } else {
+        fb.className = "text-xs font-bold text-rose-600 block";
+        fb.innerText = `模範: ${item.ans1} ${item.ans2} ${item.ans3 || ''} (${item.category})`;
+      }
+    }
+
+    /* UNIT 18-2 RENDERER */
+    function renderU18_2A() {
+      const container = document.getElementById('container-u18-2a');
+      container.innerHTML = dataUnit18_2A.map((item, idx) => {
+        const val = userAnswersState[`${item.id}_text`] || '';
+        return `
+        <div class="p-4 bg-amber-50/50 border border-amber-100 rounded-xl space-y-3">
+          <div class="flex items-start justify-between gap-2">
+            <div>
+              <span class="font-bold text-slate-800 text-sm">${idx + 1}. ${item.jp}</span>
+              <div class="text-xs font-mono text-amber-900 mt-1">① ${item.sent1} / ② ${item.sent2}</div>
+            </div>
+            <button onclick="speakText('${item.full}')" class="p-1.5 text-slate-400 hover:text-amber-600 rounded-lg transition">
+              <i data-lucide="volume-2" class="w-4 h-4"></i>
+            </button>
+          </div>
+          <input type="text" id="${item.id}_text" value="${val}" oninput="handleFillInput('${item.id}_text')" placeholder="大過去を用いて1文に結合..." class="w-full px-3 py-2 bg-white border border-slate-300 rounded-lg text-sm font-mono focus:border-amber-500 outline-none">
+          <div class="flex items-center justify-between">
+            <button onclick="checkSentenceExact('${item.id}', '${item.correct}')" class="px-3 py-1.5 bg-amber-600 hover:bg-amber-700 text-white text-xs font-bold rounded-lg transition">判定</button>
+            <div id="${item.id}_feedback" class="text-xs font-bold hidden"></div>
+          </div>
+        </div>`;
+      }).join('');
+    }
+
+    function handleFillInput(key, val) {
+      if (val !== undefined) {
+        userAnswersState[key] = val;
+      } else {
+        const el = document.getElementById(key);
+        if (el) userAnswersState[key] = el.value;
+      }
+      persistAppState();
+    }
+
+    function addXP(amount, id) {
+      if (!completedQuestions.has(id)) {
+        completedQuestions.add(id);
+        userXP += amount;
+        persistAppState();
+        updateGlobalStats();
+      }
+    }
+
+    /* MOCK EXAM RENDERER & GRADER */
+    function renderMockExam() {
+      const container = document.getElementById('mock-exam-questions-container');
+      const allList = [
+        ...dataUnit17_1A, ...dataUnit17_1B, ...dataUnit17_2, ...dataUnit17_3A,
+        ...dataUnit18_1A, ...dataUnit18_2A
+      ];
+
+      container.innerHTML = allList.map((item, idx) => {
+        const val = userAnswersState[`mock_${item.id}`] || '';
+        return `
+        <div class="p-4 bg-slate-50 border border-slate-200 rounded-xl space-y-2">
+          <div class="flex items-start justify-between">
+            <span class="font-bold text-xs text-indigo-700">Q${idx + 1}. [${item.sec}]</span>
+            <span class="text-xs text-slate-500">${item.jp}</span>
+          </div>
+          <input type="text" id="mock_${item.id}" value="${val}" oninput="handleFillInput('mock_${item.id}')" placeholder="あなたの解答を入力..." class="w-full px-3 py-2 bg-white border border-slate-300 rounded-lg text-sm font-mono focus:border-purple-500 outline-none">
+          <div id="mock_fb_${item.id}" class="text-xs font-bold hidden"></div>
+        </div>`;
+      }).join('');
+    }
+
+    function gradeMockExam() {
+      const allList = [
+        ...dataUnit17_1A, ...dataUnit17_1B, ...dataUnit17_2, ...dataUnit17_3A,
+        ...dataUnit18_1A, ...dataUnit18_2A
+      ];
+
+      let score = 0;
+      allList.forEach(item => {
+        const inputVal = (document.getElementById(`mock_${item.id}`).value || '').trim();
+        const fb = document.getElementById(`mock_fb_${item.id}`);
+
+        let isCorrect = false;
+        if (item.correct) {
+          const clean = inputVal.replace(/[.?!]/g, '').toLowerCase();
+          const target = item.correct.replace(/[.?!]/g, '').toLowerCase();
+          if (clean === target) isCorrect = true;
+        } else if (item.ans1) {
+          if (inputVal.toLowerCase().includes(item.ans1.toLowerCase()) && inputVal.toLowerCase().includes(item.ans2.toLowerCase())) {
+            isCorrect = true;
+          }
+        }
+
+        if (isCorrect) {
+          score++;
+          fb.className = "text-xs font-bold text-emerald-600 block";
+          fb.innerText = "✓ 正解";
+        } else {
+          fb.className = "text-xs font-bold text-rose-600 block";
+          fb.innerText = `✗ 模範解答: ${item.correct || item.full}`;
+        }
+      });
+
+      const banner = document.getElementById('mock-exam-score-banner');
+      banner.classList.remove('hidden');
+      banner.innerHTML = `採点結果: <strong>${score}</strong> / ${allList.length} 点 (${Math.round((score/allList.length)*100)}%)`;
+    }
+
+    function resetMockExam() {
+      const allList = [
+        ...dataUnit17_1A, ...dataUnit17_1B, ...dataUnit17_2, ...dataUnit17_3A,
+        ...dataUnit18_1A, ...dataUnit18_2A
+      ];
+      allList.forEach(item => {
+        delete userAnswersState[`mock_${item.id}`];
+        const el = document.getElementById(`mock_${item.id}`);
+        if (el) el.value = '';
+        const fb = document.getElementById(`mock_fb_${item.id}`);
+        if (fb) fb.className = "hidden";
+      });
+      document.getElementById('mock-exam-score-banner').classList.add('hidden');
+      persistAppState();
+    }
+
+    /* MASTER QUIZ LOGIC */
+    function startMasterQuiz() {
+      const allList = [
+        ...dataUnit17_1A, ...dataUnit17_1B, ...dataUnit17_2, ...dataUnit17_3A,
+        ...dataUnit18_1A, ...dataUnit18_2A
+      ];
+
+      quizQuestions = [...allList].sort(() => 0.5 - Math.random()).slice(0, 10);
+      currentQuizIndex = 0;
+      quizScore = 0;
+      quizTimeRemaining = 180;
+
+      document.getElementById('quiz-start-screen').classList.add('hidden');
+      document.getElementById('quiz-result-screen').classList.add('hidden');
+      document.getElementById('quiz-active-screen').classList.remove('hidden');
+
+      startQuizTimer();
+      renderQuizQuestion();
+    }
+
+    function startQuizTimer() {
+      clearInterval(quizTimer);
+      quizTimer = setInterval(() => {
+        quizTimeRemaining--;
+        const min = Math.floor(quizTimeRemaining / 60).toString().padStart(2, '0');
+        const sec = (quizTimeRemaining % 60).toString().padStart(2, '0');
+        document.getElementById('quiz-timer').innerText = `${min}:${sec}`;
+
+        if (quizTimeRemaining <= 0) {
+          clearInterval(quizTimer);
+          finishQuiz();
+        }
+      }, 1000);
+    }
+
+    function renderQuizQuestion() {
+      const q = quizQuestions[currentQuizIndex];
+      document.getElementById('quiz-q-num').innerText = currentQuizIndex + 1;
+      document.getElementById('quiz-q-category').innerText = q.sec;
+      document.getElementById('quiz-q-jp').innerText = q.jp;
+      document.getElementById('quiz-q-en').innerText = q.full;
+
+      const options = generateQuizOptions(q.full);
+      const container = document.getElementById('quiz-options-container');
+      container.innerHTML = options.map(opt => `
+        <button onclick="submitQuizAnswer('${opt.replace(/'/g, "\\'")}', '${q.full.replace(/'/g, "\\'")}')" class="p-3.5 bg-slate-100 hover:bg-indigo-50 border border-slate-200 hover:border-indigo-300 rounded-xl font-mono text-sm text-left font-bold transition">
+          ${opt}
+        </button>
+      `).join('');
+    }
+
+    function generateQuizOptions(correctStr) {
+      const dist1 = correctStr.replace(/had/g, 'has').replace(/hadn't/g, "hasn't");
+      const dist2 = correctStr.replace(/had/g, 'have');
+      const dist3 = correctStr.replace(/eaten|left|cooked|stopped|made|gone|taken|done|gotten|reserved|finished|met|learned|climbed|touched|been|known|using|belonged|washing|lived|waiting|studied|looking|broken|read/g, 'did');
+
+      const set = new Set([correctStr, dist1, dist2, dist3]);
+      return [...set].sort(() => 0.5 - Math.random());
+    }
+
+    function submitQuizAnswer(selected, correct) {
+      if (selected === correct) quizScore += 10;
+      currentQuizIndex++;
+      if (currentQuizIndex < quizQuestions.length) {
+        renderQuizQuestion();
+      } else {
+        clearInterval(quizTimer);
+        finishQuiz();
+      }
+    }
+
+    function finishQuiz() {
+      document.getElementById('quiz-active-screen').classList.add('hidden');
+      document.getElementById('quiz-result-screen').classList.remove('hidden');
+      document.getElementById('quiz-final-score').innerText = quizScore;
+      addXP(quizScore, 'quiz_master');
+      userAnswersState['quiz_last_score'] = quizScore;
+      persistAppState();
+    }
+
+    function resetQuiz() {
+      document.getElementById('quiz-start-screen').classList.remove('hidden');
+      document.getElementById('quiz-result-screen').classList.add('hidden');
+    }
+
+    /* PRINT VIEW UPDATER */
+    function updatePrintView() {
+      document.getElementById('print-student-name').innerText = studentProfile.name.trim() || '未設定';
+      document.getElementById('print-student-class').innerText = studentProfile.class.trim() || '未設定';
+      document.getElementById('print-student-id').innerText = studentProfile.id.trim() || '未設定';
+      document.getElementById('print-student-notes').innerText = studentProfile.notes.trim() || '（メモなし）';
+      document.getElementById('print-date').innerText = new Date().toLocaleDateString('ja-JP');
+      document.getElementById('print-xp-score').innerText = `${userXP} XP`;
+
+      const listContainer = document.getElementById('print-answers-list');
+      const allList = [
+        ...dataUnit17_1A, ...dataUnit17_1B, ...dataUnit17_2, ...dataUnit17_3A,
+        ...dataUnit18_1A, ...dataUnit18_2A
+      ];
+
+      listContainer.innerHTML = allList.map((item, idx) => {
+        const val1 = userAnswersState[`${item.id}_ans1`];
+        const val2 = userAnswersState[`${item.id}_ans2`];
+        const textVal = userAnswersState[`${item.id}_text`];
+
+        let displayAns = '（未入力）';
+        if (textVal) displayAns = textVal;
+        else if (val1 || val2) displayAns = `${val1 || ''} ${val2 || ''}`;
+
+        return `
+        <div class="p-2 border-b border-slate-200 text-xs flex justify-between items-center gap-2">
+          <div>
+            <span class="font-bold font-mono text-slate-500">Q${idx+1} [${item.sec}]</span>
+            <span class="text-slate-800 ml-2">${item.jp}</span>
+          </div>
+          <div class="font-mono font-bold text-indigo-900 border-b border-slate-400 px-2 min-w-[150px] text-right">
+            ${displayAns}
+          </div>
+        </div>`;
+      }).join('');
+    }
+
+    /* MASTER BANK RENDERER */
+    function renderMasterBankList(filter = 'all') {
+      const container = document.getElementById('master-bank-list-container');
+      const allList = [
+        ...dataUnit17_1A, ...dataUnit17_1B, ...dataUnit17_2, ...dataUnit17_3A, ...dataUnit17_3B,
+        ...dataUnit18_1A, ...dataUnit18_1B, ...dataUnit18_2A, ...dataUnit18_2B
+      ];
+
+      const filtered = filter === 'all' ? allList : allList.filter(item => item.sec === filter);
+
+      container.innerHTML = filtered.map((item, idx) => `
+        <div class="p-4 bg-slate-800/80 border border-slate-700/80 rounded-xl space-y-2 text-xs">
+          <div class="flex items-center justify-between text-teal-300 font-mono font-bold">
+            <span>#${idx+1} [${item.sec}]</span>
+            <button onclick="speakText('${item.full}')" class="p-1 text-teal-400 hover:text-white transition">
+              <i data-lucide="volume-2" class="w-4 h-4"></i>
+            </button>
+          </div>
+          <div class="font-bold text-slate-200">${item.jp}</div>
+          <div class="p-2 bg-slate-900 rounded font-mono text-emerald-400 font-bold">${item.full}</div>
+          <div class="text-slate-400">解説: ${item.exp}</div>
+        </div>
+      `).join('');
+      lucide.createIcons();
+    }
+
+    function filterBank(sec) {
+      document.querySelectorAll('.bank-filter-btn').forEach(b => {
+        b.classList.remove('bg-teal-600', 'text-white');
+        b.classList.add('bg-slate-800', 'text-slate-300');
+      });
+      const btn = document.getElementById(`bank-filter-${sec}`);
+      if (btn) {
+        btn.classList.add('bg-teal-600', 'text-white');
+        btn.classList.remove('bg-slate-800', 'text-slate-300');
+      }
+      renderMasterBankList(sec);
+    }
+  </script>
+</body>
+</html>
