@@ -1,0 +1,1960 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>GrammarStation: UNITS 17 & 18 - Past Perfect Tense (過去完了形)</title>
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <!-- Lucide Icons CDN -->
+  <script src="https://unpkg.com/lucide@latest"></script>
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Noto+Sans+JP:wght@400;500;700;900&display=swap" rel="stylesheet">
+  
+  <style>
+    body {
+      font-family: 'Plus Jakarta Sans', 'Noto Sans JP', sans-serif;
+    }
+    .gradient-header {
+      background: linear-gradient(135deg, #0f172a 0%, #1e1b4b 40%, #311042 100%);
+    }
+    .gradient-accent {
+      background: linear-gradient(135deg, #4f46e5 0%, #7c3aed 50%, #d946ef 100%);
+    }
+    .word-chip {
+      transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+      cursor: pointer;
+      user-select: none;
+    }
+    .word-chip:hover {
+      transform: translateY(-2px);
+    }
+    .chip-container::-webkit-scrollbar {
+      height: 6px;
+    }
+    .chip-container::-webkit-scrollbar-thumb {
+      background: #cbd5e1;
+      border-radius: 9999px;
+    }
+
+    @media print {
+      body {
+        background: white !important;
+        color: black !important;
+        font-size: 11pt;
+      }
+      header, footer, nav, .no-print, button, .tab-btn, #global-progress-bar-container, #audio-settings-bar {
+        display: none !important;
+      }
+      .tab-content {
+        display: block !important;
+      }
+      .print-only {
+        display: block !important;
+      }
+      .card-print {
+        border: 1px solid #cbd5e1 !important;
+        box-shadow: none !important;
+        break-inside: avoid;
+        margin-bottom: 1rem !important;
+        background: white !important;
+      }
+      input[type="text"], textarea {
+        border-bottom: 1.5px solid #000 !important;
+        border-top: none !important;
+        border-left: none !important;
+        border-right: none !important;
+        border-radius: 0 !important;
+        background: transparent !important;
+      }
+    }
+
+    .print-only {
+      display: none;
+    }
+  </style>
+</head>
+<body class="bg-slate-50 text-slate-800 min-h-screen flex flex-col selection:bg-indigo-500 selection:text-white">
+
+  <!-- TOP HEADER & NAV -->
+  <header class="gradient-header text-white sticky top-0 z-50 shadow-xl border-b border-indigo-900/50 no-print">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-3 flex flex-wrap items-center justify-between gap-3">
+      <!-- Logo & Title -->
+      <div class="flex items-center gap-3">
+        <div class="p-2.5 bg-indigo-600/80 rounded-xl border border-indigo-400/30 backdrop-blur-md shadow-inner flex items-center justify-center">
+          <i data-lucide="history" class="w-6 h-6 text-indigo-200"></i>
+        </div>
+        <div>
+          <div class="flex items-center gap-2">
+            <span class="px-2 py-0.5 text-[10px] font-extrabold tracking-wider bg-indigo-500/30 text-indigo-200 border border-indigo-400/30 rounded-full uppercase">ESL Master Course</span>
+            <span class="text-xs text-indigo-300 font-mono">Units 17 & 18</span>
+          </div>
+          <h1 class="text-lg sm:text-xl font-black tracking-tight flex items-center gap-2">
+            <span>過去完了形</span>
+            <span class="text-xs font-semibold text-slate-300 font-sans hidden sm:inline">(Past Perfect Tense & Pluperfect)</span>
+          </h1>
+        </div>
+      </div>
+
+      <!-- Student Badge & Controls -->
+      <div class="flex items-center gap-2 sm:gap-3 ml-auto flex-wrap">
+        <button onclick="switchTab('student-profile')" class="flex items-center gap-2 px-3 py-1.5 bg-slate-800/80 hover:bg-slate-700/80 rounded-xl border border-indigo-500/30 text-xs transition">
+          <i data-lucide="user-check" class="w-4 h-4 text-emerald-400"></i>
+          <span id="header-student-name" class="font-bold text-slate-200">生徒名: 未設定</span>
+        </button>
+
+        <div class="flex items-center gap-1.5 px-3 py-1.5 bg-slate-900/80 rounded-xl border border-amber-500/30 text-xs font-semibold">
+          <i data-lucide="zap" class="w-4 h-4 text-amber-400 fill-amber-400"></i>
+          <span><span id="global-xp" class="text-amber-400 font-bold text-sm">0</span> XP</span>
+        </div>
+
+        <button onclick="switchTab('pdf-export')" class="px-3 py-1.5 bg-emerald-600 hover:bg-emerald-500 text-white rounded-xl text-xs font-bold transition flex items-center gap-1.5 shadow-md">
+          <i data-lucide="printer" class="w-4 h-4"></i>
+          <span>PDF保存・印刷</span>
+        </button>
+
+        <button id="btn-lang-toggle" onclick="toggleLanguage()" class="px-3 py-1.5 bg-indigo-900/80 hover:bg-indigo-800 text-indigo-100 rounded-xl border border-indigo-500/30 text-xs font-bold transition flex items-center gap-1.5">
+          <i data-lucide="languages" class="w-4 h-4 text-indigo-300"></i>
+          <span id="lang-label">日本語</span>
+        </button>
+      </div>
+    </div>
+
+    <!-- MAIN NAVIGATION TABS -->
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 bg-slate-950/50 border-t border-slate-800/80 overflow-x-auto">
+      <nav class="flex space-x-1 sm:space-x-2 py-2 text-xs sm:text-sm font-semibold whitespace-nowrap items-center" id="main-nav-tabs">
+        <button onclick="switchTab('student-profile')" id="tab-student-profile" class="tab-btn px-3 py-1.5 rounded-lg transition flex items-center gap-1.5 text-slate-300 hover:text-white hover:bg-slate-800/60">
+          <i data-lucide="user" class="w-4 h-4 text-indigo-300"></i>
+          <span>生徒情報</span>
+        </button>
+        <button onclick="switchTab('u17-completion')" id="tab-u17-completion" class="tab-btn px-3.5 py-1.5 rounded-lg transition flex items-center gap-1.5 bg-indigo-600 text-white shadow-md">
+          <i data-lucide="check-circle-2" class="w-4 h-4"></i>
+          <span>Unit 17-1: 完了・結果</span>
+        </button>
+        <button onclick="switchTab('u17-questions')" id="tab-u17-questions" class="tab-btn px-3.5 py-1.5 rounded-lg transition flex items-center gap-1.5 text-slate-300 hover:text-white hover:bg-slate-800/60">
+          <i data-lucide="help-circle" class="w-4 h-4"></i>
+          <span>Unit 17-2: 疑問文・否定文</span>
+        </button>
+        <button onclick="switchTab('u17-experience')" id="tab-u17-experience" class="tab-btn px-3.5 py-1.5 rounded-lg transition flex items-center gap-1.5 text-slate-300 hover:text-white hover:bg-slate-800/60">
+          <i data-lucide="award" class="w-4 h-4"></i>
+          <span>Unit 17-3: 経験</span>
+        </button>
+        <button onclick="switchTab('u18-continuation')" id="tab-u18-continuation" class="tab-btn px-3.5 py-1.5 rounded-lg transition flex items-center gap-1.5 text-slate-300 hover:text-white hover:bg-slate-800/60">
+          <i data-lucide="clock" class="w-4 h-4"></i>
+          <span>Unit 18-1: 継続 (状態/動作)</span>
+        </button>
+        <button onclick="switchTab('u18-pluperfect')" id="tab-u18-pluperfect" class="tab-btn px-3.5 py-1.5 rounded-lg transition flex items-center gap-1.5 text-slate-300 hover:text-white hover:bg-slate-800/60">
+          <i data-lucide="rewind" class="w-4 h-4"></i>
+          <span>Unit 18-2: 大過去</span>
+        </button>
+        <button onclick="switchTab('master-quiz')" id="tab-master-quiz" class="tab-btn px-3.5 py-1.5 rounded-lg transition flex items-center gap-1.5 bg-gradient-to-r from-amber-500 to-rose-500 text-white font-bold hover:brightness-110">
+          <i data-lucide="trophy" class="w-4 h-4"></i>
+          <span>総合テスト</span>
+        </button>
+        <button onclick="switchTab('mock-exam')" id="tab-mock-exam" class="tab-btn px-3.5 py-1.5 rounded-lg transition flex items-center gap-1.5 bg-gradient-to-r from-purple-600 to-indigo-600 text-white font-bold hover:brightness-110">
+          <i data-lucide="file-text" class="w-4 h-4"></i>
+          <span>模擬試験</span>
+        </button>
+        <button onclick="switchTab('pdf-export')" id="tab-pdf-export" class="tab-btn px-3 py-1.5 rounded-lg transition flex items-center gap-1.5 bg-emerald-700 text-white font-bold hover:bg-emerald-600">
+          <i data-lucide="printer" class="w-4 h-4"></i>
+          <span>印刷シート</span>
+        </button>
+        <button onclick="switchTab('master-bank')" id="tab-master-bank" class="tab-btn px-2.5 py-1 rounded-lg transition flex items-center gap-1 bg-slate-900 text-teal-300 hover:bg-slate-800 text-xs font-semibold border border-teal-500/30 ml-auto">
+          <i data-lucide="book-open-check" class="w-3.5 h-3.5 text-teal-400"></i>
+          <span>Master Bank</span>
+        </button>
+      </nav>
+    </div>
+  </header>
+
+  <!-- MAIN CONTAINER -->
+  <main class="flex-grow max-w-7xl w-full mx-auto px-4 sm:px-6 lg:px-8 py-6 space-y-6">
+
+    <!-- GLOBAL PROGRESS BAR & AUDIO SETTINGS BAR -->
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-4 no-print">
+      <div id="global-progress-bar-container" class="md:col-span-2 bg-white rounded-xl p-3.5 border border-slate-200 shadow-sm flex items-center gap-4">
+        <div class="text-xs font-bold text-slate-700 shrink-0 flex items-center gap-1.5">
+          <i data-lucide="target" class="w-4 h-4 text-indigo-600"></i>
+          <span id="txt-overall-progress">全問題達成度</span>
+        </div>
+        <div class="w-full bg-slate-100 rounded-full h-3.5 overflow-hidden border border-slate-200 flex">
+          <div id="overall-progress-bar" class="bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 h-3.5 rounded-full transition-all duration-500" style="width: 0%"></div>
+        </div>
+        <span id="overall-pct" class="text-xs font-extrabold text-indigo-700 shrink-0 font-mono min-w-[3rem] text-right">0%</span>
+      </div>
+
+      <!-- AUDIO CONTROLS BAR -->
+      <div id="audio-settings-bar" class="bg-white rounded-xl p-3.5 border border-slate-200 shadow-sm flex items-center justify-between gap-3 text-xs">
+        <div class="flex items-center gap-1.5 font-bold text-slate-700">
+          <i data-lucide="volume-2" class="w-4 h-4 text-indigo-600"></i>
+          <span>音声読み上げ設定</span>
+        </div>
+        <div class="flex items-center gap-2">
+          <label class="text-[11px] font-semibold text-slate-500">速度:</label>
+          <select id="speech-rate-select" class="px-2 py-1 bg-slate-100 border border-slate-300 rounded-lg text-xs font-bold outline-none">
+            <option value="0.75">0.75x (ゆっくり)</option>
+            <option value="0.95" selected>1.0x (標準)</option>
+            <option value="1.15">1.2x (速め)</option>
+          </select>
+        </div>
+      </div>
+    </div>
+
+    <!-- TAB 0: STUDENT PROFILE -->
+    <div id="content-student-profile" class="tab-content hidden space-y-6">
+      <div class="bg-white rounded-2xl border border-slate-200 shadow-sm p-6 space-y-6">
+        <div class="border-b border-slate-200 pb-4 flex flex-wrap items-center justify-between gap-4">
+          <div>
+            <span class="px-2.5 py-0.5 bg-indigo-100 text-indigo-800 text-xs font-bold rounded-full">Local Storage</span>
+            <h2 class="text-2xl font-black text-slate-900 mt-1">生徒プロフィール ＆ 学習記録</h2>
+            <p class="text-xs text-slate-600 mt-1">
+              入力された情報や解答データはお使いの端末 (ブラウザ) に自動保存されます。
+            </p>
+          </div>
+          <button onclick="saveStudentProfile()" class="px-5 py-2.5 bg-indigo-600 hover:bg-indigo-700 text-white font-bold text-xs rounded-xl shadow transition flex items-center gap-2">
+            <i data-lucide="save" class="w-4 h-4"></i>
+            <span>情報を保存 (Save Profile)</span>
+          </button>
+        </div>
+
+        <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-4">
+          <div>
+            <label class="block text-xs font-bold text-slate-700 mb-1">氏名 (Student Name)</label>
+            <input type="text" id="input-student-name" oninput="saveStudentProfile()" placeholder="山田 太郎" class="w-full px-3 py-2 bg-slate-50 border border-slate-300 rounded-lg text-sm font-semibold focus:bg-white focus:border-indigo-500 outline-none">
+          </div>
+          <div>
+            <label class="block text-xs font-bold text-slate-700 mb-1">学年・クラス (Class / Grade)</label>
+            <input type="text" id="input-student-class" oninput="saveStudentProfile()" placeholder="中学3年1組 / JHS 3-1" class="w-full px-3 py-2 bg-slate-50 border border-slate-300 rounded-lg text-sm font-semibold focus:bg-white focus:border-indigo-500 outline-none">
+          </div>
+          <div>
+            <label class="block text-xs font-bold text-slate-700 mb-1">出席番号 / 学籍番号 (ID)</label>
+            <input type="text" id="input-student-id" oninput="saveStudentProfile()" placeholder="15" class="w-full px-3 py-2 bg-slate-50 border border-slate-300 rounded-lg text-sm font-semibold focus:bg-white focus:border-indigo-500 outline-none">
+          </div>
+          <div>
+            <label class="block text-xs font-bold text-slate-700 mb-1">担当教師 / 学校名 (Teacher/School)</label>
+            <input type="text" id="input-student-teacher" oninput="saveStudentProfile()" placeholder="英語科 / 〇〇中学校" class="w-full px-3 py-2 bg-slate-50 border border-slate-300 rounded-lg text-sm font-semibold focus:bg-white focus:border-indigo-500 outline-none">
+          </div>
+        </div>
+
+        <div>
+          <label class="block text-xs font-bold text-slate-700 mb-1">学習メモ・振り返り (Notes / Reflection)</label>
+          <textarea id="input-student-notes" oninput="saveStudentProfile()" rows="4" placeholder="過去完了形 (had + 過去分詞) の復習メモ..." class="w-full p-3 bg-slate-50 border border-slate-300 rounded-xl text-sm font-sans focus:bg-white focus:border-indigo-500 outline-none"></textarea>
+        </div>
+
+        <div class="bg-indigo-50 border border-indigo-100 rounded-xl p-4 flex flex-wrap items-center justify-between gap-3 text-xs">
+          <div class="flex items-center gap-2 text-indigo-900">
+            <i data-lucide="database" class="w-4 h-4 text-indigo-600"></i>
+            <span>ローカル保存状態: <strong id="storage-status-text" class="text-emerald-600">正常に自動保存中</strong></span>
+          </div>
+          <button onclick="resetAllData()" class="px-3 py-1.5 bg-rose-100 hover:bg-rose-200 text-rose-700 font-bold rounded-lg transition text-xs flex items-center gap-1">
+            <i data-lucide="trash-2" class="w-3.5 h-3.5"></i>
+            <span>すべての学習データを削除リセット</span>
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- TAB 1: UNIT 17 - SECTION 1 (COMPLETION & RESULT) -->
+    <div id="content-u17-completion" class="tab-content space-y-6">
+      
+      <!-- HEADER CARD -->
+      <div class="bg-white rounded-2xl border border-slate-200 shadow-sm overflow-hidden">
+        <div class="bg-gradient-to-r from-indigo-900 to-slate-900 p-5 text-white flex flex-col md:flex-row md:items-center justify-between gap-4">
+          <div>
+            <div class="flex items-center gap-2 mb-1">
+              <span class="px-2.5 py-0.5 bg-indigo-500/40 text-indigo-200 text-xs font-bold rounded-full border border-indigo-400/30">UNIT 17 • Section 1</span>
+              <span class="text-xs text-slate-300">Completion & Result</span>
+            </div>
+            <h2 class="text-xl font-bold">1. 過去完了形 〈had ＋ 過去分詞〉: 完了・結果</h2>
+            <p class="text-xs text-slate-300 mt-1">
+              過去のある時点における状況を、それ以前に起こったことと関連づけて「…してしまっていた」「…したところだった」を表します。
+            </p>
+          </div>
+          <div class="p-3 bg-white/10 rounded-xl backdrop-blur border border-white/10 text-center shrink-0">
+            <span class="block text-[10px] text-indigo-200 uppercase tracking-widest font-bold">Grammar Formula</span>
+            <span class="text-lg font-black text-amber-300">Subject + had + 過去分詞</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- LECTURE NOTE BOX -->
+      <div class="bg-white rounded-2xl border border-indigo-200 shadow-md p-6 space-y-5">
+        <div class="flex items-center gap-3 border-b border-indigo-100 pb-3">
+          <div class="p-2 bg-indigo-100 rounded-lg text-indigo-700">
+            <i data-lucide="book-open" class="w-5 h-5"></i>
+          </div>
+          <div>
+            <h3 class="text-base font-extrabold text-indigo-950">文法解説：過去完了形「完了・結果」マスター</h3>
+            <p class="text-xs text-slate-500">基準点となる過去よりも前に完了した動作・結果を表す</p>
+          </div>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-4 text-xs">
+          <div class="p-4 bg-slate-50 rounded-xl border border-slate-200 space-y-2">
+            <h4 class="font-bold text-indigo-900 text-sm flex items-center gap-1.5">
+              <i data-lucide="check-circle-2" class="w-4 h-4 text-indigo-600"></i>
+              ① 完了 (Completion)
+            </h4>
+            <p class="text-slate-700">
+              過去のある「基準点」の時点で、すでに動作が<strong>「〜し終えていた / 〜したところだった」</strong>ことを表します。
+            </p>
+            <div class="bg-indigo-50 p-2.5 rounded-lg border border-indigo-100 text-indigo-900 font-mono">
+              <strong>Ex:</strong> When I arrived at the station, the train <u>had already left</u>.<br>
+              <span class="text-[11px] text-slate-600 font-sans">（私が駅に着いたとき、電車はすでに発車してしまっていた。）</span>
+            </div>
+          </div>
+
+          <div class="p-4 bg-slate-50 rounded-xl border border-slate-200 space-y-2">
+            <h4 class="font-bold text-indigo-900 text-sm flex items-center gap-1.5">
+              <i data-lucide="check-circle-2" class="w-4 h-4 text-indigo-600"></i>
+              ② 結果 (Result)
+            </h4>
+            <p class="text-slate-700">
+              過去の基準点より前に起きたことの結果として<strong>「〜してしまっていた」</strong>状態を表します。
+            </p>
+            <div class="bg-indigo-50 p-2.5 rounded-lg border border-indigo-100 text-indigo-900 font-mono">
+              <strong>Ex:</strong> The alarm clock <u>had stopped</u> when she woke up.<br>
+              <span class="text-[11px] text-slate-600 font-sans">（彼女が目覚めた時には、目覚まし時計は止まってしまっていた。）</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- EXERCISE 1A -->
+      <div class="bg-white rounded-2xl border border-slate-200 shadow-sm p-5 sm:p-6 space-y-4">
+        <div class="flex items-center justify-between border-b border-slate-100 pb-3">
+          <h3 class="font-bold text-slate-900 text-base flex items-center gap-2">
+            <span class="w-6 h-6 bg-indigo-600 text-white text-xs font-bold rounded-full flex items-center justify-center">1A</span>
+            <span>適語補充問題 (Fill in the blanks)</span>
+          </h3>
+          <span class="text-xs text-slate-500">4 Questions</span>
+        </div>
+        <p class="text-xs text-slate-600">次の日本文に合うように、空欄に適語を書きなさい。</p>
+        <div class="space-y-4" id="container-u17-1a"></div>
+      </div>
+
+      <!-- EXERCISE 1B -->
+      <div class="bg-white rounded-2xl border border-slate-200 shadow-sm p-5 sm:p-6 space-y-4">
+        <div class="flex items-center justify-between border-b border-slate-100 pb-3">
+          <h3 class="font-bold text-slate-900 text-base flex items-center gap-2">
+            <span class="w-6 h-6 bg-indigo-600 text-white text-xs font-bold rounded-full flex items-center justify-center">1B</span>
+            <span>文の書きかえ問題 (Sentence Rewrite)</span>
+          </h3>
+          <span class="text-xs text-slate-500">4 Questions</span>
+        </div>
+        <p class="text-xs text-slate-600">
+          次の文の文末に <code class="bg-slate-100 px-1.5 py-0.5 rounded border border-slate-300 font-bold text-indigo-700">when I came home</code> を加えて、過去完了形の文に書きかえなさい。
+        </p>
+        <div class="space-y-4" id="container-u17-1b"></div>
+      </div>
+    </div>
+
+    <!-- TAB 2: UNIT 17 - SECTION 2 (QUESTIONS & NEGATIVES) -->
+    <div id="content-u17-questions" class="tab-content hidden space-y-6">
+      
+      <!-- HEADER CARD -->
+      <div class="bg-white rounded-2xl border border-slate-200 shadow-sm overflow-hidden">
+        <div class="bg-gradient-to-r from-slate-900 to-indigo-950 p-5 text-white flex flex-col md:flex-row md:items-center justify-between gap-4">
+          <div>
+            <div class="flex items-center gap-2 mb-1">
+              <span class="px-2.5 py-0.5 bg-purple-500/40 text-purple-200 text-xs font-bold rounded-full border border-purple-400/30">UNIT 17 • Section 2</span>
+              <span class="text-xs text-slate-300">Questions & Negatives</span>
+            </div>
+            <h2 class="text-xl font-bold">2. 過去完了形の疑問文と否定文</h2>
+            <p class="text-xs text-slate-300 mt-1">
+              助動詞 had の配置ルールを押さえ、過去の基準点における疑問・否定表現をマスターします。
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <!-- LECTURE NOTE BOX -->
+      <div class="bg-white rounded-2xl border border-purple-200 shadow-md p-6 space-y-5">
+        <div class="flex items-center gap-3 border-b border-purple-100 pb-3">
+          <div class="p-2 bg-purple-100 rounded-lg text-purple-700">
+            <i data-lucide="help-circle" class="w-5 h-5"></i>
+          </div>
+          <div>
+            <h3 class="text-base font-extrabold text-purple-950">文法解説：疑問文・否定文の作成原則</h3>
+            <p class="text-xs text-slate-500">had を文頭へ移動（疑問文） / had の直後に not を挿入（否定文）</p>
+          </div>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-4 text-xs">
+          <div class="p-4 bg-purple-50/50 rounded-xl border border-purple-100 space-y-2">
+            <h4 class="font-bold text-purple-900 text-sm flex items-center gap-1.5">
+              <i data-lucide="help-circle" class="w-4 h-4 text-purple-600"></i>
+              ① 疑問文 (Questions)
+            </h4>
+            <p class="text-slate-700">
+              助動詞 <code class="bg-purple-100 px-1 text-purple-900 font-bold">Had</code> を主語の前に移動します。
+            </p>
+            <div class="bg-white p-3 rounded-lg border border-purple-200 font-mono space-y-1">
+              <div><strong>Formula:</strong> Had + Subject + 過去分詞...?</div>
+              <div class="text-purple-800"><strong>Ex:</strong> Had they gotten the tickets before they went to the concert?</div>
+            </div>
+          </div>
+
+          <div class="p-4 bg-purple-50/50 rounded-xl border border-purple-100 space-y-2">
+            <h4 class="font-bold text-purple-900 text-sm flex items-center gap-1.5">
+              <i data-lucide="minus-circle" class="w-4 h-4 text-purple-600"></i>
+              ② 否定文 (Negatives)
+            </h4>
+            <p class="text-slate-700">
+              助動詞 <code class="bg-purple-100 px-1 text-purple-900 font-bold">had</code> の直後に <code class="bg-purple-100 px-1 text-purple-900 font-bold">not</code> (短縮形 <code class="bg-purple-100 px-1 text-purple-900 font-bold">hadn't</code>) を置きます。
+            </p>
+            <div class="bg-white p-3 rounded-lg border border-purple-200 font-mono space-y-1">
+              <div><strong>Formula:</strong> Subject + hadn't + 過去分詞...</div>
+              <div class="text-purple-800"><strong>Ex:</strong> Andy hadn't finished the work before the meeting started.</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- EXERCISE 2 -->
+      <div class="bg-white rounded-2xl border border-slate-200 shadow-sm p-5 sm:p-6 space-y-4">
+        <div class="flex items-center justify-between border-b border-slate-100 pb-3">
+          <h3 class="font-bold text-slate-900 text-base flex items-center gap-2">
+            <span class="w-6 h-6 bg-purple-600 text-white text-xs font-bold rounded-full flex items-center justify-center">2</span>
+            <span>疑問文・否定文への書き換え問題 (Questions & Negatives)</span>
+          </h3>
+          <span class="text-xs text-slate-500">4 Questions</span>
+        </div>
+        <div class="space-y-4" id="container-u17-2"></div>
+      </div>
+    </div>
+
+    <!-- TAB 3: UNIT 17 - SECTION 3 (EXPERIENCE) -->
+    <div id="content-u17-experience" class="tab-content hidden space-y-6">
+      
+      <!-- HEADER CARD -->
+      <div class="bg-white rounded-2xl border border-slate-200 shadow-sm overflow-hidden">
+        <div class="bg-gradient-to-r from-emerald-950 to-teal-900 p-5 text-white flex flex-col md:flex-row md:items-center justify-between gap-4">
+          <div>
+            <div class="flex items-center gap-2 mb-1">
+              <span class="px-2.5 py-0.5 bg-emerald-500/40 text-emerald-200 text-xs font-bold rounded-full border border-emerald-400/30">UNIT 17 • Section 3</span>
+              <span class="text-xs text-slate-300">Experience</span>
+            </div>
+            <h2 class="text-xl font-bold">3. 過去完了形: 経験 「（過去のある時点までに）…したことがあった」</h2>
+            <p class="text-xs text-slate-300 mt-1">
+              過去のある時点を基準にして、それ以前における経験の有無や回数を表します。
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <!-- LECTURE NOTE BOX -->
+      <div class="bg-white rounded-2xl border border-emerald-200 shadow-md p-6 space-y-5">
+        <div class="flex items-center gap-3 border-b border-emerald-100 pb-3">
+          <div class="p-2 bg-emerald-100 rounded-lg text-emerald-700">
+            <i data-lucide="award" class="w-5 h-5"></i>
+          </div>
+          <div>
+            <h3 class="text-base font-extrabold text-emerald-950">文法解説：経験を表すキーワード & had been to</h3>
+            <p class="text-xs text-slate-500">before, once, ever, never などの副詞の位置に注意</p>
+          </div>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-4 text-xs">
+          <div class="p-3.5 bg-emerald-50/60 rounded-xl border border-emerald-100 space-y-1.5">
+            <h4 class="font-bold text-emerald-900 text-xs flex items-center gap-1">
+              <i data-lucide="check" class="w-3.5 h-3.5 text-emerald-600"></i> 回数・経験の副詞
+            </h4>
+            <p class="text-slate-700">
+              <code class="font-bold text-emerald-800">before</code>（以前に）, <code class="font-bold text-emerald-800">once</code>（1度）, <code class="font-bold text-emerald-800">twice</code>（2度）などが伴います。
+            </p>
+          </div>
+
+          <div class="p-3.5 bg-emerald-50/60 rounded-xl border border-emerald-100 space-y-1.5">
+            <h4 class="font-bold text-emerald-900 text-xs flex items-center gap-1">
+              <i data-lucide="check" class="w-3.5 h-3.5 text-emerald-600"></i> ever / never の位置
+            </h4>
+            <p class="text-slate-700">
+              <code class="font-bold text-emerald-800">ever</code> や <code class="font-bold text-emerald-800">never</code> は <strong>had と過去分詞の間</strong> に置きます。
+            </p>
+          </div>
+
+          <div class="p-3.5 bg-amber-50 rounded-xl border border-amber-200 space-y-1.5">
+            <h4 class="font-bold text-amber-900 text-xs flex items-center gap-1">
+              <i data-lucide="alert-triangle" class="w-3.5 h-3.5 text-amber-600"></i> 「行ったことがあった」
+            </h4>
+            <p class="text-slate-700">
+              <strong class="text-emerald-800">had been to + 場所</strong>: 〜へ行ったことがあった【経験】
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <!-- EXERCISE 3A -->
+      <div class="bg-white rounded-2xl border border-slate-200 shadow-sm p-5 sm:p-6 space-y-4">
+        <div class="flex items-center justify-between border-b border-slate-100 pb-3">
+          <h3 class="font-bold text-slate-900 text-base flex items-center gap-2">
+            <span class="w-6 h-6 bg-emerald-600 text-white text-xs font-bold rounded-full flex items-center justify-center">3A</span>
+            <span>動詞の過去完了形への変化問題 (Experience Fill-in)</span>
+          </h3>
+          <span class="text-xs text-slate-500">5 Questions</span>
+        </div>
+        <div class="space-y-4" id="container-u17-3a"></div>
+      </div>
+
+      <!-- EXERCISE 3B -->
+      <div class="bg-white rounded-2xl border border-slate-200 shadow-sm p-5 sm:p-6 space-y-4">
+        <div class="flex items-center justify-between border-b border-slate-100 pb-3">
+          <h3 class="font-bold text-slate-900 text-base flex items-center gap-2">
+            <span class="w-6 h-6 bg-emerald-600 text-white text-xs font-bold rounded-full flex items-center justify-center">3B</span>
+            <span>語句並べ替え問題 (Word Unscramble)</span>
+          </h3>
+          <span class="text-xs text-slate-500">6 Questions</span>
+        </div>
+        <div class="space-y-6" id="container-u17-3b"></div>
+      </div>
+    </div>
+
+    <!-- TAB 4: UNIT 18 - SECTION 1 (CONTINUATION) -->
+    <div id="content-u18-continuation" class="tab-content hidden space-y-6">
+      
+      <!-- HEADER CARD -->
+      <div class="bg-white rounded-2xl border border-slate-200 shadow-sm overflow-hidden">
+        <div class="bg-gradient-to-r from-blue-950 via-indigo-900 to-slate-900 p-5 text-white flex flex-col md:flex-row md:items-center justify-between gap-4">
+          <div>
+            <div class="flex items-center gap-2 mb-1">
+              <span class="px-2.5 py-0.5 bg-blue-500/40 text-blue-200 text-xs font-bold rounded-full border border-blue-400/30">UNIT 18 • Section 1</span>
+              <span class="text-xs text-slate-300">Continuation (継続)</span>
+            </div>
+            <h2 class="text-xl font-bold">1. 状態の継続 vs 動作の継続 (過去完了進行形)</h2>
+            <p class="text-xs text-slate-300 mt-1">
+              過去のある時点まで「ずっと〜だった（状態）」か「ずっと〜し続けていた（動作）」によって形を使い分けます。
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <!-- LECTURE NOTE BOX -->
+      <div class="bg-white rounded-2xl border border-blue-200 shadow-md p-6 space-y-5">
+        <div class="flex items-center gap-3 border-b border-blue-100 pb-3">
+          <div class="p-2 bg-blue-100 rounded-lg text-blue-700">
+            <i data-lucide="clock" class="w-5 h-5"></i>
+          </div>
+          <div>
+            <h3 class="text-base font-extrabold text-blue-950">文法解説：状態の継続 vs 動作の継続（過去完了進行形）</h3>
+            <p class="text-xs text-slate-500">動詞のタイプ（状態動詞か動作動詞か）によって決定</p>
+          </div>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-4 text-xs">
+          <div class="p-4 bg-blue-50/60 rounded-xl border border-blue-100 space-y-2">
+            <div class="flex items-center justify-between">
+              <h4 class="font-bold text-blue-950 text-sm flex items-center gap-1.5">
+                <i data-lucide="check-circle" class="w-4 h-4 text-blue-600"></i>
+                ① 状態の継続 (State)
+              </h4>
+              <span class="px-2 py-0.5 bg-blue-200 text-blue-900 rounded font-bold text-[10px]">had + p.p.</span>
+            </div>
+            <p class="text-slate-700">
+              <strong class="text-blue-900">状態動詞</strong> (know, live, be など) を用い、過去の基準点まで「ずっと〜という状態だった」を表します。
+            </p>
+            <div class="bg-white p-2.5 rounded-lg border border-blue-200 font-mono text-blue-900">
+              We <u>had known</u> each other for five years by that time.
+            </div>
+          </div>
+
+          <div class="p-4 bg-indigo-50/60 rounded-xl border border-indigo-100 space-y-2">
+            <div class="flex items-center justify-between">
+              <h4 class="font-bold text-indigo-950 text-sm flex items-center gap-1.5">
+                <i data-lucide="play-circle" class="w-4 h-4 text-indigo-600"></i>
+                ② 動作の継続 (Action)
+              </h4>
+              <span class="px-2 py-0.5 bg-indigo-200 text-indigo-900 rounded font-bold text-[10px]">had been -ing</span>
+            </div>
+            <p class="text-slate-700">
+              <strong class="text-indigo-900">動作動詞</strong> (wait, study, play など) を用い、過去の基準点まで「ずっと〜し続けていた」を表す<strong>過去完了進行形</strong>にします。
+            </p>
+            <div class="bg-white p-2.5 rounded-lg border border-indigo-200 font-mono text-indigo-900">
+              I <u>had been using</u> the computer for two hours.
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- EXERCISE 1A -->
+      <div class="bg-white rounded-2xl border border-slate-200 shadow-sm p-5 sm:p-6 space-y-4">
+        <div class="flex items-center justify-between border-b border-slate-100 pb-3">
+          <h3 class="font-bold text-slate-900 text-base flex items-center gap-2">
+            <span class="w-6 h-6 bg-blue-600 text-white text-xs font-bold rounded-full flex items-center justify-center">1A</span>
+            <span>適語補充 ＆ 種別選択問題 (Fill-in & Category Selection)</span>
+          </h3>
+          <span class="text-xs text-slate-500">4 Questions</span>
+        </div>
+        <div class="space-y-4" id="container-u18-1a"></div>
+      </div>
+
+      <!-- EXERCISE 1B -->
+      <div class="bg-white rounded-2xl border border-slate-200 shadow-sm p-5 sm:p-6 space-y-4">
+        <div class="flex items-center justify-between border-b border-slate-100 pb-3">
+          <h3 class="font-bold text-slate-900 text-base flex items-center gap-2">
+            <span class="w-6 h-6 bg-blue-600 text-white text-xs font-bold rounded-full flex items-center justify-center">1B</span>
+            <span>語句並べ替え問題 (Word Unscramble)</span>
+          </h3>
+          <span class="text-xs text-slate-500">4 Questions</span>
+        </div>
+        <div class="space-y-6" id="container-u18-1b"></div>
+      </div>
+    </div>
+
+    <!-- TAB 5: UNIT 18 - SECTION 2 (PLUPERFECT / 大過去) -->
+    <div id="content-u18-pluperfect" class="tab-content hidden space-y-6">
+      
+      <!-- HEADER CARD -->
+      <div class="bg-white rounded-2xl border border-slate-200 shadow-sm overflow-hidden">
+        <div class="bg-gradient-to-r from-amber-950 via-rose-950 to-slate-900 p-5 text-white flex flex-col md:flex-row md:items-center justify-between gap-4">
+          <div>
+            <div class="flex items-center gap-2 mb-1">
+              <span class="px-2.5 py-0.5 bg-amber-500/40 text-amber-200 text-xs font-bold rounded-full border border-amber-400/30">UNIT 18 • Section 2</span>
+              <span class="text-xs text-slate-300">Pluperfect / Earlier Past</span>
+            </div>
+            <h2 class="text-xl font-bold">2. 大過去 (Pluperfect / Relative Past)</h2>
+            <p class="text-xs text-slate-300 mt-1">
+              「ある過去の出来事」よりもさらに「古い過去」であることを明確に示すための 〈had + 過去分詞〉 です。
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <!-- LECTURE NOTE BOX -->
+      <div class="bg-white rounded-2xl border border-amber-200 shadow-md p-6 space-y-5">
+        <div class="flex items-center gap-3 border-b border-amber-100 pb-3">
+          <div class="p-2 bg-amber-100 rounded-lg text-amber-800">
+            <i data-lucide="rewind" class="w-5 h-5"></i>
+          </div>
+          <div>
+            <h3 class="text-base font-extrabold text-amber-950">文法解説：大過去 (Pluperfect) と 2文結合の手順</h3>
+            <p class="text-xs text-slate-500">that 節内での大過去表現 ＆ ago から before への時制変化</p>
+          </div>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-4 text-xs">
+          <div class="p-4 bg-amber-50/50 rounded-xl border border-amber-100 space-y-2">
+            <h4 class="font-bold text-amber-900 text-sm flex items-center gap-1.5">
+              <i data-lucide="layers" class="w-4 h-4 text-amber-600"></i>
+              ① 大過去の代表的構文 (that節)
+            </h4>
+            <p class="text-slate-700">
+              「気づいた / 見つけた / 聞いた」を表す動詞 (found, realized, heard, told) の後の <code class="font-bold text-amber-900">that 節</code> 内で、それより前の出来事を <code class="font-bold text-amber-900">had + p.p.</code> にします。
+            </p>
+            <div class="bg-white p-2.5 rounded-lg border border-amber-200 font-mono text-amber-950">
+              I <u>found</u> [過去] that I <u>had made</u> [大過去] a mistake.
+            </div>
+          </div>
+
+          <div class="p-4 bg-amber-50/50 rounded-xl border border-amber-100 space-y-2">
+            <h4 class="font-bold text-amber-900 text-sm flex items-center gap-1.5">
+              <i data-lucide="clock" class="w-4 h-4 text-amber-600"></i>
+              ② 時制にともなう語句の変化 (before vs ago)
+            </h4>
+            <p class="text-slate-700">
+              「〜年前」を表す語句は、大過去では <code class="font-bold text-amber-900">ago</code> ではなく <code class="font-bold text-amber-900">before</code> に変わります。
+            </p>
+            <div class="bg-white p-2.5 rounded-lg border border-amber-200 font-mono text-amber-950">
+              three years ago ➔ <strong>three years before</strong>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- EXERCISE 2A -->
+      <div class="bg-white rounded-2xl border border-slate-200 shadow-sm p-5 sm:p-6 space-y-4">
+        <div class="flex items-center justify-between border-b border-slate-100 pb-3">
+          <h3 class="font-bold text-slate-900 text-base flex items-center gap-2">
+            <span class="w-6 h-6 bg-amber-600 text-white text-xs font-bold rounded-full flex items-center justify-center">2A</span>
+            <span>適語補充問題 (Pluperfect Fill-in)</span>
+          </h3>
+          <span class="text-xs text-slate-500">4 Questions</span>
+        </div>
+        <div class="space-y-4" id="container-u18-2a"></div>
+      </div>
+
+      <!-- EXERCISE 2B -->
+      <div class="bg-white rounded-2xl border border-slate-200 shadow-sm p-5 sm:p-6 space-y-4">
+        <div class="flex items-center justify-between border-b border-slate-100 pb-3">
+          <h3 class="font-bold text-slate-900 text-base flex items-center gap-2">
+            <span class="w-6 h-6 bg-amber-600 text-white text-xs font-bold rounded-full flex items-center justify-center">2B</span>
+            <span>2文結合問題 (Sentence Combination)</span>
+          </h3>
+          <span class="text-xs text-slate-500">4 Questions</span>
+        </div>
+        <div class="space-y-4" id="container-u18-2b"></div>
+      </div>
+    </div>
+
+    <!-- TAB 6: MASTER QUIZ (総合チャレンジ) -->
+    <div id="content-master-quiz" class="tab-content hidden space-y-6">
+      <div class="bg-white rounded-2xl border border-slate-200 shadow-sm p-6 space-y-6">
+        <div class="flex flex-wrap items-center justify-between gap-4 border-b border-slate-100 pb-4">
+          <div>
+            <span class="px-2.5 py-0.5 bg-amber-100 text-amber-800 text-xs font-extrabold rounded-full border border-amber-300">Unit 17 & 18 Master Challenge</span>
+            <h2 class="text-2xl font-black text-slate-900 mt-1">過去完了形 総合チャレンジ問題</h2>
+            <p class="text-xs text-slate-500 mt-1">完了・結果、疑問・否定、経験、継続、大過去の全単元から出題されます。</p>
+          </div>
+          <button onclick="checkAllMasterQuiz()" class="px-5 py-2.5 bg-gradient-to-r from-amber-500 to-rose-500 hover:brightness-110 text-white font-bold text-xs rounded-xl shadow transition flex items-center gap-2">
+            <i data-lucide="check-circle" class="w-4 h-4"></i>
+            <span>すべての判定を行う</span>
+          </button>
+        </div>
+
+        <div class="space-y-6" id="container-master-quiz"></div>
+      </div>
+    </div>
+
+    <!-- TAB 7: MOCK EXAM (模擬試験) -->
+    <div id="content-mock-exam" class="tab-content hidden space-y-6">
+      <div class="bg-white rounded-2xl border border-slate-200 shadow-sm p-6 space-y-6">
+        <div class="flex flex-wrap items-center justify-between gap-4 border-b border-slate-100 pb-4">
+          <div>
+            <span class="px-2.5 py-0.5 bg-purple-100 text-purple-800 text-xs font-extrabold rounded-full border border-purple-300">Timed Exam Mode</span>
+            <h2 class="text-2xl font-black text-slate-900 mt-1">過去完了形 定期考査・模擬試験 (100点満点)</h2>
+            <p class="text-xs text-slate-500 mt-1">制限時間なし・採点機能付きのオンライン実力テストです。</p>
+          </div>
+          <div class="flex items-center gap-3">
+            <button onclick="gradeMockExam()" class="px-5 py-2.5 bg-purple-600 hover:bg-purple-700 text-white font-bold text-xs rounded-xl shadow transition flex items-center gap-2">
+              <i data-lucide="file-check-2" class="w-4 h-4"></i>
+              <span>模擬試験を採点する</span>
+            </button>
+          </div>
+        </div>
+
+        <div id="mock-exam-score-card" class="hidden p-4 bg-purple-50 border border-purple-200 rounded-xl flex items-center justify-between">
+          <div class="flex items-center gap-3">
+            <i data-lucide="award" class="w-8 h-8 text-purple-600"></i>
+            <div>
+              <span class="text-xs font-bold text-purple-900 uppercase">Exam Score Result</span>
+              <div class="text-2xl font-black text-purple-950"><span id="mock-score-val">0</span> / 100 点</div>
+            </div>
+          </div>
+          <span id="mock-feedback-badge" class="px-3 py-1 bg-purple-200 text-purple-900 font-bold text-xs rounded-full"></span>
+        </div>
+
+        <div class="space-y-6" id="container-mock-exam"></div>
+      </div>
+    </div>
+
+    <!-- TAB 8: PDF EXPORT (PDF印刷ワークシート) -->
+    <div id="content-pdf-export" class="tab-content hidden space-y-6">
+      <div class="bg-white rounded-2xl border border-slate-200 shadow-sm p-6 space-y-6">
+        <div class="no-print border-b border-slate-200 pb-4 flex flex-wrap items-center justify-between gap-4">
+          <div>
+            <h2 class="text-2xl font-black text-slate-900">印刷・PDF出力用 ワークシート</h2>
+            <p class="text-xs text-slate-600 mt-1">下の「印刷・PDF保存を実行」ボタンをクリックすると、ブラウザの印刷ダイアログが開きます。</p>
+          </div>
+          <button onclick="window.print()" class="px-6 py-3 bg-emerald-600 hover:bg-emerald-500 text-white font-black text-sm rounded-xl shadow-lg transition flex items-center gap-2">
+            <i data-lucide="printer" class="w-5 h-5"></i>
+            <span>印刷・PDF保存を実行 (Print)</span>
+          </button>
+        </div>
+
+        <!-- PRINTABLE WORKSHEET CONTAINER -->
+        <div class="card-print p-6 space-y-6 border border-slate-300 rounded-xl bg-white">
+          <div class="border-b-2 border-slate-900 pb-4 flex justify-between items-end">
+            <div>
+              <span class="text-xs font-bold uppercase tracking-wider text-slate-600">GrammarStation ESL Master Course</span>
+              <h1 class="text-2xl font-black text-slate-900">過去完了形 (Past Perfect Tense) 総合演習問題集</h1>
+            </div>
+            <div class="text-right text-xs space-y-1">
+              <div>氏名: <span id="print-name-disp" class="font-bold underline min-w-[8rem] inline-block">________________</span></div>
+              <div>クラス/番号: <span id="print-class-disp" class="font-bold underline min-w-[6rem] inline-block">______</span></div>
+            </div>
+          </div>
+
+          <div id="container-pdf-content" class="space-y-6 text-sm"></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- TAB 9: MASTER BANK (マスターバンク) -->
+    <div id="content-master-bank" class="tab-content hidden space-y-6">
+      <div class="bg-white rounded-2xl border border-slate-200 shadow-sm p-6 space-y-6">
+        <div class="border-b border-slate-100 pb-4 flex flex-wrap items-center justify-between gap-4">
+          <div>
+            <span class="px-2.5 py-0.5 bg-teal-100 text-teal-800 text-xs font-bold rounded-full border border-teal-300">Sentence Repository</span>
+            <h2 class="text-2xl font-black text-slate-900 mt-1">Master Sentence Bank (全例文音声・解答一覧)</h2>
+            <p class="text-xs text-slate-500 mt-1">本教材に登場するすべての例文をアクセント・性別別音声付きで一覧・復習できます。</p>
+          </div>
+          <div class="flex items-center gap-2">
+            <input type="text" id="bank-search-input" oninput="filterMasterBank()" placeholder="検索 (例: train, never, lived)..." class="px-3 py-1.5 bg-slate-100 border border-slate-300 rounded-lg text-xs font-semibold outline-none focus:bg-white focus:border-teal-500">
+          </div>
+        </div>
+
+        <div class="overflow-x-auto">
+          <table class="w-full text-left border-collapse text-xs">
+            <thead>
+              <tr class="bg-slate-100 border-b border-slate-300 text-slate-700 font-bold">
+                <th class="p-3">Unit / 分類</th>
+                <th class="p-3">英文 (English Sentence)</th>
+                <th class="p-3">日本語訳</th>
+                <th class="p-3">音声アクセント/性別</th>
+                <th class="p-3 text-center">試聴</th>
+              </tr>
+            </thead>
+            <tbody id="container-master-bank-list" class="divide-y divide-slate-200"></tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+
+  </main>
+
+  <!-- FOOTER -->
+  <footer class="bg-slate-900 text-slate-400 text-xs py-6 border-t border-slate-800 mt-auto no-print">
+    <div class="max-w-7xl mx-auto px-4 text-center space-y-2">
+      <p class="font-semibold text-slate-300">GrammarStation Units 17 & 18 — Past Perfect & Pluperfect Interactive App</p>
+      <p class="text-slate-500">Multi-Accent Audio (UK, US, AU, CA, IE) • Intelligent Answer Checking Engine</p>
+    </div>
+  </footer>
+
+  <!-- JAVASCRIPT ENGINE -->
+  <script>
+    /* ==========================================================================
+       DATA STRUCTURE FOR ALL EXERCISES WITH ACCENTS, GENDERS & SOUND PRESETS
+       Accents: 🇬🇧 en-GB, 🇺🇸 en-US, 🇦🇺 en-AU, 🇨🇦 en-CA, 🇮🇪 en-IE
+       Genders: female, male
+       ========================================================================== */
+
+    const appData = {
+      // UNIT 17-1 A: Completion & Result Fill-in
+      u17_1a: [
+        {
+          id: "u17_1a_1",
+          ja: "私が駅に着いたとき、電車はすでに発車してしまっていた。",
+          before: "When I arrived at the station, the train ",
+          after: " left.",
+          blanks: 2,
+          answers: ["had", "already"],
+          sentence: "When I arrived at the station, the train had already left.",
+          accent: "en-GB", accentLabel: "🇬🇧 UK • Female", gender: "female"
+        },
+        {
+          id: "u17_1a_2",
+          ja: "彼女が起きた時、目覚まし時計は止まってしまっていた。",
+          before: "The alarm clock ",
+          after: " when she woke up.",
+          blanks: 2,
+          answers: ["had", "stopped"],
+          sentence: "The alarm clock had stopped when she woke up.",
+          accent: "en-US", accentLabel: "🇺🇸 US • Male", gender: "male"
+        },
+        {
+          id: "u17_1a_3",
+          ja: "彼らが着いた時には、パーティーはすでに始まっていた。",
+          before: "The party ",
+          after: " started by the time they arrived.",
+          blanks: 2,
+          answers: ["had", "already"],
+          sentence: "The party had already started by the time they arrived.",
+          accent: "en-CA", accentLabel: "🇨🇦 CA • Female", gender: "female"
+        },
+        {
+          id: "u17_1a_4",
+          ja: "トムが帰宅したとき、彼の妹は宿題をちょうど終えたところだった。",
+          before: "Tom's sister ",
+          after: " finished her homework when he came home.",
+          blanks: 2,
+          answers: ["had", "just"],
+          sentence: "Tom's sister had just finished her homework when he came home.",
+          accent: "en-AU", accentLabel: "🇦🇺 AU • Male", gender: "male"
+        }
+      ],
+
+      // UNIT 17-1 B: Rewrite with "when I came home"
+      u17_1b: [
+        {
+          id: "u17_1b_1",
+          orig: "Laura cooked dinner.",
+          target: "Laura had cooked dinner when I came home.",
+          ja: "私が帰宅した時、ローラは夕食を作り終えていた。",
+          accent: "en-IE", accentLabel: "🇮🇪 IE • Female", gender: "female"
+        },
+        {
+          id: "u17_1b_2",
+          orig: "Ken finished his lunch.",
+          target: "Ken had finished his lunch when I came home.",
+          ja: "私が帰宅した時、ケンは昼食を食べ終えていた。",
+          accent: "en-GB", accentLabel: "🇬🇧 UK • Male", gender: "male"
+        },
+        {
+          id: "u17_1b_3",
+          orig: "They washed all the dishes.",
+          target: "They had washed all the dishes when I came home.",
+          ja: "私が帰宅した時、彼らはすべてのお皿を洗い終えていた。",
+          accent: "en-US", accentLabel: "🇺🇸 US • Female", gender: "female"
+        },
+        {
+          id: "u17_1b_4",
+          orig: "The bus left the bus stop.",
+          target: "The bus had left the bus stop when I came home.",
+          ja: "私が帰宅した時、バスはバス停を出発してしまっていた。",
+          accent: "en-CA", accentLabel: "🇨🇦 CA • Male", gender: "male"
+        }
+      ],
+
+      // UNIT 17-2: Questions & Negatives
+      u17_2: [
+        {
+          id: "u17_2_1",
+          prompt: "次の文を疑問文にしなさい: \"They had gotten the tickets before they went to the concert.\"",
+          target: "Had they gotten the tickets before they went to the concert?",
+          ja: "彼らはコンサートに行く前にチケットを手に入れていましたか。",
+          accent: "en-AU", accentLabel: "🇦🇺 AU • Female", gender: "female"
+        },
+        {
+          id: "u17_2_2",
+          prompt: "次の文を否定文にしなさい: \"Andy had finished the work before the meeting started.\"",
+          target: "Andy had not finished the work before the meeting started.",
+          altTargets: ["Andy hadn't finished the work before the meeting started."],
+          ja: "アンディは会議が始まる前に仕事が終わっていなかった。",
+          accent: "en-GB", accentLabel: "🇬🇧 UK • Male", gender: "male"
+        },
+        {
+          id: "u17_2_3",
+          prompt: "空欄に適語を補いなさい: \"(　1　) you (　2　) the movie before you read the book? (その本を読む前に映画を見ましたか)\"",
+          type: "fill",
+          answers: ["Had", "seen"],
+          sentence: "Had you seen the movie before you read the book?",
+          accent: "en-US", accentLabel: "🇺🇸 US • Male", gender: "male"
+        },
+        {
+          id: "u17_2_4",
+          prompt: "空欄に適語を補いなさい: \"She (　1　) (　2　) (　3 {receive} ) the email when the office closed. (オフィスが閉まった時、彼女はまだメールを受け取っていなかった)\"",
+          type: "fill",
+          answers: ["had", "not", "received"],
+          altAnswers: [["hadn't", "", "received"]],
+          sentence: "She had not received the email when the office closed.",
+          accent: "en-IE", accentLabel: "🇮🇪 IE • Female", gender: "female"
+        }
+      ],
+
+      // UNIT 17-3 A: Experience Fill-in
+      u17_3a: [
+        {
+          id: "u17_3a_1",
+          prompt: "I ( meet ) her once before I moved to Tokyo.",
+          answers: ["had met"],
+          sentence: "I had met her once before I moved to Tokyo.",
+          ja: "東京に引っ越す前に、私は彼女に1度会ったことがありました。",
+          accent: "en-CA", accentLabel: "🇨🇦 CA • Female", gender: "female"
+        },
+        {
+          id: "u17_3a_2",
+          prompt: "He ( be ) to Paris twice before he turned twenty.",
+          answers: ["had been"],
+          sentence: "He had been to Paris twice before he turned twenty.",
+          ja: "彼は20歳になる前に2回パリへ行ったことがありました。",
+          accent: "en-GB", accentLabel: "🇬🇧 UK • Female", gender: "female"
+        },
+        {
+          id: "u17_3a_3",
+          prompt: "We ( never / see ) such a beautiful rainbow before that day.",
+          answers: ["had never seen"],
+          sentence: "We had never seen such a beautiful rainbow before that day.",
+          ja: "その日までに、私たちはそんなに美しい虹を見たことがありませんでした。",
+          accent: "en-US", accentLabel: "🇺🇸 US • Male", gender: "male"
+        },
+        {
+          id: "u17_3a_4",
+          prompt: "Had you ever ( fly ) in a helicopter before last week?",
+          answers: ["flown"],
+          sentence: "Had you ever flown in a helicopter before last week?",
+          ja: "先週より前にヘリコプターに乗ったことがありましたか。",
+          accent: "en-AU", accentLabel: "🇦🇺 AU • Male", gender: "male"
+        },
+        {
+          id: "u17_3a_5",
+          prompt: "She ( not / visit ) the museum before yesterday.",
+          answers: ["had not visited"],
+          altAnswers: ["hadn't visited"],
+          sentence: "She had not visited the museum before yesterday.",
+          ja: "昨日より前、彼女はその博物館を訪れたことがありませんでした。",
+          accent: "en-IE", accentLabel: "🇮🇪 IE • Male", gender: "male"
+        }
+      ],
+
+      // UNIT 17-3 B: Experience Unscramble
+      u17_3b: [
+        {
+          id: "u17_3b_1",
+          ja: "私は以前にその城を訪れたことがありました。",
+          words: ["visited", "had", "I", "castle", "before", "that"],
+          target: "I had visited that castle before.",
+          accent: "en-GB", accentLabel: "🇬🇧 UK • Male", gender: "male"
+        },
+        {
+          id: "u17_3b_2",
+          ja: "彼女はそれまでに一度もパンダを見たことがありませんでした。",
+          words: ["seen", "she", "a panda", "had", "never", "before"],
+          target: "She had never seen a panda before.",
+          accent: "en-US", accentLabel: "🇺🇸 US • Female", gender: "female"
+        },
+        {
+          id: "u17_3b_3",
+          ja: "あなたはその時までにその映画を見たことがありましたか。",
+          words: ["you", "seen", "movie", "had", "that", "by", "time", "that"],
+          target: "Had you seen that movie by that time?",
+          accent: "en-CA", accentLabel: "🇨🇦 CA • Male", gender: "male"
+        },
+        {
+          id: "u17_3b_4",
+          ja: "彼は日本に来る前に2回京都を訪れたことがありました。",
+          words: ["visited", "Kyoto", "twice", "had", "he", "before", "came", "he", "to", "Japan"],
+          target: "He had visited Kyoto twice before he came to Japan.",
+          accent: "en-AU", accentLabel: "🇦🇺 AU • Female", gender: "female"
+        },
+        {
+          id: "u17_3b_5",
+          ja: "私はそのニュースを聞くまで、彼に会ったことがありませんでした。",
+          words: ["I", "had", "met", "never", "him", "until", "I", "heard", "news", "the"],
+          target: "I had never met him until I heard the news.",
+          accent: "en-IE", accentLabel: "🇮🇪 IE • Female", gender: "female"
+        },
+        {
+          id: "u17_3b_6",
+          ja: "ケンはオーストラリアに行く前に英語を勉強したことがありましたか。",
+          words: ["studied", "Ken", "English", "had", "before", "went", "he", "to", "Australia"],
+          target: "Had Ken studied English before he went to Australia?",
+          accent: "en-GB", accentLabel: "🇬🇧 UK • Female", gender: "female"
+        }
+      ],
+
+      // UNIT 18-1 A: Continuation Fill-in & Category Selection
+      u18_1a: [
+        {
+          id: "u18_1a_1",
+          ja: "私は彼女と知り合ってから10年になっていました。(know)",
+          before: "I ",
+          after: " her for ten years.",
+          blanks: 2,
+          answers: ["had", "known"],
+          category: "State",
+          sentence: "I had known her for ten years.",
+          accent: "en-US", accentLabel: "🇺🇸 US • Female", gender: "female"
+        },
+        {
+          id: "u18_1a_2",
+          ja: "彼は雨の中で1時間ずっと待ち続けていました。(wait)",
+          before: "He ",
+          after: " in the rain for an hour.",
+          blanks: 3,
+          answers: ["had", "been", "waiting"],
+          category: "Action",
+          sentence: "He had been waiting in the rain for an hour.",
+          accent: "en-GB", accentLabel: "🇬🇧 UK • Male", gender: "male"
+        },
+        {
+          id: "u18_1a_3",
+          ja: "母が帰宅したとき、姉は2時間勉強し続けていました。(study)",
+          before: "My sister ",
+          after: " for two hours when my mother came home.",
+          blanks: 3,
+          answers: ["had", "been", "studying"],
+          category: "Action",
+          sentence: "My sister had been studying for two hours when my mother came home.",
+          accent: "en-CA", accentLabel: "🇨🇦 CA • Female", gender: "female"
+        },
+        {
+          id: "u18_1a_4",
+          ja: "私たちはその時までに5年間同じ街に住んでいました。(live)",
+          before: "We ",
+          after: " in the same city for five years by that time.",
+          blanks: 2,
+          answers: ["had", "lived"],
+          category: "State",
+          sentence: "We had lived in the same city for five years by that time.",
+          accent: "en-AU", accentLabel: "🇦🇺 AU • Male", gender: "male"
+        }
+      ],
+
+      // UNIT 18-1 B: Continuation Unscramble
+      u18_1b: [
+        {
+          id: "u18_1b_1",
+          ja: "彼女は電話が鳴るまで30分間本を読み続けていました。",
+          words: ["reading", "had", "she", "been", "a book", "for", "thirty", "minutes"],
+          target: "She had been reading a book for thirty minutes.",
+          accent: "en-IE", accentLabel: "🇮🇪 IE • Female", gender: "female"
+        },
+        {
+          id: "u18_1b_2",
+          ja: "私たちが到着したとき、彼らは2時間サッカーをし続けていました。",
+          words: ["playing", "had", "soccer", "been", "they", "for", "two", "hours"],
+          target: "They had been playing soccer for two hours.",
+          accent: "en-GB", accentLabel: "🇬🇧 UK • Female", gender: "female"
+        },
+        {
+          id: "u18_1b_3",
+          ja: "私の父は退職するまでその会社で20年間働いていました。",
+          words: ["worked", "my", "father", "had", "at", "company", "that", "for", "twenty", "years"],
+          target: "My father had worked at that company for twenty years.",
+          accent: "en-US", accentLabel: "🇺🇸 US • Male", gender: "male"
+        },
+        {
+          id: "u18_1b_4",
+          ja: "警察が来るまで、その犬は吠え続けていました。",
+          words: ["barking", "dog", "the", "had", "been", "for", "ten", "minutes"],
+          target: "The dog had been barking for ten minutes.",
+          accent: "en-CA", accentLabel: "🇨🇦 CA • Male", gender: "male"
+        }
+      ],
+
+      // UNIT 18-2 A: Pluperfect Fill-in
+      u18_2a: [
+        {
+          id: "u18_2a_1",
+          ja: "私は傘を電車の中に忘れてきたことに気づきました。(leave)",
+          before: "I realized that I ",
+          after: " my umbrella on the train.",
+          blanks: 2,
+          answers: ["had", "left"],
+          sentence: "I realized that I had left my umbrella on the train.",
+          accent: "en-AU", accentLabel: "🇦🇺 AU • Female", gender: "female"
+        },
+        {
+          id: "u18_2a_2",
+          ja: "彼は以前に失くした時計を見つけました。(lose)",
+          before: "He found the watch that he ",
+          after: " before.",
+          blanks: 2,
+          answers: ["had", "lost"],
+          sentence: "He found the watch that he had lost before.",
+          accent: "en-GB", accentLabel: "🇬🇧 UK • Male", gender: "male"
+        },
+        {
+          id: "u18_2a_3",
+          ja: "彼女は私に、3年前にロンドンで私に会ったと言いました。(see)",
+          before: "She told me that she ",
+          after: " me in London three years before.",
+          blanks: 2,
+          answers: ["had", "seen"],
+          sentence: "She told me that she had seen me in London three years before.",
+          accent: "en-IE", accentLabel: "🇮🇪 IE • Female", gender: "female"
+        },
+        {
+          id: "u18_2a_4",
+          ja: "私たちがスタジアムに着いた時、試合はすでに終わっていました。(already end)",
+          before: "When we reached the stadium, the game ",
+          after: " ended.",
+          blanks: 2,
+          answers: ["had", "already"],
+          sentence: "When we reached the stadium, the game had already ended.",
+          accent: "en-US", accentLabel: "🇺🇸 US • Female", gender: "female"
+        }
+      ],
+
+      // UNIT 18-2 B: Pluperfect Sentence Combination
+      u18_2b: [
+        {
+          id: "u18_2b_1",
+          s1: "(1) I lost my wallet.",
+          s2: "(2) I found it yesterday.",
+          target: "I found the wallet that I had lost.",
+          altTargets: ["I found the wallet which I had lost.", "I found the wallet I had lost."],
+          ja: "私は失くしていた財布を昨日見つけました。",
+          accent: "en-CA", accentLabel: "🇨🇦 CA • Male", gender: "male"
+        },
+        {
+          id: "u18_2b_2",
+          s1: "(1) She bought a coat.",
+          s2: "(2) She showed me the coat.",
+          target: "She showed me the coat that she had bought.",
+          altTargets: ["She showed me the coat she had bought.", "She showed me the coat which she had bought."],
+          ja: "彼女は買っておいたコートを私に見せてくれました。",
+          accent: "en-GB", accentLabel: "🇬🇧 UK • Female", gender: "female"
+        },
+        {
+          id: "u18_2b_3",
+          s1: "(1) He made a mistake.",
+          s2: "(2) He realized it later.",
+          target: "He realized that he had made a mistake.",
+          altTargets: ["He realized he had made a mistake."],
+          ja: "彼は自分が間違えたことに後から気づきました。",
+          accent: "en-AU", accentLabel: "🇦🇺 AU • Male", gender: "male"
+        },
+        {
+          id: "u18_2b_4",
+          s1: "(1) They ate dinner.",
+          s2: "(2) They went to the cinema.",
+          target: "They went to the cinema after they had eaten dinner.",
+          altTargets: ["After they had eaten dinner, they went to the cinema."],
+          ja: "彼らは夕食を食べた後、映画館へ行きました。",
+          accent: "en-IE", accentLabel: "🇮🇪 IE • Male", gender: "male"
+        }
+      ]
+    };
+
+    /* ==========================================================================
+       GLOBAL STATE ENGINE & LOCAL STORAGE
+       ========================================================================== */
+    let userAnswers = {};
+    let userXP = 0;
+    let studentProfile = {
+      name: "",
+      gradeClass: "",
+      idNum: "",
+      teacher: "",
+      notes: ""
+    };
+
+    window.onload = function() {
+      // Initialize icons
+      if (window.lucide) lucide.createIcons();
+      
+      // Load local storage
+      loadStoredData();
+
+      // Render Exercise Containers
+      renderUnit17_1a();
+      renderUnit17_1b();
+      renderUnit17_2();
+      renderUnit17_3a();
+      renderUnit17_3b();
+      renderUnit18_1a();
+      renderUnit18_1b();
+      renderUnit18_2a();
+      renderUnit18_2b();
+      renderMasterQuiz();
+      renderMockExam();
+      renderMasterBank();
+      renderPDFContent();
+
+      // Update progress
+      updateOverallProgress();
+
+      // Re-initialize icons after dynamic insertion
+      if (window.lucide) lucide.createIcons();
+    };
+
+    /* ==========================================================================
+       AUDIO SYNTHESIS ENGINE (Multi-accent & Multi-gender)
+       ========================================================================== */
+    function playAudio(text, langCode, gender) {
+      if (!('speechSynthesis' in window)) {
+        alert("お使いのブラウザは音声読み上げ機能に対応していません。");
+        return;
+      }
+
+      window.speechSynthesis.cancel(); // Stop any active speech
+
+      const utterance = new SpeechSynthesisUtterance(text);
+      utterance.lang = langCode || 'en-US';
+      
+      const speedSelect = document.getElementById('speech-rate-select');
+      utterance.rate = parseFloat(speedSelect ? speedSelect.value : '0.95');
+
+      // Gender pitch setting fallback
+      utterance.pitch = (gender === 'female') ? 1.25 : 0.85;
+
+      // Voice selection algorithm
+      const voices = window.speechSynthesis.getVoices();
+      if (voices.length > 0) {
+        const langMatches = voices.filter(v => v.lang.replace('_', '-').toLowerCase().startsWith(langCode.toLowerCase()));
+        if (langMatches.length > 0) {
+          let chosen = null;
+          if (gender === 'female') {
+            chosen = langMatches.find(v => /female|samantha|zira|karen|victoria|hazel|susan|catherine|fiona/i.test(v.name));
+          } else {
+            chosen = langMatches.find(v => /male|david|george|james|daniel|alex|fred/i.test(v.name));
+          }
+          utterance.voice = chosen || langMatches[0];
+        }
+      }
+
+      window.speechSynthesis.speak(utterance);
+    }
+
+    /* ==========================================================================
+       ANSWER VALIDATION & UTILITIES
+       ========================================================================== */
+    function normalizeText(text) {
+      if (!text) return "";
+      return text.trim()
+        .toLowerCase()
+        .replace(/[.,?!]/g, '')
+        .replace(/\s+/g, ' ')
+        .replace(/n't/g, " not");
+    }
+
+    function addXP(amount) {
+      userXP += amount;
+      document.getElementById('global-xp').innerText = userXP;
+      saveStoredData();
+    }
+
+    function updateOverallProgress() {
+      const totalQuestions = 35; // Total graded questions across core units
+      const solvedCount = Object.keys(userAnswers).filter(k => userAnswers[k] && userAnswers[k].isCorrect).length;
+      const pct = Math.min(100, Math.round((solvedCount / totalQuestions) * 100));
+      
+      const bar = document.getElementById('overall-progress-bar');
+      const text = document.getElementById('overall-pct');
+      if (bar) bar.style.width = pct + "%";
+      if (text) text.innerText = pct + "%";
+    }
+
+    /* ==========================================================================
+       TAB SWITCHING ENGINE
+       ========================================================================== */
+    function switchTab(tabId) {
+      // Hide all tabs
+      document.querySelectorAll('.tab-content').forEach(el => el.classList.add('hidden'));
+      
+      // Reset button styles
+      document.querySelectorAll('.tab-btn').forEach(btn => {
+        btn.classList.remove('bg-indigo-600', 'text-white', 'shadow-md');
+        if (!btn.id.includes('master-quiz') && !btn.id.includes('mock-exam') && !btn.id.includes('pdf-export') && !btn.id.includes('master-bank')) {
+          btn.classList.add('text-slate-300', 'hover:text-white', 'hover:bg-slate-800/60');
+        }
+      });
+
+      // Show selected content
+      const targetContent = document.getElementById('content-' + tabId);
+      if (targetContent) targetContent.classList.remove('hidden');
+
+      // Highlight active tab
+      const targetBtn = document.getElementById('tab-' + tabId);
+      if (targetBtn && !tabId.includes('master') && !tabId.includes('mock') && !tabId.includes('pdf')) {
+        targetBtn.classList.add('bg-indigo-600', 'text-white', 'shadow-md');
+        targetBtn.classList.remove('text-slate-300', 'hover:bg-slate-800/60');
+      }
+
+      if (tabId === 'pdf-export') renderPDFContent();
+      if (window.lucide) lucide.createIcons();
+    }
+
+    /* ==========================================================================
+       RENDER EXERCISES
+       ========================================================================== */
+
+    // Helper for generating Audio Play Button HTML
+    function getAudioBtnHTML(sentence, accent, accentLabel, gender) {
+      return `
+        <button onclick="playAudio(\`${sentence.replace(/'/g, "\\'")}\`, '${accent}', '${gender}')" 
+                class="inline-flex items-center gap-1 px-2.5 py-1 bg-indigo-50 hover:bg-indigo-100 text-indigo-700 border border-indigo-200 rounded-lg text-xs font-bold transition shrink-0 no-print" 
+                title="音声再生">
+          <i data-lucide="volume-2" class="w-3.5 h-3.5"></i>
+          <span>${accentLabel}</span>
+        </button>
+      `;
+    }
+
+    // --- UNIT 17-1A RENDER ---
+    function renderUnit17_1a() {
+      const container = document.getElementById('container-u17-1a');
+      container.innerHTML = appData.u17_1a.map((q, idx) => `
+        <div class="p-4 bg-slate-50 border border-slate-200 rounded-xl space-y-3" id="card-${q.id}">
+          <div class="flex flex-wrap items-center justify-between gap-2">
+            <span class="font-bold text-xs text-indigo-900 bg-indigo-100 px-2.5 py-0.5 rounded-full">問 ${idx + 1}</span>
+            ${getAudioBtnHTML(q.sentence, q.accent, q.accentLabel, q.gender)}
+          </div>
+          <p class="text-xs font-semibold text-slate-700">${q.ja}</p>
+          <div class="flex flex-wrap items-center gap-2 text-sm font-mono bg-white p-3 rounded-lg border border-slate-200">
+            <span>${q.before}</span>
+            <input type="text" id="${q.id}_blank1" class="w-20 px-2 py-1 border border-slate-300 rounded text-center font-bold focus:border-indigo-500 outline-none text-xs" placeholder="1">
+            <input type="text" id="${q.id}_blank2" class="w-24 px-2 py-1 border border-slate-300 rounded text-center font-bold focus:border-indigo-500 outline-none text-xs" placeholder="2">
+            <span>${q.after}</span>
+          </div>
+          <div class="flex items-center justify-between gap-2 pt-1">
+            <button onclick="checkFillIn('${q.id}', ['${q.answers.join("','")}'])" class="px-4 py-1.5 bg-indigo-600 hover:bg-indigo-700 text-white font-bold text-xs rounded-lg shadow transition">
+              判定 (Check)
+            </button>
+            <div id="feedback-${q.id}" class="text-xs font-bold"></div>
+          </div>
+        </div>
+      `).join('');
+    }
+
+    // --- UNIT 17-1B RENDER ---
+    function renderUnit17_1b() {
+      const container = document.getElementById('container-u17-1b');
+      container.innerHTML = appData.u17_1b.map((q, idx) => `
+        <div class="p-4 bg-slate-50 border border-slate-200 rounded-xl space-y-3" id="card-${q.id}">
+          <div class="flex flex-wrap items-center justify-between gap-2">
+            <span class="font-bold text-xs text-indigo-900 bg-indigo-100 px-2.5 py-0.5 rounded-full">問 ${idx + 1}</span>
+            ${getAudioBtnHTML(q.target, q.accent, q.accentLabel, q.gender)}
+          </div>
+          <div class="text-xs text-slate-700">
+            <span class="font-bold text-indigo-800">元文:</span> <code class="font-mono bg-white px-2 py-0.5 rounded border border-slate-200">${q.orig}</code>
+          </div>
+          <input type="text" id="${q.id}_input" class="w-full px-3 py-2 bg-white border border-slate-300 rounded-lg text-xs font-mono font-semibold focus:border-indigo-500 outline-none" placeholder="過去完了形の文を書いてください...">
+          <div class="flex items-center justify-between gap-2">
+            <button onclick="checkSentence('${q.id}', '${q.target.replace(/'/g, "\\'")}')" class="px-4 py-1.5 bg-indigo-600 hover:bg-indigo-700 text-white font-bold text-xs rounded-lg shadow transition">
+              判定 (Check)
+            </button>
+            <div id="feedback-${q.id}" class="text-xs font-bold"></div>
+          </div>
+        </div>
+      `).join('');
+    }
+
+    // --- UNIT 17-2 RENDER ---
+    function renderUnit17_2() {
+      const container = document.getElementById('container-u17-2');
+      container.innerHTML = appData.u17_2.map((q, idx) => {
+        if (q.type === 'fill') {
+          return `
+            <div class="p-4 bg-slate-50 border border-slate-200 rounded-xl space-y-3" id="card-${q.id}">
+              <div class="flex flex-wrap items-center justify-between gap-2">
+                <span class="font-bold text-xs text-purple-900 bg-purple-100 px-2.5 py-0.5 rounded-full">問 ${idx + 1} (適語補充)</span>
+                ${getAudioBtnHTML(q.sentence, q.accent, q.accentLabel, q.gender)}
+              </div>
+              <p class="text-xs font-semibold text-slate-800">${q.prompt}</p>
+              <div class="flex flex-wrap items-center gap-2 text-xs font-mono">
+                ${q.answers.map((_, bIdx) => `
+                  <input type="text" id="${q.id}_blank${bIdx + 1}" class="w-24 px-2 py-1 border border-slate-300 rounded font-bold text-center focus:border-purple-500 outline-none" placeholder="空欄 ${bIdx + 1}">
+                `).join('')}
+              </div>
+              <div class="flex items-center justify-between gap-2">
+                <button onclick="checkFillIn('${q.id}', ['${q.answers.join("','")}'])" class="px-4 py-1.5 bg-purple-600 hover:bg-purple-700 text-white font-bold text-xs rounded-lg shadow transition">
+                  判定 (Check)
+                </button>
+                <div id="feedback-${q.id}" class="text-xs font-bold"></div>
+              </div>
+            </div>
+          `;
+        }
+        return `
+          <div class="p-4 bg-slate-50 border border-slate-200 rounded-xl space-y-3" id="card-${q.id}">
+            <div class="flex flex-wrap items-center justify-between gap-2">
+              <span class="font-bold text-xs text-purple-900 bg-purple-100 px-2.5 py-0.5 rounded-full">問 ${idx + 1}</span>
+              ${getAudioBtnHTML(q.target, q.accent, q.accentLabel, q.gender)}
+            </div>
+            <p class="text-xs font-semibold text-slate-800">${q.prompt}</p>
+            <input type="text" id="${q.id}_input" class="w-full px-3 py-2 bg-white border border-slate-300 rounded-lg text-xs font-mono font-semibold focus:border-purple-500 outline-none" placeholder="書き換えた文を入力...">
+            <div class="flex items-center justify-between gap-2">
+              <button onclick="checkSentence('${q.id}', '${q.target.replace(/'/g, "\\'")}', [${q.altTargets ? q.altTargets.map(t => `'${t}'`).join(',') : ''}])" class="px-4 py-1.5 bg-purple-600 hover:bg-purple-700 text-white font-bold text-xs rounded-lg shadow transition">
+                判定 (Check)
+              </button>
+              <div id="feedback-${q.id}" class="text-xs font-bold"></div>
+            </div>
+          </div>
+        `;
+      }).join('');
+    }
+
+    // --- UNIT 17-3A RENDER ---
+    function renderUnit17_3a() {
+      const container = document.getElementById('container-u17-3a');
+      container.innerHTML = appData.u17_3a.map((q, idx) => `
+        <div class="p-4 bg-slate-50 border border-slate-200 rounded-xl space-y-3" id="card-${q.id}">
+          <div class="flex flex-wrap items-center justify-between gap-2">
+            <span class="font-bold text-xs text-emerald-900 bg-emerald-100 px-2.5 py-0.5 rounded-full">問 ${idx + 1}</span>
+            ${getAudioBtnHTML(q.sentence, q.accent, q.accentLabel, q.gender)}
+          </div>
+          <p class="text-xs font-bold text-slate-800">${q.prompt}</p>
+          <p class="text-xs text-slate-500">${q.ja}</p>
+          <input type="text" id="${q.id}_input" class="w-full sm:w-72 px-3 py-1.5 bg-white border border-slate-300 rounded-lg text-xs font-mono font-bold focus:border-emerald-500 outline-none" placeholder="動詞の適切な形...">
+          <div class="flex items-center justify-between gap-2">
+            <button onclick="checkSentence('${q.id}', '${q.answers[0]}', [${q.altAnswers ? q.altAnswers.map(t => `'${t}'`).join(',') : ''}])" class="px-4 py-1.5 bg-emerald-600 hover:bg-emerald-700 text-white font-bold text-xs rounded-lg shadow transition">
+              判定 (Check)
+            </button>
+            <div id="feedback-${q.id}" class="text-xs font-bold"></div>
+          </div>
+        </div>
+      `).join('');
+    }
+
+    // --- UNIT 17-3B RENDER (Unscramble Chips) ---
+    function renderUnit17_3b() {
+      const container = document.getElementById('container-u17-3b');
+      container.innerHTML = appData.u17_3b.map((q, idx) => `
+        <div class="p-4 bg-slate-50 border border-slate-200 rounded-xl space-y-3" id="card-${q.id}">
+          <div class="flex flex-wrap items-center justify-between gap-2">
+            <span class="font-bold text-xs text-emerald-900 bg-emerald-100 px-2.5 py-0.5 rounded-full">問 ${idx + 1} (並べ替え)</span>
+            ${getAudioBtnHTML(q.target, q.accent, q.accentLabel, q.gender)}
+          </div>
+          <p class="text-xs font-bold text-slate-800">${q.ja}</p>
+          
+          <!-- Chips Area -->
+          <div class="flex flex-wrap gap-1.5 p-2 bg-white border border-slate-200 rounded-lg min-h-[2.5rem] items-center" id="chips-${q.id}">
+            ${q.words.map(w => `
+              <button onclick="addWordToUnscramble('${q.id}', '${w.replace(/'/g, "\\'")}')" class="word-chip px-2.5 py-1 bg-slate-100 hover:bg-emerald-100 text-slate-800 hover:text-emerald-900 border border-slate-300 rounded-md text-xs font-mono font-semibold">
+                ${w}
+              </button>
+            `).join('')}
+          </div>
+
+          <!-- Answer Input -->
+          <div class="flex gap-2">
+            <input type="text" id="${q.id}_input" class="w-full px-3 py-2 bg-white border border-slate-300 rounded-lg text-xs font-mono font-semibold focus:border-emerald-500 outline-none" placeholder="タップして並べ替えるか、直接入力...">
+            <button onclick="clearUnscramble('${q.id}')" class="px-2.5 py-1 bg-slate-200 text-slate-700 rounded-lg text-xs font-bold shrink-0">クリア</button>
+          </div>
+
+          <div class="flex items-center justify-between gap-2">
+            <button onclick="checkSentence('${q.id}', '${q.target.replace(/'/g, "\\'")}')" class="px-4 py-1.5 bg-emerald-600 hover:bg-emerald-700 text-white font-bold text-xs rounded-lg shadow transition">
+              判定 (Check)
+            </button>
+            <div id="feedback-${q.id}" class="text-xs font-bold"></div>
+          </div>
+        </div>
+      `).join('');
+    }
+
+    // --- UNIT 18-1A RENDER ---
+    function renderUnit18_1a() {
+      const container = document.getElementById('container-u18-1a');
+      container.innerHTML = appData.u18_1a.map((q, idx) => `
+        <div class="p-4 bg-slate-50 border border-slate-200 rounded-xl space-y-3" id="card-${q.id}">
+          <div class="flex flex-wrap items-center justify-between gap-2">
+            <span class="font-bold text-xs text-blue-900 bg-blue-100 px-2.5 py-0.5 rounded-full">問 ${idx + 1}</span>
+            ${getAudioBtnHTML(q.sentence, q.accent, q.accentLabel, q.gender)}
+          </div>
+          <p class="text-xs font-bold text-slate-800">${q.ja}</p>
+          <div class="flex flex-wrap items-center gap-2 text-xs font-mono bg-white p-3 rounded-lg border border-slate-200">
+            <span>${q.before}</span>
+            ${q.answers.map((_, bIdx) => `
+              <input type="text" id="${q.id}_blank${bIdx + 1}" class="w-20 px-2 py-1 border border-slate-300 rounded font-bold text-center focus:border-blue-500 outline-none" placeholder="${bIdx + 1}">
+            `).join('')}
+            <span>${q.after}</span>
+          </div>
+
+          <div class="flex items-center gap-3 text-xs">
+            <span class="font-bold text-slate-600">継続の種別:</span>
+            <label class="flex items-center gap-1 cursor-pointer">
+              <input type="radio" name="cat_${q.id}" value="State" class="text-blue-600"> 状態の継続 (had + p.p.)
+            </label>
+            <label class="flex items-center gap-1 cursor-pointer">
+              <input type="radio" name="cat_${q.id}" value="Action" class="text-blue-600"> 動作の継続 (had been -ing)
+            </label>
+          </div>
+
+          <div class="flex items-center justify-between gap-2">
+            <button onclick="checkUnit18_1a('${q.id}', ['${q.answers.join("','")}'], '${q.category}')" class="px-4 py-1.5 bg-blue-600 hover:bg-blue-700 text-white font-bold text-xs rounded-lg shadow transition">
+              判定 (Check)
+            </button>
+            <div id="feedback-${q.id}" class="text-xs font-bold"></div>
+          </div>
+        </div>
+      `).join('');
+    }
+
+    // --- UNIT 18-1B RENDER ---
+    function renderUnit18_1b() {
+      const container = document.getElementById('container-u18-1b');
+      container.innerHTML = appData.u18_1b.map((q, idx) => `
+        <div class="p-4 bg-slate-50 border border-slate-200 rounded-xl space-y-3" id="card-${q.id}">
+          <div class="flex flex-wrap items-center justify-between gap-2">
+            <span class="font-bold text-xs text-blue-900 bg-blue-100 px-2.5 py-0.5 rounded-full">問 ${idx + 1} (並べ替え)</span>
+            ${getAudioBtnHTML(q.target, q.accent, q.accentLabel, q.gender)}
+          </div>
+          <p class="text-xs font-bold text-slate-800">${q.ja}</p>
+          <div class="flex flex-wrap gap-1.5 p-2 bg-white border border-slate-200 rounded-lg min-h-[2.5rem] items-center" id="chips-${q.id}">
+            ${q.words.map(w => `
+              <button onclick="addWordToUnscramble('${q.id}', '${w.replace(/'/g, "\\'")}')" class="word-chip px-2.5 py-1 bg-slate-100 hover:bg-blue-100 text-slate-800 hover:text-blue-900 border border-slate-300 rounded-md text-xs font-mono font-semibold">
+                ${w}
+              </button>
+            `).join('')}
+          </div>
+          <div class="flex gap-2">
+            <input type="text" id="${q.id}_input" class="w-full px-3 py-2 bg-white border border-slate-300 rounded-lg text-xs font-mono font-semibold focus:border-blue-500 outline-none" placeholder="タップして並べ替えるか直接入力...">
+            <button onclick="clearUnscramble('${q.id}')" class="px-2.5 py-1 bg-slate-200 text-slate-700 rounded-lg text-xs font-bold shrink-0">クリア</button>
+          </div>
+          <div class="flex items-center justify-between gap-2">
+            <button onclick="checkSentence('${q.id}', '${q.target.replace(/'/g, "\\'")}')" class="px-4 py-1.5 bg-blue-600 hover:bg-blue-700 text-white font-bold text-xs rounded-lg shadow transition">
+              判定 (Check)
+            </button>
+            <div id="feedback-${q.id}" class="text-xs font-bold"></div>
+          </div>
+        </div>
+      `).join('');
+    }
+
+    // --- UNIT 18-2A RENDER ---
+    function renderUnit18_2a() {
+      const container = document.getElementById('container-u18-2a');
+      container.innerHTML = appData.u18_2a.map((q, idx) => `
+        <div class="p-4 bg-slate-50 border border-slate-200 rounded-xl space-y-3" id="card-${q.id}">
+          <div class="flex flex-wrap items-center justify-between gap-2">
+            <span class="font-bold text-xs text-amber-900 bg-amber-100 px-2.5 py-0.5 rounded-full">問 ${idx + 1}</span>
+            ${getAudioBtnHTML(q.sentence, q.accent, q.accentLabel, q.gender)}
+          </div>
+          <p class="text-xs font-bold text-slate-800">${q.ja}</p>
+          <div class="flex flex-wrap items-center gap-2 text-xs font-mono bg-white p-3 rounded-lg border border-slate-200">
+            <span>${q.before}</span>
+            <input type="text" id="${q.id}_blank1" class="w-20 px-2 py-1 border border-slate-300 rounded font-bold text-center focus:border-amber-500 outline-none" placeholder="1">
+            <input type="text" id="${q.id}_blank2" class="w-24 px-2 py-1 border border-slate-300 rounded font-bold text-center focus:border-amber-500 outline-none" placeholder="2">
+            <span>${q.after}</span>
+          </div>
+          <div class="flex items-center justify-between gap-2">
+            <button onclick="checkFillIn('${q.id}', ['${q.answers.join("','")}'])" class="px-4 py-1.5 bg-amber-600 hover:bg-amber-700 text-white font-bold text-xs rounded-lg shadow transition">
+              判定 (Check)
+            </button>
+            <div id="feedback-${q.id}" class="text-xs font-bold"></div>
+          </div>
+        </div>
+      `).join('');
+    }
+
+    // --- UNIT 18-2B RENDER ---
+    function renderUnit18_2b() {
+      const container = document.getElementById('container-u18-2b');
+      container.innerHTML = appData.u18_2b.map((q, idx) => `
+        <div class="p-4 bg-slate-50 border border-slate-200 rounded-xl space-y-3" id="card-${q.id}">
+          <div class="flex flex-wrap items-center justify-between gap-2">
+            <span class="font-bold text-xs text-amber-900 bg-amber-100 px-2.5 py-0.5 rounded-full">問 ${idx + 1} (2文結合)</span>
+            ${getAudioBtnHTML(q.target, q.accent, q.accentLabel, q.gender)}
+          </div>
+          <div class="text-xs font-mono text-slate-700 bg-white p-2.5 rounded border border-slate-200 space-y-1">
+            <div>${q.s1}</div>
+            <div>${q.s2}</div>
+          </div>
+          <p class="text-xs text-slate-500">${q.ja}</p>
+          <input type="text" id="${q.id}_input" class="w-full px-3 py-2 bg-white border border-slate-300 rounded-lg text-xs font-mono font-semibold focus:border-amber-500 outline-none" placeholder="1文に結合した英文を入力...">
+          <div class="flex items-center justify-between gap-2">
+            <button onclick="checkSentence('${q.id}', '${q.target.replace(/'/g, "\\'")}', [${q.altTargets ? q.altTargets.map(t => `'${t}'`).join(',') : ''}])" class="px-4 py-1.5 bg-amber-600 hover:bg-amber-700 text-white font-bold text-xs rounded-lg shadow transition">
+              判定 (Check)
+            </button>
+            <div id="feedback-${q.id}" class="text-xs font-bold"></div>
+          </div>
+        </div>
+      `).join('');
+    }
+
+    /* ==========================================================================
+       CHECKING FUNCTIONS
+       ========================================================================== */
+
+    function checkFillIn(qId, expectedAnswers) {
+      let isCorrect = true;
+      expectedAnswers.forEach((ans, idx) => {
+        const inp = document.getElementById(`${qId}_blank${idx + 1}`);
+        if (!inp || normalizeText(inp.value) !== normalizeText(ans)) {
+          isCorrect = false;
+        }
+      });
+
+      showFeedback(qId, isCorrect, `正解: ${expectedAnswers.join(" / ")}`);
+      if (isCorrect) addXP(10);
+    }
+
+    function checkSentence(qId, targetSentence, altTargets = []) {
+      const inp = document.getElementById(`${qId}_input`);
+      if (!inp) return;
+
+      const userVal = normalizeText(inp.value);
+      const targetVal = normalizeText(targetSentence);
+      
+      let isCorrect = (userVal === targetVal);
+      if (!isCorrect && altTargets.length > 0) {
+        isCorrect = altTargets.some(alt => normalizeText(alt) === userVal);
+      }
+
+      showFeedback(qId, isCorrect, `模範解答: ${targetSentence}`);
+      if (isCorrect) addXP(15);
+    }
+
+    function checkUnit18_1a(qId, expectedAnswers, expectedCat) {
+      let fillCorrect = true;
+      expectedAnswers.forEach((ans, idx) => {
+        const inp = document.getElementById(`${qId}_blank${idx + 1}`);
+        if (!inp || normalizeText(inp.value) !== normalizeText(ans)) {
+          fillCorrect = false;
+        }
+      });
+
+      const selectedCat = document.querySelector(`input[name="cat_${qId}"]:checked`);
+      const catCorrect = selectedCat && selectedCat.value === expectedCat;
+
+      const isCorrect = fillCorrect && catCorrect;
+      const feedbackMsg = `正解: ${expectedAnswers.join(" ")} [${expectedCat === 'State' ? '状態の継続' : '動作の継続'}]`;
+
+      showFeedback(qId, isCorrect, feedbackMsg);
+      if (isCorrect) addXP(15);
+    }
+
+    function showFeedback(qId, isCorrect, solutionText) {
+      const fb = document.getElementById(`feedback-${qId}`);
+      if (!fb) return;
+
+      userAnswers[qId] = { isCorrect, solutionText };
+
+      if (isCorrect) {
+        fb.className = "text-xs font-bold text-emerald-600 flex items-center gap-1 bg-emerald-50 px-3 py-1 rounded-lg border border-emerald-200";
+        fb.innerHTML = `<i data-lucide="check-circle" class="w-4 h-4"></i> <span>正解！ Great job!</span>`;
+      } else {
+        fb.className = "text-xs font-bold text-rose-600 flex flex-col gap-0.5 bg-rose-50 px-3 py-1 rounded-lg border border-rose-200";
+        fb.innerHTML = `
+          <div class="flex items-center gap-1"><i data-lucide="x-circle" class="w-4 h-4"></i> <span>不正解 (Try again)</span></div>
+          <span class="text-[11px] text-slate-600 font-mono">${solutionText}</span>
+        `;
+      }
+
+      updateOverallProgress();
+      saveStoredData();
+      if (window.lucide) lucide.createIcons();
+    }
+
+    // --- UNSCRAMBLE CHIP HELPERS ---
+    function addWordToUnscramble(qId, word) {
+      const inp = document.getElementById(`${qId}_input`);
+      if (!inp) return;
+      const current = inp.value.trim();
+      inp.value = current ? `${current} ${word}` : word;
+    }
+
+    function clearUnscramble(qId) {
+      const inp = document.getElementById(`${qId}_input`);
+      if (inp) inp.value = "";
+    }
+
+    /* ==========================================================================
+       MASTER QUIZ & MOCK EXAM ENGINES
+       ========================================================================== */
+
+    function renderMasterQuiz() {
+      const container = document.getElementById('container-master-quiz');
+      const quizItems = [
+        ...appData.u17_1a.slice(0, 2),
+        ...appData.u17_2.slice(0, 2),
+        ...appData.u17_3b.slice(0, 2),
+        ...appData.u18_1a.slice(0, 2),
+        ...appData.u18_2b.slice(0, 2)
+      ];
+
+      container.innerHTML = quizItems.map((q, idx) => `
+        <div class="p-4 bg-slate-50 border border-slate-200 rounded-xl space-y-3" id="card-mq_${q.id}">
+          <div class="flex items-center justify-between">
+            <span class="px-2.5 py-0.5 bg-amber-500 text-white text-xs font-bold rounded-full">Challenge ${idx + 1}</span>
+            ${getAudioBtnHTML(q.sentence || q.target, q.accent, q.accentLabel, q.gender)}
+          </div>
+          <p class="text-xs font-bold text-slate-800">${q.ja || q.prompt}</p>
+          <input type="text" id="mq_${q.id}_input" class="w-full px-3 py-2 bg-white border border-slate-300 rounded-lg text-xs font-mono font-bold outline-none" placeholder="解答を入力...">
+          <div class="flex items-center justify-between gap-2">
+            <button onclick="checkSentence('mq_${q.id}', '${(q.sentence || q.target).replace(/'/g, "\\'")}')" class="px-4 py-1.5 bg-amber-600 text-white font-bold text-xs rounded-lg">
+              判定
+            </button>
+            <div id="feedback-mq_${q.id}" class="text-xs font-bold"></div>
+          </div>
+        </div>
+      `).join('');
+    }
+
+    function checkAllMasterQuiz() {
+      const quizItems = [
+        ...appData.u17_1a.slice(0, 2),
+        ...appData.u17_2.slice(0, 2),
+        ...appData.u17_3b.slice(0, 2),
+        ...appData.u18_1a.slice(0, 2),
+        ...appData.u18_2b.slice(0, 2)
+      ];
+      quizItems.forEach(q => {
+        checkSentence(`mq_${q.id}`, (q.sentence || q.target));
+      });
+    }
+
+    function renderMockExam() {
+      const container = document.getElementById('container-mock-exam');
+      const allQuestions = [
+        ...appData.u17_1a, ...appData.u17_1b, ...appData.u17_2,
+        ...appData.u17_3a, ...appData.u18_1a, ...appData.u18_2a
+      ];
+
+      container.innerHTML = allQuestions.slice(0, 10).map((q, idx) => `
+        <div class="p-4 bg-slate-50 border border-slate-200 rounded-xl space-y-2">
+          <div class="flex justify-between items-center text-xs font-bold">
+            <span class="text-purple-900">問題 ${idx + 1} [10点]</span>
+            <span class="text-slate-500 font-mono">${q.accentLabel}</span>
+          </div>
+          <p class="text-xs text-slate-800 font-semibold">${q.ja || q.prompt}</p>
+          <input type="text" id="mock_q_${idx}" class="w-full px-3 py-2 bg-white border border-slate-300 rounded-lg text-xs font-mono font-bold" placeholder="解答...">
+        </div>
+      `).join('');
+    }
+
+    function gradeMockExam() {
+      const allQuestions = [
+        ...appData.u17_1a, ...appData.u17_1b, ...appData.u17_2,
+        ...appData.u17_3a, ...appData.u18_1a, ...appData.u18_2a
+      ].slice(0, 10);
+
+      let score = 0;
+      allQuestions.forEach((q, idx) => {
+        const inp = document.getElementById(`mock_q_${idx}`);
+        if (!inp) return;
+        const target = q.sentence || q.target || (q.answers ? q.answers.join(' ') : "");
+        if (normalizeText(inp.value) === normalizeText(target)) {
+          score += 10;
+        }
+      });
+
+      const card = document.getElementById('mock-exam-score-card');
+      const val = document.getElementById('mock-score-val');
+      const badge = document.getElementById('mock-feedback-badge');
+
+      if (card) card.classList.remove('hidden');
+      if (val) val.innerText = score;
+      if (badge) {
+        if (score >= 90) badge.innerText = "秀 (Excellent!)";
+        else if (score >= 70) badge.innerText = "優 (Good Job!)";
+        else badge.innerText = "要復習 (Needs Practice)";
+      }
+
+      addXP(score);
+    }
+
+    /* ==========================================================================
+       MASTER BANK & PDF RENDER
+       ========================================================================== */
+
+    function getAllSentencesList() {
+      const list = [];
+      const addCategory = (arr, cat) => {
+        arr.forEach(item => {
+          list.push({
+            category: cat,
+            sentence: item.sentence || item.target,
+            ja: item.ja,
+            accent: item.accent,
+            accentLabel: item.accentLabel,
+            gender: item.gender
+          });
+        });
+      };
+
+      addCategory(appData.u17_1a, "Unit 17-1 (完了・結果)");
+      addCategory(appData.u17_1b, "Unit 17-1 (書きかえ)");
+      addCategory(appData.u17_2, "Unit 17-2 (疑問・否定)");
+      addCategory(appData.u17_3a, "Unit 17-3 (経験)");
+      addCategory(appData.u17_3b, "Unit 17-3 (並べ替え)");
+      addCategory(appData.u18_1a, "Unit 18-1 (継続)");
+      addCategory(appData.u18_1b, "Unit 18-1 (並べ替え)");
+      addCategory(appData.u18_2a, "Unit 18-2 (大過去)");
+      addCategory(appData.u18_2b, "Unit 18-2 (2文結合)");
+
+      return list;
+    }
+
+    function renderMasterBank() {
+      const container = document.getElementById('container-master-bank-list');
+      const list = getAllSentencesList();
+
+      container.innerHTML = list.map(item => `
+        <tr class="hover:bg-slate-50 transition">
+          <td class="p-3 font-bold text-slate-600 whitespace-nowrap">${item.category}</td>
+          <td class="p-3 font-mono font-bold text-indigo-900">${item.sentence}</td>
+          <td class="p-3 text-slate-700">${item.ja}</td>
+          <td class="p-3 whitespace-nowrap">
+            <span class="px-2 py-0.5 bg-slate-100 text-slate-700 border border-slate-300 rounded text-[10px] font-bold">
+              ${item.accentLabel}
+            </span>
+          </td>
+          <td class="p-3 text-center whitespace-nowrap">
+            <button onclick="playAudio(\`${item.sentence.replace(/'/g, "\\'")}\`, '${item.accent}', '${item.gender}')" class="p-1.5 bg-indigo-600 text-white rounded-lg hover:bg-indigo-700 transition">
+              <i data-lucide="volume-2" class="w-4 h-4"></i>
+            </button>
+          </td>
+        </tr>
+      `).join('');
+    }
+
+    function filterMasterBank() {
+      const query = document.getElementById('bank-search-input').value.toLowerCase();
+      const rows = document.querySelectorAll('#container-master-bank-list tr');
+      rows.forEach(row => {
+        const text = row.innerText.toLowerCase();
+        row.style.display = text.includes(query) ? '' : 'none';
+      });
+    }
+
+    function renderPDFContent() {
+      const container = document.getElementById('container-pdf-content');
+      const list = getAllSentencesList();
+
+      container.innerHTML = `
+        <div class="space-y-4">
+          <h3 class="font-bold text-base border-b border-slate-400 pb-1">■ 過去完了形 重要例文リスト (Sentence List)</h3>
+          <ol class="list-decimal list-inside space-y-2">
+            ${list.map(item => `
+              <li class="pb-1 border-b border-slate-100">
+                <span class="font-bold text-slate-900">${item.sentence}</span>
+                <div class="text-xs text-slate-600 ml-4">${item.ja} [${item.category}]</div>
+              </li>
+            `).join('')}
+          </ol>
+        </div>
+      `;
+    }
+
+    /* ==========================================================================
+       LOCAL STORAGE HANDLERS
+       ========================================================================== */
+    function saveStudentProfile() {
+      studentProfile.name = document.getElementById('input-student-name').value;
+      studentProfile.gradeClass = document.getElementById('input-student-class').value;
+      studentProfile.idNum = document.getElementById('input-student-id').value;
+      studentProfile.teacher = document.getElementById('input-student-teacher').value;
+      studentProfile.notes = document.getElementById('input-student-notes').value;
+
+      document.getElementById('header-student-name').innerText = `生徒名: ${studentProfile.name || "未設定"}`;
+      document.getElementById('print-name-disp').innerText = studentProfile.name || "________________";
+      document.getElementById('print-class-disp').innerText = studentProfile.gradeClass || "______";
+
+      saveStoredData();
+    }
+
+    function saveStoredData() {
+      const data = {
+        xp: userXP,
+        profile: studentProfile,
+        answers: userAnswers
+      };
+      try {
+        localStorage.setItem('grammarstation_units1718_data', JSON.stringify(data));
+      } catch (e) {
+        console.warn('LocalStorage save failed:', e);
+      }
+    }
+
+    function loadStoredData() {
+      try {
+        const raw = localStorage.getItem('grammarstation_units1718_data');
+        if (!raw) return;
+        const data = JSON.parse(raw);
+        if (data.xp) {
+          userXP = data.xp;
+          document.getElementById('global-xp').innerText = userXP;
+        }
+        if (data.profile) {
+          studentProfile = data.profile;
+          document.getElementById('input-student-name').value = studentProfile.name || "";
+          document.getElementById('input-student-class').value = studentProfile.gradeClass || "";
+          document.getElementById('input-student-id').value = studentProfile.idNum || "";
+          document.getElementById('input-student-teacher').value = studentProfile.teacher || "";
+          document.getElementById('input-student-notes').value = studentProfile.notes || "";
+          
+          document.getElementById('header-student-name').innerText = `生徒名: ${studentProfile.name || "未設定"}`;
+          document.getElementById('print-name-disp').innerText = studentProfile.name || "________________";
+          document.getElementById('print-class-disp').innerText = studentProfile.gradeClass || "______";
+        }
+        if (data.answers) {
+          userAnswers = data.answers;
+        }
+      } catch (e) {
+        console.warn('LocalStorage load error:', e);
+      }
+    }
+
+    function resetAllData() {
+      if (confirm('すべての学習履歴と生徒情報を削除リセットしてもよろしいですか？')) {
+        localStorage.removeItem('grammarstation_units1718_data');
+        location.reload();
+      }
+    }
+
+    function toggleLanguage() {
+      const label = document.getElementById('lang-label');
+      if (label.innerText === "日本語") {
+        label.innerText = "English";
+      } else {
+        label.innerText = "日本語";
+      }
+    }
+  </script>
+</body>
+</html>
