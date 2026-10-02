@@ -1,0 +1,1232 @@
+<!DOCTYPE html>
+<html lang="ja" class="h-full">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>GrammarStation Units 17 & 18 - 過去完了形 (Light Theme)</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://unpkg.com/lucide@latest"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=Noto+Sans+JP:wght@400;500;700;900&display=swap" rel="stylesheet">
+  <style>
+    body { font-family: 'Inter', 'Noto Sans JP', sans-serif; }
+    @media print {
+      .no-print { display: none !important; }
+      .card-print { border: none !important; box-shadow: none !important; padding: 0 !important; }
+      body { background: white !important; color: black !important; }
+    }
+  </style>
+</head>
+<body class="h-full bg-slate-50 text-slate-800 antialiased flex flex-col justify-between selection:bg-indigo-100 selection:text-indigo-900">
+
+<!-- TOP HEADER BAR -->
+<header class="bg-white border-b border-slate-200 sticky top-0 z-50 shadow-xs">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between gap-4">
+    <!-- Brand Logo & Title -->
+    <div class="flex items-center gap-3">
+      <div class="w-10 h-10 bg-indigo-600 rounded-xl flex items-center justify-center text-white shadow-md shadow-indigo-200">
+        <i data-lucide="book-open-check" class="w-6 h-6"></i>
+      </div>
+      <div>
+        <div class="flex items-center gap-2">
+          <span class="text-xs font-black uppercase tracking-wider text-indigo-600 bg-indigo-50 px-2 py-0.5 rounded-md border border-indigo-100">ESL Master Course</span>
+          <span class="text-[11px] font-bold text-slate-600">Units 17 & 18</span>
+        </div>
+        <h1 class="text-base sm:text-lg font-black text-slate-900 leading-tight">過去完了形 完全マスター教材</h1>
+      </div>
+    </div>
+
+    <!-- Student Badge & Controls -->
+    <div class="flex items-center gap-2 sm:gap-3 ml-auto flex-wrap">
+      <button onclick="switchTab('student-profile')" class="flex items-center gap-2 px-3 py-1.5 bg-slate-100 hover:bg-slate-200 rounded-xl border border-slate-200 text-xs transition">
+        <i data-lucide="user-check" class="w-4 h-4 text-emerald-600"></i>
+        <span id="header-student-name" class="font-bold text-slate-700">生徒名: 未設定</span>
+      </button>
+
+      <div class="flex items-center gap-1.5 px-3 py-1.5 bg-amber-50 rounded-xl border border-amber-200 text-xs font-semibold">
+        <i data-lucide="zap" class="w-4 h-4 text-amber-500 fill-amber-500"></i>
+        <span><span id="global-xp" class="text-amber-600 font-bold text-sm">0</span> XP</span>
+      </div>
+
+      <button onclick="switchTab('pdf-export')" class="px-3 py-1.5 bg-emerald-600 hover:bg-emerald-700 text-white rounded-xl text-xs font-bold transition flex items-center gap-1.5 shadow-sm">
+        <i data-lucide="printer" class="w-4 h-4"></i>
+        <span>PDF保存・印刷</span>
+      </button>
+
+      <button id="btn-lang-toggle" onclick="toggleLanguage()" class="px-3 py-1.5 bg-slate-100 hover:bg-slate-200 text-slate-700 rounded-xl border border-slate-200 text-xs font-bold transition flex items-center gap-1.5">
+        <i data-lucide="languages" class="w-4 h-4 text-indigo-600"></i>
+        <span id="lang-label">日本語</span>
+      </button>
+    </div>
+  </div>
+
+  <!-- MAIN NAVIGATION TABS -->
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 bg-white border-t border-slate-200 overflow-x-auto">
+    <nav class="flex space-x-1 sm:space-x-2 py-2 text-xs sm:text-sm font-semibold whitespace-nowrap items-center" id="main-nav-tabs">
+      <button onclick="switchTab('student-profile')" id="tab-student-profile" class="tab-btn px-3 py-1.5 rounded-lg transition flex items-center gap-1.5 text-slate-600 hover:text-slate-900 hover:bg-slate-100">
+        <i data-lucide="user" class="w-4 h-4 text-indigo-600"></i>
+        <span>生徒情報</span>
+      </button>
+      <button onclick="switchTab('u17-completion')" id="tab-u17-completion" class="tab-btn px-3.5 py-1.5 rounded-lg transition flex items-center gap-1.5 bg-indigo-600 text-white shadow-sm">
+        <i data-lucide="check-circle-2" class="w-4 h-4"></i>
+        <span>Unit 17-1: 完了・結果</span>
+      </button>
+      <button onclick="switchTab('u17-questions')" id="tab-u17-questions" class="tab-btn px-3.5 py-1.5 rounded-lg transition flex items-center gap-1.5 text-slate-600 hover:text-slate-900 hover:bg-slate-100">
+        <i data-lucide="help-circle" class="w-4 h-4"></i>
+        <span>Unit 17-2: 疑問文・否定文</span>
+      </button>
+      <button onclick="switchTab('u17-experience')" id="tab-u17-experience" class="tab-btn px-3.5 py-1.5 rounded-lg transition flex items-center gap-1.5 text-slate-600 hover:text-slate-900 hover:bg-slate-100">
+        <i data-lucide="award" class="w-4 h-4"></i>
+        <span>Unit 17-3: 経験</span>
+      </button>
+      <button onclick="switchTab('u18-continuation')" id="tab-u18-continuation" class="tab-btn px-3.5 py-1.5 rounded-lg transition flex items-center gap-1.5 text-slate-600 hover:text-slate-900 hover:bg-slate-100">
+        <i data-lucide="clock" class="w-4 h-4"></i>
+        <span>Unit 18-1: 継続 (状態/動作)</span>
+      </button>
+      <button onclick="switchTab('u18-pluperfect')" id="tab-u18-pluperfect" class="tab-btn px-3.5 py-1.5 rounded-lg transition flex items-center gap-1.5 text-slate-600 hover:text-slate-900 hover:bg-slate-100">
+        <i data-lucide="rewind" class="w-4 h-4"></i>
+        <span>Unit 18-2: 大過去</span>
+      </button>
+      <button onclick="switchTab('master-quiz')" id="tab-master-quiz" class="tab-btn px-3.5 py-1.5 rounded-lg transition flex items-center gap-1.5 bg-gradient-to-r from-amber-500 to-rose-500 text-white font-bold hover:brightness-105 shadow-sm">
+        <i data-lucide="trophy" class="w-4 h-4"></i>
+        <span>総合テスト</span>
+      </button>
+      <button onclick="switchTab('mock-exam')" id="tab-mock-exam" class="tab-btn px-3.5 py-1.5 rounded-lg transition flex items-center gap-1.5 bg-gradient-to-r from-purple-600 to-indigo-600 text-white font-bold hover:brightness-105 shadow-sm">
+        <i data-lucide="file-text" class="w-4 h-4"></i>
+        <span>模擬試験</span>
+      </button>
+      <button onclick="switchTab('pdf-export')" id="tab-pdf-export" class="tab-btn px-3.5 py-1.5 rounded-lg transition flex items-center gap-1.5 bg-emerald-600 text-white font-bold hover:bg-emerald-700 shadow-sm">
+        <i data-lucide="printer" class="w-4 h-4"></i>
+        <span>印刷シート</span>
+      </button>
+      <button onclick="switchTab('master-bank')" id="tab-master-bank" class="tab-btn px-2.5 py-1 rounded-lg transition flex items-center gap-1 bg-slate-100 text-teal-700 hover:bg-slate-200 text-xs font-semibold border border-teal-200 ml-auto">
+        <i data-lucide="book-open-check" class="w-3.5 h-3.5 text-teal-600"></i>
+        <span>Master Bank</span>
+      </button>
+    </nav>
+  </div>
+</header>
+
+<main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6 space-y-6 w-full grow">
+
+  <!-- GLOBAL PROGRESS BAR & AUDIO SETTINGS BAR -->
+  <div class="grid grid-cols-1 md:grid-cols-3 gap-4 no-print">
+    <div id="global-progress-bar-container" class="md:col-span-2 bg-white rounded-2xl p-4 border border-slate-200 shadow-xs flex items-center gap-4">
+      <div class="text-xs font-bold text-slate-700 shrink-0 flex items-center gap-1.5">
+        <i data-lucide="target" class="w-4 h-4 text-indigo-600"></i>
+        <span id="txt-overall-progress">全問題達成度</span>
+      </div>
+      <div class="w-full bg-slate-100 rounded-full h-3.5 overflow-hidden border border-slate-200 flex">
+        <div id="overall-progress-bar" class="bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 h-3.5 rounded-full transition-all duration-500" style="width: 0%"></div>
+      </div>
+      <span id="overall-pct" class="text-xs font-extrabold text-indigo-600 shrink-0 font-mono min-w-[3rem] text-right">0%</span>
+    </div>
+
+    <!-- AUDIO CONTROLS BAR -->
+    <div id="audio-settings-bar" class="bg-white rounded-2xl p-4 border border-slate-200 shadow-xs flex items-center justify-between gap-3 text-xs">
+      <div class="flex items-center gap-1.5 font-bold text-slate-700">
+        <i data-lucide="volume-2" class="w-4 h-4 text-indigo-600"></i>
+        <span>音声読み上げ設定</span>
+      </div>
+      <div class="flex items-center gap-2">
+        <label class="text-[11px] font-semibold text-slate-500">速度:</label>
+        <select id="speech-rate-select" class="px-2.5 py-1 bg-slate-100 border border-slate-300 rounded-lg text-xs font-bold outline-none text-slate-700">
+          <option value="0.75">0.75x (ゆっくり)</option>
+          <option value="0.95" selected>1.0x (標準)</option>
+          <option value="1.15">1.2x (速め)</option>
+        </select>
+      </div>
+    </div>
+  </div>
+
+  <!-- TAB 0: STUDENT PROFILE -->
+  <div id="content-student-profile" class="tab-content hidden space-y-6">
+    <div class="bg-white rounded-2xl border border-slate-200 shadow-xs p-6 sm:p-8 space-y-6">
+      <div class="border-b border-slate-200 pb-5 flex flex-wrap items-center justify-between gap-4">
+        <div>
+          <span class="px-2.5 py-1 bg-indigo-50 text-indigo-700 text-xs font-bold rounded-full border border-indigo-100">Local Storage</span>
+          <h2 class="text-2xl font-black text-slate-900 mt-1">生徒プロフィール ＆ 学習記録</h2>
+          <p class="text-xs text-slate-500 mt-1">
+            入力された情報や解答データはお使いの端末 (ブラウザ) に自動保存されます。
+          </p>
+        </div>
+        <button onclick="saveStudentProfile()" class="px-5 py-2.5 bg-indigo-600 hover:bg-indigo-700 text-white font-bold text-xs rounded-xl shadow-sm transition flex items-center gap-2">
+          <i data-lucide="save" class="w-4 h-4"></i>
+          <span>情報を保存 (Save Profile)</span>
+        </button>
+      </div>
+
+      <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-4">
+        <div>
+          <label class="block text-xs font-bold text-slate-700 mb-1">氏名 (Student Name)</label>
+          <input type="text" id="input-student-name" oninput="saveStudentProfile()" placeholder="山田 太郎" class="w-full px-3 py-2.5 bg-slate-50 border border-slate-300 rounded-xl text-sm font-semibold text-slate-800 focus:bg-white focus:border-indigo-500 outline-none transition">
+        </div>
+        <div>
+          <label class="block text-xs font-bold text-slate-700 mb-1">学年・クラス (Class / Grade)</label>
+          <input type="text" id="input-student-class" oninput="saveStudentProfile()" placeholder="中学3年1組 / JHS 3-1" class="w-full px-3 py-2.5 bg-slate-50 border border-slate-300 rounded-xl text-sm font-semibold text-slate-800 focus:bg-white focus:border-indigo-500 outline-none transition">
+        </div>
+        <div>
+          <label class="block text-xs font-bold text-slate-700 mb-1">出席番号 / 学籍番号 (ID)</label>
+          <input type="text" id="input-student-id" oninput="saveStudentProfile()" placeholder="15" class="w-full px-3 py-2.5 bg-slate-50 border border-slate-300 rounded-xl text-sm font-semibold text-slate-800 focus:bg-white focus:border-indigo-500 outline-none transition">
+        </div>
+        <div>
+          <label class="block text-xs font-bold text-slate-700 mb-1">担当教師 / 学校名 (Teacher/School)</label>
+          <input type="text" id="input-student-teacher" oninput="saveStudentProfile()" placeholder="英語科 / 〇〇中学校" class="w-full px-3 py-2.5 bg-slate-50 border border-slate-300 rounded-xl text-sm font-semibold text-slate-800 focus:bg-white focus:border-indigo-500 outline-none transition">
+        </div>
+      </div>
+
+      <div>
+        <label class="block text-xs font-bold text-slate-700 mb-1">学習メモ・振り返り (Notes / Reflection)</label>
+        <textarea id="input-student-notes" oninput="saveStudentProfile()" rows="4" placeholder="過去完了形 (had + 過去分詞) の復習メモ..." class="w-full p-3.5 bg-slate-50 border border-slate-300 rounded-xl text-sm text-slate-800 font-sans focus:bg-white focus:border-indigo-500 outline-none transition"></textarea>
+      </div>
+
+      <div class="bg-indigo-50/70 border border-indigo-100 rounded-xl p-4 flex flex-wrap items-center justify-between gap-3 text-xs">
+        <div class="flex items-center gap-2 text-indigo-900 font-medium">
+          <i data-lucide="database" class="w-4 h-4 text-indigo-600"></i>
+          <span>ローカル保存状態: <strong id="storage-status-text" class="text-emerald-600 font-bold">正常に自動保存中</strong></span>
+        </div>
+        <button onclick="resetAllData()" class="px-3.5 py-2 bg-rose-50 hover:bg-rose-100 text-rose-700 font-bold rounded-lg border border-rose-200 transition text-xs flex items-center gap-1.5">
+          <i data-lucide="trash-2" class="w-3.5 h-3.5"></i>
+          <span>すべての学習データを削除リセット</span>
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- TAB 1: UNIT 17 - SECTION 1 (COMPLETION & RESULT) -->
+  <div id="content-u17-completion" class="tab-content space-y-6">
+    
+    <!-- HEADER CARD -->
+    <div class="bg-white rounded-2xl border border-slate-200 shadow-xs overflow-hidden">
+      <div class="bg-gradient-to-r from-indigo-800 to-indigo-950 p-6 text-white flex flex-col md:flex-row md:items-center justify-between gap-4">
+        <div>
+          <div class="flex items-center gap-2 mb-2">
+            <span class="px-2.5 py-0.5 bg-indigo-500/30 text-indigo-100 text-xs font-bold rounded-full border border-indigo-400/30">UNIT 17 • Section 1</span>
+            <span class="text-xs text-indigo-200 font-medium">Completion & Result</span>
+          </div>
+          <h2 class="text-xl sm:text-2xl font-black">1. 過去完了形 〈had ＋ 過去分詞〉: 完了・結果</h2>
+          <p class="text-xs sm:text-sm text-indigo-100 mt-1">
+            過去のある時点における状況を、それ以前に起こったことと関連づけて「…してしまっていた」「…したところだった」を表します。
+          </p>
+        </div>
+        <div class="p-3.5 bg-white/10 rounded-xl backdrop-blur-md border border-white/20 text-center shrink-0">
+          <span class="block text-[10px] text-indigo-200 uppercase tracking-widest font-extrabold">Grammar Formula</span>
+          <span class="text-base sm:text-lg font-black text-amber-300">Subject + had + 過去分詞</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- LECTURE NOTE BOX -->
+    <div class="bg-white rounded-2xl border border-indigo-200 shadow-xs p-6 space-y-5">
+      <div class="flex items-center gap-3 border-b border-indigo-100 pb-4">
+        <div class="p-2.5 bg-indigo-50 rounded-xl text-indigo-600 border border-indigo-100">
+          <i data-lucide="book-open" class="w-5 h-5"></i>
+        </div>
+        <div>
+          <h3 class="text-base font-extrabold text-slate-900">文法解説：過去完了形「完了・結果」マスター</h3>
+          <p class="text-xs text-slate-500">基準点となる過去よりも前に完了した動作・結果を表す</p>
+        </div>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-5 text-xs">
+        <div class="p-4 bg-slate-50 rounded-xl border border-slate-200 space-y-2.5">
+          <h4 class="font-bold text-indigo-900 text-sm flex items-center gap-1.5">
+            <i data-lucide="check-circle-2" class="w-4 h-4 text-indigo-600"></i>
+            ① 完了 (Completion)
+          </h4>
+          <p class="text-slate-600 leading-relaxed">
+            過去のある「基準点」の時点で、すでに動作が<strong>「〜し終えていた / 〜したところだった」</strong>ことを表します。
+          </p>
+          <div class="bg-white p-3 rounded-xl border border-slate-200 text-slate-800 font-mono text-[11px] space-y-1">
+            <div><strong>Ex:</strong> When I arrived at the station, the train <u>had already left</u>.</div>
+            <div class="text-slate-500 font-sans">（私が駅に着いたとき、電車はすでに発車してしまっていた。）</div>
+          </div>
+        </div>
+
+        <div class="p-4 bg-slate-50 rounded-xl border border-slate-200 space-y-2.5">
+          <h4 class="font-bold text-indigo-900 text-sm flex items-center gap-1.5">
+            <i data-lucide="check-circle-2" class="w-4 h-4 text-indigo-600"></i>
+            ② 結果 (Result)
+          </h4>
+          <p class="text-slate-600 leading-relaxed">
+            過去の基準点より前に起きたことの結果として<strong>「〜してしまっていた」</strong>状態を表します。
+          </p>
+          <div class="bg-white p-3 rounded-xl border border-slate-200 text-slate-800 font-mono text-[11px] space-y-1">
+            <div><strong>Ex:</strong> The alarm clock <u>had stopped</u> when she woke up.</div>
+            <div class="text-slate-500 font-sans">（彼女が目覚めた時には、目覚まし時計は止まってしまっていた。）</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- EXERCISE 1A -->
+    <div class="bg-white rounded-2xl border border-slate-200 shadow-xs p-6 space-y-4">
+      <div class="flex items-center justify-between border-b border-slate-100 pb-3">
+        <h3 class="font-bold text-slate-900 text-base flex items-center gap-2">
+          <span class="w-6 h-6 bg-indigo-600 text-white text-xs font-bold rounded-full flex items-center justify-center">1A</span>
+          <span>適語補充問題 (Fill in the blanks)</span>
+        </h3>
+        <span class="text-xs font-medium text-slate-500 bg-slate-100 px-2.5 py-1 rounded-full">4 Questions</span>
+      </div>
+      <p class="text-xs text-slate-600">次の日本文に合うように、空欄に適語を書きなさい。</p>
+      <div class="space-y-4" id="container-u17-1a"></div>
+    </div>
+
+    <!-- EXERCISE 1B -->
+    <div class="bg-white rounded-2xl border border-slate-200 shadow-xs p-6 space-y-4">
+      <div class="flex items-center justify-between border-b border-slate-100 pb-3">
+        <h3 class="font-bold text-slate-900 text-base flex items-center gap-2">
+          <span class="w-6 h-6 bg-indigo-600 text-white text-xs font-bold rounded-full flex items-center justify-center">1B</span>
+          <span>文の書きかえ問題 (Sentence Rewrite)</span>
+        </h3>
+        <span class="text-xs font-medium text-slate-500 bg-slate-100 px-2.5 py-1 rounded-full">4 Questions</span>
+      </div>
+      <p class="text-xs text-slate-600">
+        次の文の文末に <code class="bg-slate-100 px-1.5 py-0.5 rounded border border-slate-200 font-bold text-indigo-600">when I came home</code> を加えて、過去完了形の文に書きかえなさい。
+      </p>
+      <div class="space-y-4" id="container-u17-1b"></div>
+    </div>
+  </div>
+
+  <!-- TAB 2: UNIT 17 - SECTION 2 (QUESTIONS & NEGATIVES) -->
+  <div id="content-u17-questions" class="tab-content hidden space-y-6">
+    
+    <!-- HEADER CARD -->
+    <div class="bg-white rounded-2xl border border-slate-200 shadow-xs overflow-hidden">
+      <div class="bg-gradient-to-r from-purple-800 to-indigo-950 p-6 text-white flex flex-col md:flex-row md:items-center justify-between gap-4">
+        <div>
+          <div class="flex items-center gap-2 mb-2">
+            <span class="px-2.5 py-0.5 bg-purple-500/30 text-purple-100 text-xs font-bold rounded-full border border-purple-400/30">UNIT 17 • Section 2</span>
+            <span class="text-xs text-purple-200 font-medium">Questions & Negatives</span>
+          </div>
+          <h2 class="text-xl sm:text-2xl font-black">2. 過去完了形の疑問文と否定文</h2>
+          <p class="text-xs sm:text-sm text-purple-100 mt-1">
+            助動詞 had の配置ルールを押さえ、過去の基準点における疑問・否定表現をマスターします。
+          </p>
+        </div>
+      </div>
+    </div>
+
+    <!-- LECTURE NOTE BOX -->
+    <div class="bg-white rounded-2xl border border-purple-200 shadow-xs p-6 space-y-5">
+      <div class="flex items-center gap-3 border-b border-purple-100 pb-4">
+        <div class="p-2.5 bg-purple-50 rounded-xl text-purple-600 border border-purple-100">
+          <i data-lucide="help-circle" class="w-5 h-5"></i>
+        </div>
+        <div>
+          <h3 class="text-base font-extrabold text-slate-900">文法解説：疑問文・否定文の作成原則</h3>
+          <p class="text-xs text-slate-500">had を文頭へ移動（疑問文） / had の直後に not を挿入（否定文）</p>
+        </div>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-5 text-xs">
+        <div class="p-4 bg-purple-50/40 rounded-xl border border-purple-100 space-y-2.5">
+          <h4 class="font-bold text-purple-950 text-sm flex items-center gap-1.5">
+            <i data-lucide="help-circle" class="w-4 h-4 text-purple-600"></i>
+            ① 疑問文 (Questions)
+          </h4>
+          <p class="text-slate-600 leading-relaxed">
+            助動詞 <code class="bg-purple-100 text-purple-900 px-1.5 py-0.5 rounded font-bold">Had</code> を主語の前に移動します。
+          </p>
+          <div class="bg-white p-3 rounded-xl border border-purple-100 font-mono text-[11px] space-y-1">
+            <div class="text-slate-700"><strong>Formula:</strong> Had + Subject + 過去分詞...?</div>
+            <div class="text-purple-700 font-sans text-xs"><strong>Ex:</strong> Had they gotten the tickets before they went to the concert?</div>
+          </div>
+        </div>
+
+        <div class="p-4 bg-purple-50/40 rounded-xl border border-purple-100 space-y-2.5">
+          <h4 class="font-bold text-purple-950 text-sm flex items-center gap-1.5">
+            <i data-lucide="minus-circle" class="w-4 h-4 text-purple-600"></i>
+            ② 否定文 (Negatives)
+          </h4>
+          <p class="text-slate-600 leading-relaxed">
+            助動詞 <code class="bg-purple-100 text-purple-900 px-1.5 py-0.5 rounded font-bold">had</code> の直後に <code class="bg-purple-100 text-purple-900 px-1.5 py-0.5 rounded font-bold">not</code> (短縮形 <code class="bg-purple-100 text-purple-900 px-1.5 py-0.5 rounded font-bold">hadn't</code>) を置きます。
+          </p>
+          <div class="bg-white p-3 rounded-xl border border-purple-100 font-mono text-[11px] space-y-1">
+            <div class="text-slate-700"><strong>Formula:</strong> Subject + hadn't + 過去分詞...</div>
+            <div class="text-purple-700 font-sans text-xs"><strong>Ex:</strong> Andy hadn't finished the work before the meeting started.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- EXERCISE 2 -->
+    <div class="bg-white rounded-2xl border border-slate-200 shadow-xs p-6 space-y-4">
+      <div class="flex items-center justify-between border-b border-slate-100 pb-3">
+        <h3 class="font-bold text-slate-900 text-base flex items-center gap-2">
+          <span class="w-6 h-6 bg-purple-600 text-white text-xs font-bold rounded-full flex items-center justify-center">2</span>
+          <span>疑問文・否定文への書き換え問題 (Questions & Negatives)</span>
+        </h3>
+        <span class="text-xs font-medium text-slate-500 bg-slate-100 px-2.5 py-1 rounded-full">4 Questions</span>
+      </div>
+      <div class="space-y-4" id="container-u17-2"></div>
+    </div>
+  </div>
+
+  <!-- TAB 3: UNIT 17 - SECTION 3 (EXPERIENCE) -->
+  <div id="content-u17-experience" class="tab-content hidden space-y-6">
+    
+    <!-- HEADER CARD -->
+    <div class="bg-white rounded-2xl border border-slate-200 shadow-xs overflow-hidden">
+      <div class="bg-gradient-to-r from-emerald-800 to-teal-950 p-6 text-white flex flex-col md:flex-row md:items-center justify-between gap-4">
+        <div>
+          <div class="flex items-center gap-2 mb-2">
+            <span class="px-2.5 py-0.5 bg-emerald-500/30 text-emerald-100 text-xs font-bold rounded-full border border-emerald-400/30">UNIT 17 • Section 3</span>
+            <span class="text-xs text-emerald-200 font-medium">Experience</span>
+          </div>
+          <h2 class="text-xl sm:text-2xl font-black">3. 過去完了形: 経験 「（過去のある時点までに）…したことがあった」</h2>
+          <p class="text-xs sm:text-sm text-emerald-100 mt-1">
+            過去のある時点を基準にして、それ以前における経験の有無や回数を表します。
+          </p>
+        </div>
+      </div>
+    </div>
+
+    <!-- LECTURE NOTE BOX -->
+    <div class="bg-white rounded-2xl border border-emerald-200 shadow-xs p-6 space-y-5">
+      <div class="flex items-center gap-3 border-b border-emerald-100 pb-4">
+        <div class="p-2.5 bg-emerald-50 rounded-xl text-emerald-600 border border-emerald-100">
+          <i data-lucide="award" class="w-5 h-5"></i>
+        </div>
+        <div>
+          <h3 class="text-base font-extrabold text-slate-900">文法解説：経験を表すキーワード & had been to</h3>
+          <p class="text-xs text-slate-500">before, once, ever, never などの副詞の位置に注意</p>
+        </div>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-4 text-xs">
+        <div class="p-4 bg-emerald-50/40 rounded-xl border border-emerald-100 space-y-2">
+          <h4 class="font-bold text-emerald-950 text-xs flex items-center gap-1.5">
+            <i data-lucide="check" class="w-4 h-4 text-emerald-600"></i> 回数・経験の副詞
+          </h4>
+          <p class="text-slate-600 leading-relaxed">
+            <code class="font-bold text-emerald-800 bg-emerald-100 px-1 py-0.5 rounded">before</code>（以前に）, <code class="font-bold text-emerald-800 bg-emerald-100 px-1 py-0.5 rounded">once</code>（1度）, <code class="font-bold text-emerald-800 bg-emerald-100 px-1 py-0.5 rounded">twice</code>（2度）などが伴います。
+          </p>
+        </div>
+
+        <div class="p-4 bg-emerald-50/40 rounded-xl border border-emerald-100 space-y-2">
+          <h4 class="font-bold text-emerald-950 text-xs flex items-center gap-1.5">
+            <i data-lucide="check" class="w-4 h-4 text-emerald-600"></i> ever / never の位置
+          </h4>
+          <p class="text-slate-600 leading-relaxed">
+            <code class="font-bold text-emerald-800 bg-emerald-100 px-1 py-0.5 rounded">ever</code> や <code class="font-bold text-emerald-800 bg-emerald-100 px-1 py-0.5 rounded">never</code> は <strong>had と過去分詞の間</strong> に置きます。
+          </p>
+        </div>
+
+        <div class="p-4 bg-amber-50/60 rounded-xl border border-amber-200 space-y-2">
+          <h4 class="font-bold text-amber-950 text-xs flex items-center gap-1.5">
+            <i data-lucide="alert-triangle" class="w-4 h-4 text-amber-600"></i> 「行ったことがあった」
+          </h4>
+          <p class="text-slate-600 leading-relaxed">
+            <strong class="text-amber-900 font-bold">had been to + 場所</strong>: 〜へ行ったことがあった【経験】
+          </p>
+        </div>
+      </div>
+    </div>
+
+    <!-- EXERCISE 3A -->
+    <div class="bg-white rounded-2xl border border-slate-200 shadow-xs p-6 space-y-4">
+      <div class="flex items-center justify-between border-b border-slate-100 pb-3">
+        <h3 class="font-bold text-slate-900 text-base flex items-center gap-2">
+          <span class="w-6 h-6 bg-emerald-600 text-white text-xs font-bold rounded-full flex items-center justify-center">3A</span>
+          <span>動詞の過去完了形への変化問題 (Experience Fill-in)</span>
+        </h3>
+        <span class="text-xs font-medium text-slate-500 bg-slate-100 px-2.5 py-1 rounded-full">5 Questions</span>
+      </div>
+      <div class="space-y-4" id="container-u17-3a"></div>
+    </div>
+
+    <!-- EXERCISE 3B -->
+    <div class="bg-white rounded-2xl border border-slate-200 shadow-xs p-6 space-y-4">
+      <div class="flex items-center justify-between border-b border-slate-100 pb-3">
+        <h3 class="font-bold text-slate-900 text-base flex items-center gap-2">
+          <span class="w-6 h-6 bg-emerald-600 text-white text-xs font-bold rounded-full flex items-center justify-center">3B</span>
+          <span>語句並べ替え問題 (Word Unscramble)</span>
+        </h3>
+        <span class="text-xs font-medium text-slate-500 bg-slate-100 px-2.5 py-1 rounded-full">6 Questions</span>
+      </div>
+      <div class="space-y-6" id="container-u17-3b"></div>
+    </div>
+  </div>
+
+  <!-- TAB 4: UNIT 18 - SECTION 1 (CONTINUATION) -->
+  <div id="content-u18-continuation" class="tab-content hidden space-y-6">
+    
+    <!-- HEADER CARD -->
+    <div class="bg-white rounded-2xl border border-slate-200 shadow-xs overflow-hidden">
+      <div class="bg-gradient-to-r from-blue-800 to-indigo-950 p-6 text-white flex flex-col md:flex-row md:items-center justify-between gap-4">
+        <div>
+          <div class="flex items-center gap-2 mb-2">
+            <span class="px-2.5 py-0.5 bg-blue-500/30 text-blue-100 text-xs font-bold rounded-full border border-blue-400/30">UNIT 18 • Section 1</span>
+            <span class="text-xs text-blue-200 font-medium">Continuation (継続)</span>
+          </div>
+          <h2 class="text-xl sm:text-2xl font-black">1. 状態の継続 vs 動作の継続 (過去完了進行形)</h2>
+          <p class="text-xs sm:text-sm text-blue-100 mt-1">
+            過去のある時点まで「ずっと〜だった（状態）」か「ずっと〜し続けていた（動作）」によって形を使い分けます。
+          </p>
+        </div>
+      </div>
+    </div>
+
+    <!-- LECTURE NOTE BOX -->
+    <div class="bg-white rounded-2xl border border-blue-200 shadow-xs p-6 space-y-5">
+      <div class="flex items-center gap-3 border-b border-blue-100 pb-4">
+        <div class="p-2.5 bg-blue-50 rounded-xl text-blue-600 border border-blue-100">
+          <i data-lucide="clock" class="w-5 h-5"></i>
+        </div>
+        <div>
+          <h3 class="text-base font-extrabold text-slate-900">文法解説：状態の継続 vs 動作の継続（過去完了進行形）</h3>
+          <p class="text-xs text-slate-500">動詞のタイプ（状態動詞か動作動詞か）によって決定</p>
+        </div>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-5 text-xs">
+        <div class="p-4 bg-blue-50/40 rounded-xl border border-blue-100 space-y-2.5">
+          <div class="flex items-center justify-between">
+            <h4 class="font-bold text-blue-950 text-sm flex items-center gap-1.5">
+              <i data-lucide="check-circle" class="w-4 h-4 text-blue-600"></i>
+              ① 状態の継続 (State)
+            </h4>
+            <span class="px-2.5 py-0.5 bg-blue-100 text-blue-800 rounded font-bold text-[10px]">had + p.p.</span>
+          </div>
+          <p class="text-slate-600 leading-relaxed">
+            <strong class="text-blue-900 font-bold">状態動詞</strong> (know, live, be など) を用い、過去の基準点まで「ずっと〜という状態だった」を表します。
+          </p>
+          <div class="bg-white p-3 rounded-xl border border-blue-100 font-mono text-[11px] text-blue-950">
+            We <u>had known</u> each other for five years by that time.
+          </div>
+        </div>
+
+        <div class="p-4 bg-indigo-50/40 rounded-xl border border-indigo-100 space-y-2.5">
+          <div class="flex items-center justify-between">
+            <h4 class="font-bold text-indigo-950 text-sm flex items-center gap-1.5">
+              <i data-lucide="play-circle" class="w-4 h-4 text-indigo-600"></i>
+              ② 動作の継続 (Action)
+            </h4>
+            <span class="px-2.5 py-0.5 bg-indigo-100 text-indigo-800 rounded font-bold text-[10px]">had been -ing</span>
+          </div>
+          <p class="text-slate-600 leading-relaxed">
+            <strong class="text-indigo-900 font-bold">動作動詞</strong> (wait, study, play など) を用い、過去の基準点まで「ずっと〜し続けていた」を表す<strong>過去完了進行形</strong>にします。
+          </p>
+          <div class="bg-white p-3 rounded-xl border border-indigo-100 font-mono text-[11px] text-indigo-950">
+            I <u>had been using</u> the computer for two hours.
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- EXERCISE 1A -->
+    <div class="bg-white rounded-2xl border border-slate-200 shadow-xs p-6 space-y-4">
+      <div class="flex items-center justify-between border-b border-slate-100 pb-3">
+        <h3 class="font-bold text-slate-900 text-base flex items-center gap-2">
+          <span class="w-6 h-6 bg-blue-600 text-white text-xs font-bold rounded-full flex items-center justify-center">1A</span>
+          <span>適語補充 ＆ 種別選択問題 (Fill-in & Category Selection)</span>
+        </h3>
+        <span class="text-xs font-medium text-slate-500 bg-slate-100 px-2.5 py-1 rounded-full">4 Questions</span>
+      </div>
+      <div class="space-y-4" id="container-u18-1a"></div>
+    </div>
+
+    <!-- EXERCISE 1B -->
+    <div class="bg-white rounded-2xl border border-slate-200 shadow-xs p-6 space-y-4">
+      <div class="flex items-center justify-between border-b border-slate-100 pb-3">
+        <h3 class="font-bold text-slate-900 text-base flex items-center gap-2">
+          <span class="w-6 h-6 bg-blue-600 text-white text-xs font-bold rounded-full flex items-center justify-center">1B</span>
+          <span>語句並べ替え問題 (Word Unscramble)</span>
+        </h3>
+        <span class="text-xs font-medium text-slate-500 bg-slate-100 px-2.5 py-1 rounded-full">4 Questions</span>
+      </div>
+      <div class="space-y-6" id="container-u18-1b"></div>
+    </div>
+  </div>
+
+  <!-- TAB 5: UNIT 18 - SECTION 2 (PLUPERFECT / 大過去) -->
+  <div id="content-u18-pluperfect" class="tab-content hidden space-y-6">
+    
+    <!-- HEADER CARD -->
+    <div class="bg-white rounded-2xl border border-slate-200 shadow-xs overflow-hidden">
+      <div class="bg-gradient-to-r from-amber-700 via-rose-800 to-indigo-950 p-6 text-white flex flex-col md:flex-row md:items-center justify-between gap-4">
+        <div>
+          <div class="flex items-center gap-2 mb-2">
+            <span class="px-2.5 py-0.5 bg-amber-500/30 text-amber-100 text-xs font-bold rounded-full border border-amber-400/30">UNIT 18 • Section 2</span>
+            <span class="text-xs text-amber-200 font-medium">Pluperfect / Earlier Past</span>
+          </div>
+          <h2 class="text-xl sm:text-2xl font-black">2. 大過去 (Pluperfect / Relative Past)</h2>
+          <p class="text-xs sm:text-sm text-amber-100 mt-1">
+            「ある過去の出来事」よりもさらに「古い過去」であることを明確に示すための 〈had + 過去分詞〉 です。
+          </p>
+        </div>
+      </div>
+    </div>
+
+    <!-- LECTURE NOTE BOX -->
+    <div class="bg-white rounded-2xl border border-amber-200 shadow-xs p-6 space-y-5">
+      <div class="flex items-center gap-3 border-b border-amber-100 pb-4">
+        <div class="p-2.5 bg-amber-50 rounded-xl text-amber-700 border border-amber-200">
+          <i data-lucide="rewind" class="w-5 h-5"></i>
+        </div>
+        <div>
+          <h3 class="text-base font-extrabold text-slate-900">文法解説：大過去 (Pluperfect) と 2文結合の手順</h3>
+          <p class="text-xs text-slate-500">that 節内での大過去表現 ＆ ago から before への時制変化</p>
+        </div>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-5 text-xs">
+        <div class="p-4 bg-amber-50/40 rounded-xl border border-amber-200 space-y-2.5">
+          <h4 class="font-bold text-amber-950 text-sm flex items-center gap-1.5">
+            <i data-lucide="layers" class="w-4 h-4 text-amber-600"></i>
+            ① 大過去の代表的構文 (that節)
+          </h4>
+          <p class="text-slate-600 leading-relaxed">
+            「気づいた / 見つけた / 聞いた」を表す動詞 (found, realized, heard, told) の後の <code class="font-bold text-amber-900 bg-amber-100 px-1 py-0.5 rounded">that 節</code> 内で、それより前のことを <code class="font-bold text-amber-900 bg-amber-100 px-1 py-0.5 rounded">had + p.p.</code> にします。
+          </p>
+          <div class="bg-white p-3 rounded-xl border border-amber-200 font-mono text-[11px] text-amber-950">
+            I <u>found</u> [過去] that I <u>had made</u> [大過去] a mistake.
+          </div>
+        </div>
+
+        <div class="p-4 bg-amber-50/40 rounded-xl border border-amber-200 space-y-2.5">
+          <h4 class="font-bold text-amber-950 text-sm flex items-center gap-1.5">
+            <i data-lucide="clock" class="w-4 h-4 text-amber-600"></i>
+            ② 時制にともなう語句の変化 (before vs ago)
+          </h4>
+          <p class="text-slate-600 leading-relaxed">
+            「〜年前」を表す語句は、大過去では <code class="font-bold text-amber-900 bg-amber-100 px-1 py-0.5 rounded">ago</code> ではなく <code class="font-bold text-amber-900 bg-amber-100 px-1 py-0.5 rounded">before</code> に変わります。
+          </p>
+          <div class="bg-white p-3 rounded-xl border border-amber-200 font-mono text-[11px] text-amber-950">
+            three years ago ➔ <strong>three years before</strong>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- EXERCISE 2A -->
+    <div class="bg-white rounded-2xl border border-slate-200 shadow-xs p-6 space-y-4">
+      <div class="flex items-center justify-between border-b border-slate-100 pb-3">
+        <h3 class="font-bold text-slate-900 text-base flex items-center gap-2">
+          <span class="w-6 h-6 bg-amber-600 text-white text-xs font-bold rounded-full flex items-center justify-center">2A</span>
+          <span>適語補充問題 (Pluperfect Fill-in)</span>
+        </h3>
+        <span class="text-xs font-medium text-slate-500 bg-slate-100 px-2.5 py-1 rounded-full">4 Questions</span>
+      </div>
+      <div class="space-y-4" id="container-u18-2a"></div>
+    </div>
+
+    <!-- EXERCISE 2B -->
+    <div class="bg-white rounded-2xl border border-slate-200 shadow-xs p-6 space-y-4">
+      <div class="flex items-center justify-between border-b border-slate-100 pb-3">
+        <h3 class="font-bold text-slate-900 text-base flex items-center gap-2">
+          <span class="w-6 h-6 bg-amber-600 text-white text-xs font-bold rounded-full flex items-center justify-center">2B</span>
+          <span>2文結合問題 (Sentence Combination)</span>
+        </h3>
+        <span class="text-xs font-medium text-slate-500 bg-slate-100 px-2.5 py-1 rounded-full">4 Questions</span>
+      </div>
+      <div class="space-y-4" id="container-u18-2b"></div>
+    </div>
+  </div>
+
+  <!-- TAB 6: MASTER QUIZ (総合チャレンジ) -->
+  <div id="content-master-quiz" class="tab-content hidden space-y-6">
+    <div class="bg-white rounded-2xl border border-slate-200 shadow-xs p-6 sm:p-8 space-y-6">
+      <div class="flex flex-wrap items-center justify-between gap-4 border-b border-slate-200 pb-5">
+        <div>
+          <span class="px-2.5 py-1 bg-amber-50 text-amber-700 text-xs font-extrabold rounded-full border border-amber-200">Unit 17 & 18 Master Challenge</span>
+          <h2 class="text-2xl font-black text-slate-900 mt-1">過去完了形 総合チャレンジ問題</h2>
+          <p class="text-xs text-slate-500 mt-1">完了・結果、疑問・否定、経験、継続、大過去の全単元から出題されます。</p>
+        </div>
+        <button onclick="checkAllMasterQuiz()" class="px-5 py-2.5 bg-gradient-to-r from-amber-500 to-rose-500 hover:brightness-105 text-white font-bold text-xs rounded-xl shadow-sm transition flex items-center gap-2">
+          <i data-lucide="check-circle" class="w-4 h-4"></i>
+          <span>すべての判定を行う</span>
+        </button>
+      </div>
+
+      <div class="space-y-6" id="container-master-quiz"></div>
+    </div>
+  </div>
+
+  <!-- TAB 7: MOCK EXAM (模擬試験) -->
+  <div id="content-mock-exam" class="tab-content hidden space-y-6">
+    <div class="bg-white rounded-2xl border border-slate-200 shadow-xs p-6 sm:p-8 space-y-6">
+      <div class="flex flex-wrap items-center justify-between gap-4 border-b border-slate-200 pb-5">
+        <div>
+          <span class="px-2.5 py-1 bg-purple-50 text-purple-700 text-xs font-extrabold rounded-full border border-purple-200">Timed Exam Mode</span>
+          <h2 class="text-2xl font-black text-slate-900 mt-1">過去完了形 定期考査・模擬試験 (100点満点)</h2>
+          <p class="text-xs text-slate-500 mt-1">制限時間なし・採点機能付きのオンライン実力テストです。</p>
+        </div>
+        <div class="flex items-center gap-3">
+          <button onclick="gradeMockExam()" class="px-5 py-2.5 bg-purple-600 hover:bg-purple-700 text-white font-bold text-xs rounded-xl shadow-sm transition flex items-center gap-2">
+            <i data-lucide="file-check-2" class="w-4 h-4"></i>
+            <span>模擬試験を採点する</span>
+          </button>
+        </div>
+      </div>
+
+      <div id="mock-exam-score-card" class="hidden p-5 bg-purple-50/70 border border-purple-200 rounded-2xl flex items-center justify-between">
+        <div class="flex items-center gap-3.5">
+          <div class="w-12 h-12 bg-purple-600 rounded-xl flex items-center justify-center text-white shadow-sm">
+            <i data-lucide="award" class="w-6 h-6"></i>
+          </div>
+          <div>
+            <span class="text-xs font-bold text-purple-800 uppercase tracking-wider">Exam Score Result</span>
+            <div class="text-2xl font-black text-purple-950"><span id="mock-score-val">0</span> / 100 点</div>
+          </div>
+        </div>
+        <span id="mock-feedback-badge" class="px-3.5 py-1.5 bg-purple-200 text-purple-950 font-bold text-xs rounded-full"></span>
+      </div>
+
+      <div class="space-y-6" id="container-mock-exam"></div>
+    </div>
+  </div>
+
+  <!-- TAB 8: PDF EXPORT (PDF印刷ワークシート) -->
+  <div id="content-pdf-export" class="tab-content hidden space-y-6">
+    <div class="bg-white rounded-2xl border border-slate-200 shadow-xs p-6 sm:p-8 space-y-6">
+      <div class="no-print border-b border-slate-200 pb-5 flex flex-wrap items-center justify-between gap-4">
+        <div>
+          <h2 class="text-2xl font-black text-slate-900">印刷・PDF出力用 ワークシート</h2>
+          <p class="text-xs text-slate-600 mt-1">完了したセクション（正解済みの問題）のみが自動的にPDFシートに含まれます。新しく問題をクリアした後に再度この画面を開くと、内容が自動更新されます。</p>
+        </div>
+        <button onclick="window.print()" class="px-6 py-3 bg-emerald-600 hover:bg-emerald-700 text-white font-black text-sm rounded-xl shadow-md transition flex items-center gap-2">
+          <i data-lucide="printer" class="w-5 h-5"></i>
+          <span>印刷・PDF保存を実行 (Print)</span>
+        </button>
+      </div>
+
+      <!-- PRINTABLE WORKSHEET CONTAINER -->
+      <div class="card-print p-6 sm:p-8 space-y-6 border border-slate-300 rounded-2xl bg-white text-slate-800">
+        <div class="border-b-2 border-slate-800 pb-4 flex justify-between items-end">
+          <div>
+            <span class="text-xs font-bold uppercase tracking-wider text-slate-500">GrammarStation ESL Master Course</span>
+            <h1 class="text-2xl font-black text-slate-900 mt-1">過去完了形 (Past Perfect Tense) 習得済み演習シート</h1>
+          </div>
+          <div class="text-right text-xs space-y-1 text-slate-700">
+            <div>氏名: <span id="print-name-disp" class="font-bold underline min-w-[8rem] inline-block">________________</span></div>
+            <div>クラス/番号: <span id="print-class-disp" class="font-bold underline min-w-[6rem] inline-block">______</span></div>
+          </div>
+        </div>
+
+        <div id="container-pdf-content" class="space-y-6 text-sm"></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- TAB 9: MASTER BANK (マスターバンク) -->
+  <div id="content-master-bank" class="tab-content hidden space-y-6">
+    <div class="bg-white rounded-2xl border border-slate-200 shadow-xs p-6 sm:p-8 space-y-6">
+      <div class="border-b border-slate-200 pb-5 flex flex-wrap items-center justify-between gap-4">
+        <div>
+          <span class="px-2.5 py-1 bg-teal-50 text-teal-700 text-xs font-bold rounded-full border border-teal-200">Sentence Repository</span>
+          <h2 class="text-2xl font-black text-slate-900 mt-1">Master Sentence Bank (全例文音声・解答一覧)</h2>
+          <p class="text-xs text-slate-500 mt-1">本教材に登場するすべての例文をアクセント・性別別音声付きで一覧・復習できます。</p>
+        </div>
+        <div class="flex items-center gap-2">
+          <input type="text" id="bank-search-input" oninput="filterMasterBank()" placeholder="検索 (例: train, never, lived)..." class="px-3.5 py-2 bg-slate-50 border border-slate-300 rounded-xl text-xs font-semibold outline-none focus:bg-white focus:border-teal-500 text-slate-800 transition">
+        </div>
+      </div>
+
+      <div class="overflow-x-auto rounded-xl border border-slate-200">
+        <table class="w-full text-left border-collapse text-xs">
+          <thead>
+            <tr class="bg-slate-100 border-b border-slate-200 text-slate-700 font-bold">
+              <th class="p-3.5">Unit / 分類</th>
+              <th class="p-3.5">英文 (English Sentence)</th>
+              <th class="p-3.5">日本語訳</th>
+              <th class="p-3.5">音声アクセント/性別</th>
+              <th class="p-3.5 text-center">試聴</th>
+            </tr>
+          </thead>
+          <tbody id="container-master-bank-list" class="divide-y divide-slate-200 bg-white"></tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+
+</main>
+
+<footer class="bg-white border-t border-slate-200 py-6 text-center text-xs text-slate-500 no-print">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col sm:flex-row items-center justify-between gap-3">
+    <div>GrammarStation Units 17 & 18 • Interactive ESL Learning Environment</div>
+    <div class="flex items-center gap-4">
+      <span class="text-emerald-600 font-bold flex items-center gap-1"><i data-lucide="shield-check" class="w-4 h-4"></i> ブラウザ自動保存有効</span>
+      <span>© 2026 GrammarStation</span>
+    </div>
+  </div>
+</footer>
+
+<script>
+  // Application State & Data Stores
+  let currentLanguage = 'ja'; // 'ja' or 'en'
+  let studentProfile = {
+    name: '',
+    classVal: '',
+    id: '',
+    teacher: '',
+    notes: ''
+  };
+
+  let userAnswers = {};
+  let completedSections = {};
+
+  // Exercise Data Definitions
+  const u17_1aData = [
+    { id: 'u17_1a_1', q: "私が駅に着いたとき、電車はすでに発車してしまっていた。<br>When I arrived at the station, the train [       ] already [       ].", answers: ["had", "left"], hint: "leave の過去分詞は left です。" },
+    { id: 'u17_1a_2', q: "彼女が目を覚ましたとき、目覚まし時計は鳴りやんでいた。<br>The alarm clock [       ] [       ] when she woke up.", answers: ["had", "stopped"], hint: "stop の過去分詞は stopped です。" },
+    { id: 'u17_1a_3', q: "私たちが劇場に着いたとき、映画はすでに始まっていた。<br>The movie [       ] already [       ] when we got to the theater.", answers: ["had", "started"], hint: "start の過去分詞は started です。" },
+    { id: 'u17_1a_4', q: "彼が部屋に入ってきたとき、私はすでに宿題を終えていた。<br>I [       ] already [       ] my homework when he came into the room.", answers: ["had", "finished"], hint: "finish の過去分詞は finished です。" }
+  ];
+
+  const u17_1bData = [
+    { id: 'u17_1b_1', base: "I cleaned my room.", answer: "I had cleaned my room when I came home.", hint: "I had cleaned my room + when I came home" },
+    { id: 'u17_1b_2', base: "She cooked dinner.", answer: "She had cooked dinner when I came home.", hint: "She had cooked dinner + when I came home" },
+    { id: 'u17_1b_3', base: "They washed the car.", answer: "They had washed the car when I came home.", hint: "They had washed the car + when I came home" },
+    { id: 'u17_1b_4', base: "He studied English.", answer: "He had studied English when I came home.", hint: "He had studied English + when I came home" }
+  ];
+
+  const u17_2Data = [
+    { id: 'u17_2_1', type: 'q', prompt: "【疑問文に】 They had finished the work before noon.", answer: "Had they finished the work before noon?", hint: "Had を先頭に出します。" },
+    { id: 'u17_2_2', type: 'n', prompt: "【否定文に】 She had cleaned her room by then.", answer: "She hadn't cleaned her room by then.", hint: "had の後ろに not を入れます (hadn't)" },
+    { id: 'u17_2_3', type: 'q', prompt: "【疑問文に】 You had eaten lunch before the meeting.", answer: "Had you eaten lunch before the meeting?", hint: "Had you eaten ... ?" },
+    { id: 'u17_2_4', type: 'n', prompt: "【否定文に】 We had locked the door.", answer: "We hadn't locked the door.", hint: "hadn't locked" }
+  ];
+
+  const u17_3aData = [
+    { id: 'u17_3a_1', verb: "visit (訪れたことがある)", answer: "had visited", hint: "had + 過去分詞" },
+    { id: 'u17_3a_2', verb: "be (行ったことがある)", answer: "had been to", hint: "had been to ... で「行ったことがある」" },
+    { id: 'u17_3a_3', verb: "see (見たことがあった)", answer: "had seen", hint: "see の過去分詞は seen" },
+    { id: 'u17_3a_4', verb: "read (読んだことがあった)", answer: "had read", hint: "read の過去分詞も read (発音はred)" },
+    { id: 'u17_3a_5', verb: "hear (聞いたことがあった)", answer: "had heard", hint: "hear の過去分詞は heard" }
+  ];
+
+  const u17_3bData = [
+    { id: 'u17_3b_1', words: ["before", "I", "met", "him", "never", "had", "seen", "I", "such a tall man"], answer: "I had never seen such a tall man before I met him.", hint: "I had never seen ..." },
+    { id: 'u17_3b_2', words: ["to", "Kyoto", "twice", "had", "been", "she"], answer: "She had been to Kyoto twice.", hint: "She had been to Kyoto twice." },
+    { id: 'u17_3b_3', words: ["ever", "before", "eaten", "sushi", "had", "he"], answer: "He had ever eaten sushi before.", hint: "He had ever eaten sushi before." },
+    { id: 'u17_3b_4', words: ["once", "there", "been", "had", "they"], answer: "They had been there once.", hint: "They had been there once." },
+    { id: 'u17_3b_5', words: ["seen", "before", "never", "that movie", "had", "I"], answer: "I had never seen that movie before.", hint: "I had never seen that movie before." },
+    { id: 'u17_3b_6', words: ["before", "played", "tennis", "never", "had", "we"], answer: "We had never played tennis before.", hint: "We had never played tennis before." }
+  ];
+
+  const u18_1aData = [
+    { id: 'u18_1a_1', q: "私たちはそのときまでに5年間お互いを知っていた。(状態)<br>We [       ] [       ] each other for five years by that time.", answers: ["had", "known"], hint: "know は状態動詞なので had known" },
+    { id: 'u18_1a_2', q: "彼女は彼らが到着するまで2時間ずっと待っていた。(動作)<br>She [       ] [       ] [       ] for two hours until they arrived.", answers: ["had", "been", "waiting"], hint: "wait は動作動詞なので過去完了進行形 had been waiting" },
+    { id: 'u18_1a_3', q: "彼らはその町に10年間住んでいた。(状態)<br>They [       ] [       ] in the town for ten years.", answers: ["had", "lived"], hint: "live は状態的に継続する場合 had lived" },
+    { id: 'u18_1a_4', q: "雨が降り始めてから、私は3時間ずっと本を読んでいた。(動作)<br>I [       ] [       ] [       ] a book for three hours when it started to rain.", answers: ["had", "been", "reading"], hint: "read は動作動詞なので had been reading" }
+  ];
+
+  const u18_1bData = [
+    { id: 'u18_1b_1', words: ["studying", "English", "had", "been", "for", "hours", "three", "he"], answer: "He had been studying English for three hours.", hint: "He had been studying English for three hours." },
+    { id: 'u18_1b_2', words: ["known", "him", "had", "we", "long", "a", "for", "time"], answer: "We had known him for a long time.", hint: "We had known him for a long time." },
+    { id: 'u18_1b_3', words: ["raining", "had", "been", "it", "all", "day"], answer: "It had been raining all day.", hint: "It had been raining all day." },
+    { id: 'u18_1b_4', words: ["lived", "Tokyo", "in", "had", "she", "years", "ten", "for"], answer: "She had lived in Tokyo for ten years.", hint: "She had lived in Tokyo for ten years." }
+  ];
+
+  const u18_2aData = [
+    { id: 'u18_2a_1', q: "I found that he [       ] [       ] the camera three years before.", answers: ["had", "lost"], hint: "lose の過去分詞は lost" },
+    { id: 'u18_2a_2', q: "She realized that she [       ] [       ] her umbrella on the train.", answers: ["had", "left"], hint: "leave の過去分詞は left" },
+    { id: 'u18_2a_3', q: "He told me that he [       ] [       ] to London before.", answers: ["had", "been"], hint: "been to London" },
+    { id: 'u18_2a_4', q: "We noticed that someone [       ] [       ] our window.", answers: ["had", "broken"], hint: "break の過去分詞は broken" }
+  ];
+
+  const u18_2bData = [
+    { id: 'u18_2b_1', base: "I lost my key. / I found it.", answer: "I found that I had lost my key.", hint: "I found that I had lost my key." },
+    { id: 'u18_2b_2', base: "She finished her homework. / She went out.", answer: "She went out after she had finished her homework.", hint: "She went out after she had finished her homework." },
+    { id: 'u18_2b_3', base: "He bought a car. / He passed the exam.", answer: "He bought a car after he had passed the exam.", hint: "He bought a car after he had passed the exam." },
+    { id: 'u18_2b_4', base: "They ate dinner. / We arrived.", answer: "They had eaten dinner when we arrived.", hint: "They had eaten dinner when we arrived." }
+  ];
+
+  const masterQuizData = [
+    { id: 'mq_1', q: "When I got home, my mother [       ] cooking dinner.", answers: ["had"], hint: "完了・結果の had" },
+    { id: 'mq_2', q: "Had you ever [       ] to Hokkaido before that trip?", answers: ["been"], hint: "行ったことがある (been)" },
+    { id: 'mq_3', q: "She [       ] waiting for him for an hour when he came.", answers: ["had"], hint: "過去完了進行形 had been waiting の had" },
+    { id: 'mq_4', q: "I realized that I [       ] my wallet at home.", answers: ["had", "left"], hint: "大過去「忘れてきていた」had left" }
+  ];
+
+  const mockExamData = [
+    { id: 'mex_1', q: "次の文の空欄に適切な語を入れよ。<br>When we reached the museum, it [       ] already closed.", answer: "had", type: "input" },
+    { id: 'mex_2', q: "次の日本文を英語に訳せ。<br>私が駅に着いたとき、すでに電車は出発していた。", answer: "When I arrived at the station, the train had already left.", type: "input" },
+    { id: 'mex_3', q: "次の文を否定文に書き換えよ。<br>He had finished his homework before dinner.", answer: "He hadn't finished his homework before dinner.", type: "input" },
+    { id: 'mex_4', q: "次の文の空欄に適切な語を入れよ。<br>She [       ] living in Osaka for five years when she moved.", answer: "had", type: "input" },
+    { id: 'mex_5', q: "次の文の空欄に適切な語を入れよ。<br>I knew that he [       ] visited the city twice before.", answer: "had", type: "input" }
+  ];
+
+  // Master Sentence Bank Data for Audio & Review
+  const masterBankData = [
+    { unit: "Unit 17-1", en: "When I arrived at the station, the train had already left.", ja: "私が駅に着いたとき、電車はすでに発車してしまっていた。", gender: "Female (US)", accent: "American" },
+    { unit: "Unit 17-1", en: "The alarm clock had stopped when she woke up.", ja: "彼女が目覚めた時には、目覚まし時計は止まってしまっていた。", gender: "Male (UK)", accent: "British" },
+    { unit: "Unit 17-2", en: "Had they gotten the tickets before they went to the concert?", ja: "彼らはコンサートに行く前にチケットを手に入れていましたか？", gender: "Female (US)", accent: "American" },
+    { unit: "Unit 17-2", en: "Andy hadn't finished the work before the meeting started.", ja: "アンディは会議が始まる前にその仕事を終わらせていなかった。", gender: "Male (US)", accent: "American" },
+    { unit: "Unit 17-3", en: "I had never seen such a tall man before I met him.", ja: "彼に会うまで、私はそんなに背の高い人を見たことがなかった。", gender: "Female (UK)", accent: "British" },
+    { unit: "Unit 17-3", en: "She had been to Kyoto twice.", ja: "彼女は京都に2度行ったことがあった。", gender: "Female (US)", accent: "American" },
+    { unit: "Unit 18-1", en: "We had known each other for five years by that time.", ja: "私たちはそのときまでに5年間お互いを知っていた。", gender: "Male (UK)", accent: "British" },
+    { unit: "Unit 18-1", en: "I had been using the computer for two hours.", ja: "私は2時間ずっとそのコンピュータを使っていた。", gender: "Female (US)", accent: "American" },
+    { unit: "Unit 18-2", en: "I found that I had made a mistake.", ja: "私は間違いを犯していたことに気づいた。", gender: "Male (US)", accent: "American" },
+    { unit: "Unit 18-2", en: "I found that he had lost the camera three years before.", ja: "私は彼が3年前にカメラをなくしていたことを知った。", gender: "Female (UK)", accent: "British" }
+  ];
+
+  // Initialization on Window Load
+  window.onload = function() {
+    loadStudentProfile();
+    renderAllExercises();
+    updateOverallProgress();
+    renderMasterBankList();
+    lucide.createIcons();
+  };
+
+  // Tab Switching Function
+  function switchTab(tabId) {
+    document.querySelectorAll('.tab-content').forEach(el => el.classList.add('hidden'));
+    document.querySelectorAll('.tab-btn').forEach(btn => {
+      btn.classList.remove('bg-indigo-600', 'text-white', 'shadow-sm');
+      btn.classList.add('text-slate-600', 'hover:text-slate-900', 'hover:bg-slate-100');
+    });
+
+    const targetContent = document.getElementById('content-' + tabId);
+    if (targetContent) targetContent.classList.remove('hidden');
+
+    const targetBtn = document.getElementById('tab-' + tabId);
+    if (targetBtn) {
+      targetBtn.classList.remove('text-slate-600', 'hover:text-slate-900', 'hover:bg-slate-100');
+      targetBtn.classList.add('bg-indigo-600', 'text-white', 'shadow-sm');
+    }
+
+    if (tabId === 'pdf-export') {
+      renderPdfExportContent();
+    }
+    lucide.createIcons();
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }
+
+  // Student Profile Management & LocalStorage
+  function saveStudentProfile() {
+    studentProfile.name = document.getElementById('input-student-name').value;
+    studentProfile.classVal = document.getElementById('input-student-class').value;
+    studentProfile.id = document.getElementById('input-student-id').value;
+    studentProfile.teacher = document.getElementById('input-student-teacher').value;
+    studentProfile.notes = document.getElementById('input-student-notes').value;
+
+    localStorage.setItem('gs_student_profile', JSON.stringify(studentProfile));
+    
+    document.getElementById('header-student-name').innerText = studentProfile.name ? `生徒名: ${studentProfile.name}` : "生徒名: 未設定";
+    document.getElementById('storage-status-text').innerText = "正常に自動保存中 (" + new Date().toLocaleTimeString() + ")";
+  }
+
+  function loadStudentProfile() {
+    const saved = localStorage.getItem('gs_student_profile');
+    if (saved) {
+      try {
+        studentProfile = JSON.parse(saved);
+        document.getElementById('input-student-name').value = studentProfile.name || '';
+        document.getElementById('input-student-class').value = studentProfile.classVal || '';
+        document.getElementById('input-student-id').value = studentProfile.id || '';
+        document.getElementById('input-student-teacher').value = studentProfile.teacher || '';
+        document.getElementById('input-student-notes').value = studentProfile.notes || '';
+        if (studentProfile.name) {
+          document.getElementById('header-student-name').innerText = `生徒名: ${studentProfile.name}`;
+        }
+      } catch(e) { console.error(e); }
+    }
+
+    const savedAns = localStorage.getItem('gs_user_answers');
+    if (savedAns) {
+      try { userAnswers = JSON.parse(savedAns); } catch(e){}
+    }
+  }
+
+  function resetAllData() {
+    if (confirm("本当にすべての学習データをリセットしますか？")) {
+      localStorage.removeItem('gs_student_profile');
+      localStorage.removeItem('gs_user_answers');
+      userAnswers = {};
+      location.reload();
+    }
+  }
+
+  // Rendering Exercises
+  function renderAllExercises() {
+    renderList('container-u17-1a', u17_1aData, '1a');
+    renderList('container-u17-1b', u17_1bData, '1b');
+    renderList('container-u17-2', u17_2Data, 'u17_2');
+    renderList('container-u17-3a', u17_3aData, 'u17_3a');
+    renderList('container-u17-3b', u17_3bData, 'u17_3b');
+    renderList('container-u18-1a', u18_1aData, 'u18_1a');
+    renderList('container-u18-1b', u18_1bData, 'u18_1b');
+    renderList('container-u18-2a', u18_2aData, 'u18_2a');
+    renderList('container-u18-2b', u18_2bData, 'u18_2b');
+    renderList('container-master-quiz', masterQuizData, 'mq');
+    renderMockExam();
+  }
+
+  function renderList(containerId, dataArray, prefix) {
+    const container = document.getElementById(containerId);
+    if (!container) return;
+    let html = '';
+    dataArray.forEach((item, idx) => {
+      const qId = prefix + '_' + idx;
+      const savedVal = userAnswers[qId] || '';
+      const isCorrect = userAnswers['correct_' + qId] === true;
+
+      html += `
+        <div class="p-4 sm:p-5 bg-slate-50 rounded-xl border ${isCorrect ? 'border-emerald-300 bg-emerald-50/40' : 'border-slate-200'} space-y-3 transition">
+          <div class="flex items-start justify-between gap-2">
+            <div class="text-xs sm:text-sm font-bold text-slate-800 leading-relaxed">
+              <span class="inline-block px-2 py-0.5 bg-indigo-100 text-indigo-800 font-extrabold rounded mr-2 text-xs">(${idx + 1})</span>
+              ${item.q || item.base || item.verb || item.prompt}
+            </div>
+            <button onclick="speakText('${(item.en || item.base || item.prompt || '').replace(/'/g, "\\'")}')" class="p-2 text-indigo-600 hover:bg-indigo-50 rounded-lg transition" title="音声再生">
+              <i data-lucide="volume-2" class="w-4 h-4"></i>
+            </button>
+          </div>
+
+          <div class="flex flex-wrap items-center gap-2 pt-1">
+            <input type="text" id="ans_${qId}" value="${savedVal}" placeholder="解答を入力..." 
+              class="px-3.5 py-2 bg-white border ${isCorrect ? 'border-emerald-500 text-emerald-900 font-bold' : 'border-slate-300 text-slate-800'} rounded-xl text-xs sm:text-sm font-semibold outline-none focus:border-indigo-500 grow max-w-md shadow-xs"
+              oninput="saveUserAnswer('${qId}')">
+            
+            <button onclick="checkAnswer('${qId}', ${JSON.stringify(item.answers || [item.answer]).replace(/"/g, '&quot;')})" 
+              class="px-4 py-2 bg-indigo-600 hover:bg-indigo-700 text-white font-bold text-xs rounded-xl transition shadow-xs">
+              解答確認
+            </button>
+
+            <button onclick="toggleHint('${qId}')" class="px-3 py-2 bg-slate-200 hover:bg-slate-300 text-slate-700 font-semibold text-xs rounded-xl transition">
+              ヒント
+            </button>
+          </div>
+
+          <div id="hint_${qId}" class="hidden text-xs text-indigo-700 bg-indigo-50 p-2.5 rounded-lg border border-indigo-100">
+            💡 <strong>ヒント:</strong> ${item.hint}
+          </div>
+
+          <div id="feedback_${qId}" class="text-xs font-bold ${isCorrect ? 'text-emerald-700 block' : 'hidden'}">
+            ${isCorrect ? '✨ 正解です！お見事です！' : ''}
+          </div>
+        </div>
+      `;
+    });
+    container.innerHTML = html;
+    lucide.createIcons();
+  }
+
+  function saveUserAnswer(qId) {
+    const val = document.getElementById('ans_' + qId).value;
+    userAnswers[qId] = val;
+    localStorage.setItem('gs_user_answers', JSON.stringify(userAnswers));
+  }
+
+  function checkAnswer(qId, correctAnswers) {
+    const userVal = document.getElementById('ans_' + qId).value.trim().toLowerCase().replace(/[.,?!]/g, '');
+    let matched = false;
+
+    if (Array.isArray(correctAnswers)) {
+      matched = correctAnswers.every(ans => userVal.includes(ans.toLowerCase().replace(/[.,?!]/g, '')));
+    } else {
+      matched = userVal === correctAnswers.toLowerCase().replace(/[.,?!]/g, '');
+    }
+
+    const fb = document.getElementById('feedback_' + qId);
+    const inputField = document.getElementById('ans_' + qId);
+
+    if (matched) {
+      userAnswers['correct_' + qId] = true;
+      fb.innerText = "✨ 正解です！ (Correct!)";
+      fb.className = "text-xs font-bold text-emerald-700 block";
+      inputField.className = "px-3.5 py-2 bg-emerald-50 border border-emerald-500 text-emerald-900 font-bold rounded-xl text-xs sm:text-sm outline-none grow max-w-md shadow-xs";
+      addXP(15);
+    } else {
+      userAnswers['correct_' + qId] = false;
+      fb.innerText = "❌ もう一度考えてみましょう！";
+      fb.className = "text-xs font-bold text-rose-700 block";
+      inputField.className = "px-3.5 py-2 bg-rose-50 border border-rose-500 text-rose-900 font-bold rounded-xl text-xs sm:text-sm outline-none grow max-w-md shadow-xs";
+    }
+    localStorage.setItem('gs_user_answers', JSON.stringify(userAnswers));
+    updateOverallProgress();
+  }
+
+  function toggleHint(qId) {
+    const hintEl = document.getElementById('hint_' + qId);
+    hintEl.classList.toggle('hidden');
+  }
+
+  let currentXP = 0;
+  function addXP(amount) {
+    currentXP += amount;
+    document.getElementById('global-xp').innerText = currentXP;
+  }
+
+  function updateOverallProgress() {
+    const totalCount = u17_1aData.length + u17_1bData.length + u17_2Data.length + u17_3aData.length + u17_3bData.length + u18_1aData.length + u18_1bData.length + u18_2aData.length + u18_2bData.length + masterQuizData.length;
+    let correctCount = 0;
+
+    const allIds = [];
+    [u17_1aData, u17_1bData, u17_2Data, u17_3aData, u17_3bData, u18_1aData, u18_1bData, u18_2aData, u18_2bData, masterQuizData].forEach((arr, arrIdx) => {
+      const prefix = ['1a', '1b', 'u17_2', 'u17_3a', 'u17_3b', 'u18_1a', 'u18_1b', 'u18_2a', 'u18_2b', 'mq'][arrIdx];
+      arr.forEach((_, idx) => {
+        if (userAnswers['correct_' + prefix + '_' + idx] === true) {
+          correctCount++;
+        }
+      });
+    });
+
+    const pct = Math.round((correctCount / totalCount) * 100);
+    document.getElementById('overall-progress-bar').style.width = pct + '%';
+    document.getElementById('overall-pct').innerText = pct + '%';
+  }
+
+  // Master Quiz Global Evaluation
+  function checkAllMasterQuiz() {
+    masterQuizData.forEach((item, idx) => {
+      checkAnswer('mq_' + idx, item.answers);
+    });
+    alert("総合テストの自動判定が完了しました！進行度をご確認ください。");
+  }
+
+  // Mock Exam Rendering & Grading
+  function renderMockExam() {
+    const container = document.getElementById('container-mock-exam');
+    if (!container) return;
+    let html = '';
+    mockExamData.forEach((item, idx) => {
+      const qId = 'mex_' + idx;
+      html += `
+        <div class="p-5 bg-slate-50 rounded-xl border border-slate-200 space-y-3">
+          <div class="text-xs sm:text-sm font-bold text-slate-800">
+            <span class="inline-block px-2 py-0.5 bg-purple-100 text-purple-950 font-extrabold rounded mr-2 text-xs">問題 ${idx + 1} (20点)</span>
+            ${item.q}
+          </div>
+          <input type="text" id="ans_${qId}" placeholder="解答を入力..." class="w-full sm:max-w-md px-3.5 py-2.5 bg-white border border-slate-300 rounded-xl text-xs sm:text-sm font-semibold text-slate-800 outline-none focus:border-purple-500 shadow-xs">
+          <div id="fb_${qId}" class="text-xs font-bold"></div>
+        </div>
+      `;
+    });
+    container.innerHTML = html;
+  }
+
+  function gradeMockExam() {
+    let score = 0;
+    mockExamData.forEach((item, idx) => {
+      const qId = 'mex_' + idx;
+      const val = document.getElementById('ans_' + qId).value.trim().toLowerCase().replace(/[.,?!]/g, '');
+      const correctVal = item.answer.toLowerCase().replace(/[.,?!]/g, '');
+      const fb = document.getElementById('fb_' + qId);
+
+      if (val === correctVal || val.includes(correctVal)) {
+        score += 20;
+        fb.innerText = "✨ 正解 (+20点)";
+        fb.className = "text-xs font-bold text-emerald-700";
+      } else {
+        fb.innerText = `❌ 不正解 (模範解答: ${item.answer})`;
+        fb.className = "text-xs font-bold text-rose-700";
+      }
+    });
+
+    document.getElementById('mock-exam-score-card').classList.remove('hidden');
+    document.getElementById('mock-score-val').innerText = score;
+    const badge = document.getElementById('mock-feedback-badge');
+
+    if (score === 100) {
+      badge.innerText = "🏆 満点達成！完璧です！";
+      badge.className = "px-3.5 py-1.5 bg-amber-200 text-amber-950 font-bold text-xs rounded-full";
+      addXP(100);
+    } else if (score >= 80) {
+      badge.innerText = "🌟 優秀です！あと少し！";
+      badge.className = "px-3.5 py-1.5 bg-emerald-200 text-emerald-950 font-bold text-xs rounded-full";
+    } else {
+      badge.innerText = "📚 もう一度復習してみましょう";
+      badge.className = "px-3.5 py-1.5 bg-rose-200 text-rose-950 font-bold text-xs rounded-full";
+    }
+  }
+
+  // PDF Export Content Generation
+  function renderPdfExportContent() {
+    document.getElementById('print-name-disp').innerText = studentProfile.name || '________________';
+    document.getElementById('print-class-disp').innerText = studentProfile.classVal || '______';
+
+    const container = document.getElementById('container-pdf-content');
+    let html = '<div class="space-y-4 font-sans">';
+
+    let hasContent = false;
+    [u17_1aData, u17_1bData, u17_2Data, u17_3aData, u17_3bData].forEach((arr, arrIdx) => {
+      const prefix = ['1a', '1b', 'u17_2', 'u17_3a', 'u17_3b'][arrIdx];
+      let sectionTitle = ['Unit 17-1 完了・結果 習得問題', 'Unit 17-1 文の書きかえ', 'Unit 17-2 疑問・否定文', 'Unit 17-3 経験 変化問題', 'Unit 17-3 語句並べ替え'][arrIdx];
+      
+      let solvedItems = [];
+      arr.forEach((item, idx) => {
+        const qId = prefix + '_' + idx;
+        if (userAnswers['correct_' + qId] === true) {
+          solvedItems.push(`• ${item.q || item.base || item.verb || item.prompt} ➔ <strong>${userAnswers[qId]}</strong>`);
+        }
+      });
+
+      if (solvedItems.length > 0) {
+        hasContent = true;
+        html += `<div class="border-b border-slate-200 pb-3 space-y-1">
+          <h3 class="font-bold text-indigo-900">${sectionTitle}</h3>
+          <ul class="list-disc pl-5 space-y-1 text-xs text-slate-700">`;
+        solvedItems.forEach(si => { html += `<li>${si}</li>`; });
+        html += `</ul></div>`;
+      }
+    });
+
+    if (!hasContent) {
+      html += `<p class="text-slate-500 italic">まだ正解して登録された演習問題がありません。各セクションで問題を解いて正解するとここに自動集計されます。</p>`;
+    }
+
+    html += '</div>';
+    container.innerHTML = html;
+  }
+
+  // Master Bank List Rendering
+  function renderMasterBankList() {
+    const tbody = document.getElementById('container-master-bank-list');
+    if (!tbody) return;
+    let html = '';
+    masterBankData.forEach(item => {
+      html += `
+        <tr class="hover:bg-slate-50 transition border-b border-slate-100">
+          <td class="p-3.5 font-bold text-indigo-700">${item.unit}</td>
+          <td class="p-3.5 font-semibold text-slate-900">${item.en}</td>
+          <td class="p-3.5 text-slate-600">${item.ja}</td>
+          <td class="p-3.5 text-slate-500 text-[11px]">${item.accent} / ${item.gender}</td>
+          <td class="p-3.5 text-center">
+            <button onclick="speakText('${item.en.replace(/'/g, "\\'")}')" class="px-3 py-1.5 bg-indigo-50 hover:bg-indigo-100 text-indigo-700 font-bold rounded-lg transition text-xs flex items-center justify-center gap-1 mx-auto border border-indigo-200">
+              <i data-lucide="volume-2" class="w-3.5 h-3.5"></i>
+              <span>再生</span>
+            </button>
+          </td>
+        </tr>
+      `;
+    });
+    tbody.innerHTML = html;
+    lucide.createIcons();
+  }
+
+  function filterMasterBank() {
+    const query = document.getElementById('bank-search-input').value.toLowerCase();
+    const rows = document.querySelectorAll('#container-master-bank-list tr');
+    rows.forEach(row => {
+      const text = row.innerText.toLowerCase();
+      row.style.display = text.includes(query) ? '' : 'none';
+    });
+  }
+
+  // Speech Synthesis Helper
+  function speakText(text) {
+    if (!('speechSynthesis' in window)) {
+      alert("お使いのブラウザは音声読み上げに対応していません。");
+      return;
+    }
+    window.speechSynthesis.cancel();
+    const utterance = new SpeechSynthesisUtterance(text);
+    utterance.lang = 'en-US';
+    const rateSelect = document.getElementById('speech-rate-select');
+    utterance.rate = rateSelect ? parseFloat(rateSelect.value) : 1.0;
+    window.speechSynthesis.speak(utterance);
+  }
+
+  // Language Toggle Placeholder
+  function toggleLanguage() {
+    currentLanguage = currentLanguage === 'ja' ? 'en' : 'ja';
+    document.getElementById('lang-label').innerText = currentLanguage === 'ja' ? '日本語' : 'English';
+  }
+</script>
+
+</body>
+</html>
